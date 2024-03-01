@@ -8,7 +8,7 @@
 .head__section {
     border: 1px solid #e2e2e2;
     background-color: #fff;
-    border-radius: 5px;
+    border-radius: 5px 5px 2px 2px;
     padding: 10px;
     display: flex;
     justify-content: space-between;
@@ -35,7 +35,14 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
+}
+
+.col {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
 }
 
 .bt {
@@ -53,27 +60,32 @@
     font-weight: 500;
 }
 
-.bt.selected:first-of-type {
+.todos.selected {
+    background-color: #8037d3;
+    background-color: #8037d3;
+}
+
+.regular.selected {
     background-color: #50af3d;
     border: 1px solid #50af3d;
 }
 
-.bt.selected:nth-of-type(2) {
+.medio.selected {
     background-color: #DC984B;
     border: 1px solid #DC984B;
 }
 
-.bt.selected:nth-of-type(3) {
+.critico.selected {
     background-color: #DC4B4B;
     border: 1px solid #DC4B4B;
 }
 
-.filtros__container > div:nth-of-type(2) > .filtros > .abierto.selected {
+.abierto.selected {
     background-color: #376bd3;
     border: 1px solid #376bd3;
 }
 
-.filtros__container > div:nth-of-type(2) > .filtros > .cerrado.selected {
+.cerrado.selected {
     background-color: #3a4459;
     border: 1px solid #3a4459;
 }
@@ -113,4 +125,67 @@
 
 .buscar__input:focus {
     border: 1px solid #376bd3;
+}
+
+.tickets {
+    overflow: hidden;
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #e2e2e2;
+    background-color: #fff;
+    border-radius: 2px;
+    height: 450px;
+}
+
+.ticket {
+    padding: 10px;
+    border: 1px solid #e2e2e2;
+    border-radius: 3px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.p {
+    width: 180px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    border-right: 1px solid #e2e2e2;
+    margin-right: 20px;
+}
+
+.ticket > .p > figure {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.ticket > .p .imagen {
+    width: 100%;
+}
+
+.nombre {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.dep {
+    font-size: 12px;
+    color: gray;
+    margin-top: 5px;
+}
+
+.icono {
+    width: 40px;
+    height: 40px;
+}
+
+.icono > img {
+    width: 100%;
 }
