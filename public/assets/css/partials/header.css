@@ -176,7 +176,7 @@ section:last-of-type {
 
 @media screen and (max-width: 378px) {
     form {
-        width: 100%;
+        width: 100% !important;
     }
 }
 
@@ -190,10 +190,10 @@ section:last-of-type {
     }
 }
 
-@media screen and (max-width: 320px) {
+/* @media screen and (max-width: 320px) {
     header > .container {
         flex-direction: column;
         justify-content: center;
         align-items: flex-start;
     }
-}
+} */

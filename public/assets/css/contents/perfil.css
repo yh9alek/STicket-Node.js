@@ -41,16 +41,19 @@
     border-radius: 3px;
 }
 
-.foto__letras {
+.foto__img {
     width: 120px;
     height: 120px;
-    color: #fff;
-    font-size: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
     text-align: center;
-    line-height: 128px;
-    font-weight: bold;
     border-radius: 3px;
-    background-color: #6b45e6;
+}
+
+.foto__img > img {
+    width: 100%;
 }
 
 .foto__content + p {

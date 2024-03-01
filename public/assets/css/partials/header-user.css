@@ -1,13 +1,40 @@
-.perfil {
-    padding: 5px;
-    width: 34px;
-    height: 34px;
-    border-radius: 5px;
-    color: #fff;
-    background-color: #6b45e6;
+.perfil__content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
-.perfil > p {
-    text-align: center;
-    margin-top: 5px;
+.perfil {
+    padding: 5px;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    transition: all .2s ease;
+}
+
+.perfil:hover {
+    border: 1px solid #a5a5a5;
+}
+
+.perfil > img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.perfil__content > p {
+    font-size: 13px;
+    font-weight: 500; 
+    width: 80px;
+    word-wrap: break-word;
+}
+
+@media screen and (max-width: 365px) {
+    .perfil__content > p {
+        display: none;
+    }
 }
