@@ -31,3 +31,11 @@
     <%-include('../partials/header-index.ejs')%>
     <%-include('../contents/acerca.ejs')%>
 <% } %>
+
+<!-- Secciones de Admin -->
+
+<% if(pagina === 'admintickets') { %>
+    <%-include('../partials/header-home.ejs')%>
+    <%-include('../partials/section-header.ejs')%>
+    <%-include('../contents/admin-tickets.ejs')%>
+<% } %>

@@ -2,8 +2,11 @@
     <div class="section__header">
         <div class="container">
             <h3><%=env.seccion%></h3>
-            <% if(pagina !== 'usertickets') { %>
+            <% if(pagina !== 'usertickets' && pagina !== 'admintickets') { %>
                 <p class="sections"><a href="/home"><i class="bi bi-reply"></i> Regresar</a>
+            <% } %>
+            <% if(pagina === 'admintickets') { %>
+                <p class="sections"><span>679</span> en proceso o abiertos.</p>
             <% } %>
         </div>
     </div>

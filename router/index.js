@@ -58,4 +58,15 @@ router.get('/verticket', (req, res) => {
     });
 });
 
+/* Rutas para el administrador */
+
+router.get('/admintickets', (req, res) => {
+    res.render('index', { 
+        pagina: 'admintickets',
+        env: {
+            seccion: 'Tickets del sistema',
+        },
+    });
+});
+
 export default { router };
