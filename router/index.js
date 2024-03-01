@@ -18,4 +18,8 @@ router.get('/perfil', (req, res) => {
     res.render('index', {pagina: 'perfil'});
 });
 
+router.get('/verticket', (req, res) => {
+    res.render('index', {pagina: 'verticket'});
+});
+
 export default { router };

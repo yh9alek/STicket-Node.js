@@ -66,9 +66,3 @@ input:focus {
 .btn-login:hover {
     background-color: #296aec;
 }
-
-@media screen and (max-width: 378px) {
-    form {
-        width: 100%;
-    }
-}

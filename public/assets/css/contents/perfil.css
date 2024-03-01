@@ -239,12 +239,6 @@ form .linea {
     }
 }
 
-@media screen and (max-width: 378px) {
-    form {
-        width: 100%;
-    }
-}
-
 @media screen and (max-width: 317px) {
     .foto,
     .tickets {
