@@ -1,9 +1,14 @@
 <% if(pagina === 'login') { %>
     <link rel="stylesheet" href="/assets/css/login.css">
+<% } else { %>
+    <link rel="stylesheet" href="/assets/css/header-user.css">
+    <link rel="stylesheet" href="/assets/css/sections-header.css">
 <% } %>
 
 <% if(pagina === 'usertickets') { %>
-    <link rel="stylesheet" href="/assets/css/header-user.css">
-    <link rel="stylesheet" href="/assets/css/sections-header.css">
     <link rel="stylesheet" href="/assets/css/user-tickets.css">
+<% } %>
+
+<% if(pagina === 'solicitud') { %>
+    <link rel="stylesheet" href="/assets/css/solicitud.css">
 <% } %>

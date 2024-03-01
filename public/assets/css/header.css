@@ -30,6 +30,10 @@ header > .container {
     align-items: center;
 }
 
+section:last-of-type {
+    padding-bottom: 12vh;
+}
+
 .logo__figure {
     display: flex;
     justify-content: flex-start;
@@ -146,8 +150,8 @@ header > .container {
 @media screen and (max-width: 660px) {
     .buttons {
         position: fixed;
-        left: -400px;
-        width: 350px;
+        left: -450px;
+        width: 400px;
         height: 100%;
         flex-direction: column;
         align-items: flex-start;
@@ -176,7 +180,7 @@ header > .container {
     }
 }
 
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 403px) {
     .buttons {
         width: 100%;
     }
