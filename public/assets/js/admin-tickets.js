@@ -1,4 +1,4 @@
-const botonesFiltro = document.querySelectorAll('.bt:not(.abierto):not(.cerrado)');
+const botonesFiltro = document.querySelectorAll('.bt:not(.todos_estado):not(.abierto):not(.cerrado)');
 const botonesEstado = document.querySelectorAll('.bt:not(.todos):not(.regular):not(.medio):not(.critico)');
 
 const btnBuscar = document.querySelector('.inp.buscar');

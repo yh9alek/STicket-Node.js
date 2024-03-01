@@ -80,6 +80,11 @@
     border: 1px solid #DC4B4B;
 }
 
+.todos_estado.selected {
+    background-color: #8037d3;
+    background-color: #8037d3;
+}
+
 .abierto.selected {
     background-color: #376bd3;
     border: 1px solid #376bd3;
@@ -135,15 +140,19 @@
     background-color: #fff;
     border-radius: 2px;
     height: 450px;
+    overflow: auto;
 }
 
 .ticket {
+    width: max-content;
     padding: 10px;
     border: 1px solid #e2e2e2;
     border-radius: 3px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    margin-bottom: 10px;
+    box-shadow: 0px 2px 4px #00000013;
 }
 
 .p {
@@ -184,8 +193,104 @@
 .icono {
     width: 40px;
     height: 40px;
+    margin-right: 20px;
 }
 
 .icono > img {
     width: 100%;
+}
+
+.descripcion__ticket {
+    width: 220px;
+    margin-right: 20px;
+    padding-right: 20px;
+    border-right: 1px solid #e2e2e2;
+}
+
+.datos > p:first-of-type {
+    padding: 6px 10px 4px;
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    width: max-content;
+    border-radius: 5px;
+    margin-top: 5px;
+    background-color: #DC4B4B;
+}
+
+.datos > p:last-of-type {
+    padding: 6px 10px 4px;
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    width: max-content;
+    border-radius: 5px;
+    margin-top: 5px;
+    background-color: #376bd3;
+}
+
+.descripcion__ticket > .datos {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
+}
+
+.descripcion__ticket + div {
+    height: 40px;
+    margin-right: 20px;
+    border-right: 1px solid #e2e2e2;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.fecha {
+    font-size: 13px;
+    color: #5f5f5f;
+    width: 120px;
+    padding-right: 20px;
+}
+
+.espera {
+    padding: 8px 16px;
+    background-color: #D1EBFF;
+    color: #0D7FF6;
+    border-radius: 5px;
+}
+
+.filtros {
+    flex-wrap: wrap;
+}
+
+@media screen and (max-width: 870px) {
+    .head__section {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        row-gap: 10px;
+    }
+}
+
+@media screen and (max-width: 613px) {
+    .filtros__container {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        width: 100%;
+        row-gap: 10px;
+    }
+}
+
+@media screen and (max-width: 349px) {
+    .bt {
+        width: 70px;
+        text-align: center;
+    }
+
+    .inp.buscar__input {
+        width: 100%;
+    }
 }
