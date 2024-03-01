@@ -1,0 +1,150 @@
+section.acerca {
+    background-color: #376bd3;
+}
+
+section > .container {
+    padding: 60px;
+}
+
+h1 {
+    font-size: 40px;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+h1 + div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.content {
+    padding: 20px;
+    width: 300px;
+    line-height: 1.5;
+    color: #fff;
+    border: 1px solid #ffffff25;
+    border-radius: 5px;
+}
+
+.content img {
+    width: 60px;
+}
+
+.content:first-of-type > div:first-of-type {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    column-gap: 15px;
+}
+
+.content:first-of-type > div:first-of-type p:first-of-type {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.contents {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.contents + .content {
+    height: 241px;
+    width: 400px;
+    line-height: 1.5;
+    font-size: 16px;
+}
+
+.dev__team {
+    background-color: #0e182c;
+}
+
+h2 {
+    font-size: 30px;
+    color: #fff;
+    text-align: center;
+    padding: 50px 0 100px;
+}
+
+.devs {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(230px, 100%), 1fr));
+    column-gap: 20px;
+    row-gap: 60px;
+}
+
+.dev > figure {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dev > figure > img {
+    width: 45%;
+    border-radius: 30%;
+}
+
+.nombre {
+    width: 70%;
+    font-size: 18px;
+    font-weight: 500;
+    margin: 20px auto 0;
+    color: #fff;
+    text-align: center;
+}
+
+@media screen and (max-width: 780px) {
+    h1 + div {
+        flex-direction: column;
+    }
+
+    .contents {
+        width: 400px;
+        height: auto;
+    }
+
+    .content {
+        width: 100%;
+        height: auto;
+    }
+
+    .contents + .content {
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .devs {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .dev .dev__img {
+        width: 150px;
+    }
+
+    section > .container:first-of-type {
+        padding: 60px 20px;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    h1 + div {
+        width: 100%;
+    }
+
+    .contents {
+        width: 100%;
+    }
+
+    .contents + .content {
+        width: 100%;
+    }
+}

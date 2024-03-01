@@ -1,8 +1,10 @@
 <section>
     <div class="section__header">
         <div class="container">
-            <h3>Mis Tickets</h3>
-            
+            <h3><%=env.seccion%></h3>
+            <% if(pagina !== 'usertickets') { %>
+                <p class="sections"><a href="/home"><i class="bi bi-reply"></i> Regresar</a>
+            <% } %>
         </div>
     </div>
 </section>

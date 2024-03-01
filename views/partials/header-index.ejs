@@ -13,9 +13,9 @@
                 </figure>
                 <button class="exit"><i class="bi bi-x"></i></button>
             </div>
-            <a class="btn selected" href="#">Login</a>
-            <a class="btn" href="#">Acerca de</a>
-            <a class="btn" href="#">Contacto</a>
+            <a class="btn <%= selected === 1 ? 'selected' : ''%>" href="/?selected=1">Login</a>
+            <a class="btn <%= selected === 2 ? 'selected' : ''%>" href="/acerca?selected=2">Acerca de</a>
+            <a class="btn <%= selected === 3 ? 'selected' : ''%>" href="#">Contacto</a>
         </div>
     </div>
 </header>
