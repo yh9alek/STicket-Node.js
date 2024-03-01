@@ -1,0 +1,195 @@
+@import url("https://use.typekit.net/pmm7vux.css");
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    font-family: "Cairo";
+    font-weight: lighter;
+}
+
+.background.active {
+    position: fixed;
+    left: 0; top: 0; right: 0; bottom: 0;
+    background-color: #00000054;
+    backdrop-filter: blur(3px);
+    z-index: 10;
+}
+
+.container {
+    max-width: 1130px;
+    margin: 0 auto;
+    padding: 0px 5%;
+}
+
+header > .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo__figure {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.logo__img {
+    display: inline-block;
+    width: 35px;
+    padding: 22.5px 0;
+}
+
+.logo__img + p {
+    font-weight: 500;
+    font-size: 27px;
+    margin-bottom: -7px;
+    color: #666666;
+}
+
+.logo__img + p > span {
+    color: #376bd3;
+}
+
+.buttons {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 10px;
+    transition: all .2s ease;
+    z-index: 1000;
+}
+
+.buttons.active {
+    top: 0;
+    left: 0;
+}
+
+.logo__content {
+    display: none;
+}
+
+.exit {
+    position: absolute;
+    top: 27px;
+    width: 28px;
+    height: 28px;
+    border: none;
+    border-radius: 5px;
+    background-color: #e73535;
+    color: #fff;
+    left: 180px;
+}
+
+.exit:hover {
+    background-color: #ff4848;
+    cursor: pointer;
+}
+
+.btn {
+    display: inline-block;
+    font-size: 16px;
+    padding: 10px 15px 8px;
+    font-weight: bold;
+    color: gray;
+    border-radius: 5px;
+    transition: all .2s ease;
+}
+
+.btn.selected {
+    color: #fff;
+    background-color: #376bd3;
+}
+
+.btn:not(.selected):hover {
+    color: #535353;
+}
+
+.buttons.active > .btn {
+    margin: 0px 5%;
+}
+
+.menu {
+    width: 28px;
+    height: 28px;
+    outline: none;
+    display: none;
+    border: none;
+    justify-content: flex-start;
+    margin-left: 15px;
+    text-align: center;
+    position: relative;
+    transition: all .2s ease;
+}
+
+.menu:hover {
+    background-color: #39474b;
+    cursor: pointer;
+}
+
+.menu > i {
+    position: absolute;
+    left: 7px;
+    top: 7px;
+}
+
+@media screen and (min-width: 1130px) {
+    .container {
+        padding: 0px 56px;
+    }
+}
+
+@media screen and (max-width: 660px) {
+    .buttons {
+        position: fixed;
+        left: -400px;
+        width: 350px;
+        height: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        background-color: #fff;
+    }
+
+    .buttons > .btn {
+        width: calc(100% - 10%);
+    }
+
+    .menu {
+        display: inline-block;
+        background-color: #2A3538;
+    }
+
+    .logo__content {
+        display: inline-block;
+        padding: 0 30px;
+    }
+}
+
+@media screen and (max-width: 378px) {
+    form {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .buttons {
+        width: 100%;
+    }
+
+    .logo__content {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    header > .container {
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+    }
+}
