@@ -6,4 +6,8 @@ router.get('/', (req, res) => {
     res.render('index', {pagina: 'login'});
 });
 
+router.get('/home', (req, res) => {
+    res.render('index', {pagina: 'usertickets'});
+});
+
 export default { router };

@@ -1,3 +1,9 @@
+/* Esto es para configurar correctamente la visualización en pantalla
+   dependiendo de la resolución que se use y no se rompan los estilos */
+section > .container {
+    padding: calc(20vh - 5%) 5%;
+}
+
 form {
     margin: 50px auto 0;
     width: 340px;
@@ -59,4 +65,10 @@ input:focus {
 
 .btn-login:hover {
     background-color: #296aec;
+}
+
+@media screen and (max-width: 378px) {
+    form {
+        width: 100%;
+    }
 }

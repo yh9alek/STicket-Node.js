@@ -1,0 +1,98 @@
+.section__tickets {
+    padding-top: 60px;
+    margin-bottom: 100px;
+    padding-bottom: 10vh;
+}
+
+.solicitar {
+    font-weight: bold;
+    display: inline-block;
+    font-size: 20px;
+    color: #303030;
+    padding: 5px 5px 5px 0px;
+    margin-bottom: 15px;
+}
+
+.prioridad.regular {
+    background-color: #50af3d;
+}
+
+.prioridad.medio {
+    background-color: #dc984b;
+}
+
+.prioridad.critico {
+    background-color: #dc4b4b;
+}
+
+.solicitar:hover {
+    text-decoration: underline;
+}
+
+.tickets {
+    background-color: #EEF4F5;
+    border-radius: 10px;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(245px, 100%), 1fr));
+    gap: 20px;
+}
+
+.ticket {
+    position: relative;
+    padding: 10px;
+    border-radius: 5px;
+    color: #fff;
+    height: max-content;
+    background-color: #5cd894;
+    box-shadow: 0px 3px 10px #00000031;
+}
+
+.ticket:hover {
+    cursor: pointer;
+}
+
+.ticket:nth-of-type(1n) {
+    background-color: #2FC171;
+}
+
+.ticket:nth-of-type(2n) {
+    background-color: #2c9ff1;
+}
+
+.hora {
+    font-size: 12px;
+}
+
+.ticket__img {
+    top: calc(50% - 30px);
+    right: 20px;
+    position: absolute;
+    width: 60px;
+}
+
+.ticket > .estado {
+    font-weight: bold;
+}
+
+.ticket i.bi-dot {
+    font-size: 50px;
+    position: absolute;
+    top: -8px;
+    left: 50px;
+}
+
+.ticket > .titulo {
+    margin-top: 15px;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.ticket > .prioridad {
+    padding: 7px 8px 3px;
+    width: max-content;
+    border-radius: 5px;
+    margin: 0;
+    font-weight: bold;
+    margin-bottom: 10px;
+}

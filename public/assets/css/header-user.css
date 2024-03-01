@@ -1,0 +1,13 @@
+.perfil {
+    padding: 5px;
+    width: 34px;
+    height: 34px;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #6b45e6;
+}
+
+.perfil > p {
+    text-align: center;
+    margin-top: 5px;
+}

@@ -30,10 +30,6 @@ header > .container {
     align-items: center;
 }
 
-section > .container {
-    padding: calc(20vh - 5%) 5%;
-}
-
 .logo__figure {
     display: flex;
     justify-content: flex-start;

@@ -1,0 +1,25 @@
+.section__header {
+    height: 150px;
+    color: #fff;
+    background-color: #376bd3;
+    padding: 50px 0;
+}
+
+.section__header h3 {
+    font-size: 27px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.sections > a {
+    color: #fff;
+}
+
+.sections > a:nth-of-type(1) {
+    font-weight: bold;
+}
+
+.section__tickets {
+    padding-top: 60px;
+    margin-bottom: 100px;
+}

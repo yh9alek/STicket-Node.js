@@ -2,3 +2,9 @@
     <%-include('../partials/header-index.ejs')%>
     <%-include('../login.ejs')%>
 <% } %>
+
+<% if(pagina === 'usertickets') { %>
+    <%-include('../partials/header-home.ejs')%>
+    <%-include('../partials/section-header.ejs')%>
+    <%-include('../user-tickets.ejs')%>
+<% } %>
