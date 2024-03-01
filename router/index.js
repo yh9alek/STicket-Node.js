@@ -14,4 +14,8 @@ router.get('/solicitud', (req, res) => {
     res.render('index', {pagina: 'solicitud'});
 });
 
+router.get('/perfil', (req, res) => {
+    res.render('index', {pagina: 'perfil'});
+});
+
 export default { router };
