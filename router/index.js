@@ -69,4 +69,13 @@ router.get('/admintickets', (req, res) => {
     });
 });
 
+router.get('/averticket', (req, res) => {
+    res.render('index', { 
+        pagina: 'averticket',
+        env: {
+            seccion: 'Ticket #',
+        },
+    });
+});
+
 export default { router };
