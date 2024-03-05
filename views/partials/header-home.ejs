@@ -14,11 +14,10 @@
                 <button class="exit"><i class="bi bi-x"></i></button>
             </div>
             <a class="btn selected" href="#">Home</a>
-            <% if(pagina === 'usertickets') { %>
-                <a class="btn" href="#">Configuración</a>
-            <% } %>
-            <% if(pagina === 'admintickets' || pagina === 'averticket') { %>
+            <% if(user.isAdmin) { %>
                 <a class="btn" href="#">Usuarios</a>
+            <% } else { %>
+                <a class="btn" href="#">Configuración</a>
             <% } %>
         </div>
         <div class="perfil__content">

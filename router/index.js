@@ -1,8 +1,24 @@
-import express from "express";
-import json from "body-parser";
+/*import express from "express";
+
 export const router = express.Router();
 
-router.get('/', (req, res) => {
+let usuarios = null;
+
+async function obtenerDatos() {
+    usuarios = await usuariosDB.getTodos();
+}
+
+obtenerDatos();
+
+setTimeout(() => {
+    initialize(passport,
+        correo => usuarios.find(user => user.correo === correo),
+        id => usuarios.find(user => user.id === id),
+    );
+}, 100);
+
+router.get('/', checkNotAuthenticated, (req, res) => {
+    obtenerDatos();
     res.render('index', { 
         pagina: 'login',
         selected: 1,
@@ -11,6 +27,12 @@ router.get('/', (req, res) => {
         },
     });
 });
+
+router.post('/', checkNotAuthenticated, passport.authenticate('local', {
+    successRedirect: '/home',
+    failureRedirect: '/',
+    failureFlash: true,
+}));
 
 router.get('/acerca', (req, res) => {
     res.render('index', { 
@@ -22,60 +44,87 @@ router.get('/acerca', (req, res) => {
     });
 });
 
-router.get('/home', (req, res) => {
+router.get('/home', checkAuthenticated, (req, res) => {
     res.render('index', { 
         pagina: 'usertickets',
+        user: req.user,
         env: {
             seccion: 'Mis Tickets',
         },
     });
 });
 
-router.get('/solicitud', (req, res) => {
+router.get('/solicitud', checkAuthenticated, (req, res) => {
     res.render('index', { 
         pagina: 'solicitud',
+        admin: false,
         env: {
             seccion: 'Solicitar Ticket',
         },
     });
 });
 
-router.get('/perfil', (req, res) => {
+// Perfil es dinámico con el rol (admin - user), ambos comparten la misma interfaz de perfil
+router.get('/perfil', checkAuthenticated, (req, res) => {
     res.render('index', { 
         pagina: 'perfil',
+        admin: req.body.admin,
         env: {
             seccion: 'Perfil',
         },
     });
 });
 
-router.get('/verticket', (req, res) => {
+router.get('/verticket', checkAuthenticated, (req, res) => {
     res.render('index', { 
         pagina: 'verticket',
+        admin: false,
         env: {
             seccion: 'Ticket #',
         },
     });
 });
 
-/* Rutas para el administrador */
+/* Rutas para el administrador
 
-router.get('/admintickets', (req, res) => {
+router.get('/admintickets', checkAuthenticated, (req, res) => {
     res.render('index', { 
         pagina: 'admintickets',
+        admin: true,
         env: {
             seccion: 'Tickets del sistema',
         },
     });
 });
 
-router.get('/averticket', (req, res) => {
+router.get('/averticket', checkAuthenticated, (req, res) => {
     res.render('index', { 
         pagina: 'averticket',
+        admin: true,
         env: {
             seccion: 'Ticket #',
         },
     });
 });
 
-export default { router };
+router.delete('/logout', (req, res) => {
+    req.logout(function() {
+        res.redirect('/');
+    });
+});
+
+function checkAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect('/');
+}
+
+function checkNotAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+        return res.redirect('/home');
+    }
+    next();
+}
+
+export default { router };*/
