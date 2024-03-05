@@ -1,7 +1,15 @@
 /* Esto es para configurar correctamente la visualización en pantalla
-   dependiendo de la resolución que se use y no se rompan los estilos */
+   dependiendo de la resolución que se use y no se me rompan los estilos */
 section > .container {
     padding: calc(20vh - 5%) 5%;
+}
+
+.mensaje {
+    text-align: center;
+    font-size: 15px;
+    font-weight: 500;
+    color: red;
+    margin-top: 20px;
 }
 
 form {
@@ -56,6 +64,7 @@ input:focus {
     width: 100%;
     background-color: #376bd3;
     color: #fff;
+    border: none;
     border-radius: 5px;
     height: 44px;
     line-height: 28px;
@@ -64,5 +73,6 @@ input:focus {
 }
 
 .btn-login:hover {
-    background-color: #296aec;
+    cursor: pointer;
+    background-color: rgb(35, 90, 199);
 }

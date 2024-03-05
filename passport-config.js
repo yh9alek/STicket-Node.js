@@ -2,18 +2,16 @@ import { Strategy as LocalStrategy } from 'passport-local';
 import bcrypt from 'bcrypt';
 
 async function initialize(passport, getUserByEmail, getUserById) {
-    console.log('JAJAJAJA');
     const authenticateUser = async (email, password, done) => {
-        console.log(email, password);
         const user = getUserByEmail(email);
         if(user == null) {
-            return done(null, false, {message: 'No user with that email'});
+            return done(null, false, {message: 'Este usuario no está registrado'});
         }
         try {
             if(await bcrypt.compare(password, user.pass)) {
                 return done(null, user);
             } else {
-                return done(null, false, { message: 'Password incorrect' });
+                return done(null, false, { message: 'Contraseña Incorrecta' });
             }
         } catch(e) {
             return done(e);

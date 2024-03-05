@@ -8,8 +8,8 @@
                             <img src="/assets/imgs/octavio.PNG">
                         </div>
                     </div>
-                    <p>@YohanAlek</p>
-                    <p>Trabajador - Empleado</p>
+                    <p>@<%= user.usuario %></p>
+                    <p><%= user.isAdmin ? 'Admin' : 'Trabajador - Empleado'%></p>
                 </div>
                 <div class="tickets">
                     <div>
@@ -37,27 +37,27 @@
                 <div class="inputs">
                     <div class="input">
                         <p>Nombre</p>
-                        <input class="inp usuario" type="text" placeholder="Yohan Alek Plazola Arangure" readonly>
+                        <input class="inp usuario" type="text" placeholder="<%= user.nombre %>" readonly>
                     </div>
                     <div class="input">
                         <p>Correo Electrónico</p>
-                        <input class="inp correo" type="email" placeholder="yh9dev@gmail.com" readonly>
+                        <input class="inp correo" type="email" placeholder="<%= user.correo %>" readonly>
                     </div>
                     <div class="input">
                         <p>Número Celular</p>
                         <div class="numeroCelular">
                             <input class="inp codigo" type="number" min="0" placeholder="52" readonly></input>
-                            <input class="inp celular" type="text" placeholder="6691087456" readonly>
+                            <input class="inp celular" type="text" placeholder="<%= user.celular %>" readonly>
                             <p>+</p>
                         </div>
                     </div>
                     <div class="input">
                         <p>Puesto</p>
-                        <input class="inp puesto" type="text" placeholder="Front-end Dev" readonly>
+                        <input class="inp puesto" type="text" placeholder="<%= user.puesto %>" readonly>
                     </div>
                     <div class="input">
                         <p>Departamento</p>
-                        <input class="inp departamento" type="text" placeholder="Informática" readonly>
+                        <input class="inp departamento" type="text" placeholder="<%= user.departamento %>" readonly>
                     </div>
                 </div>
             </form>

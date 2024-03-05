@@ -2,11 +2,6 @@
     <div class="container">
         <form action="/" method="POST">
             <h3>Inicia Sesión</h3>
-            <p class="mensaje">
-                <% if(messages.error) { %>
-                    <%= messages.error %>
-                <% } %>
-            </p>
             <div class="input">
                 <input class="email" id="email" type="email" name="email" placeholder="Correo Electrónico" required>
                 <i class="bi bi-person-fill"></i>
@@ -16,6 +11,11 @@
                 <i class="bi bi-lock-fill"></i>
             </div>
             <button type="submit" class="btn-login">Login</button>
+            <p class="mensaje">
+                <% if(messages.error) { %>
+                    <%= messages.error %>
+                <% } %>
+            </p>
         </form>
     </div>
 </section>

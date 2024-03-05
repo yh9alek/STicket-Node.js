@@ -57,7 +57,7 @@ app.use(methodOverride('_method'));
 
 app.get('/', checkNotAuthenticated, (req, res) => {
     obtenerDatos();
-    res.render('index', { 
+    res.render('index', {
         pagina: 'login',
         selected: 1,
         env: {
@@ -67,7 +67,7 @@ app.get('/', checkNotAuthenticated, (req, res) => {
 });
 
 app.post('/', checkNotAuthenticated, passport.authenticate('local', {
-    successRedirect: '/home',
+    successRedirect: '/',
     failureRedirect: '/',
     failureFlash: true,
 }));
@@ -160,7 +160,10 @@ function checkAuthenticated(req, res, next) {
 
 function checkNotAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
-        return res.redirect('/home');
+        if(req.user.isAdmin)
+            return res.redirect('/admintickets');
+        else
+            return res.redirect('/home');
     }
     next();
 }
