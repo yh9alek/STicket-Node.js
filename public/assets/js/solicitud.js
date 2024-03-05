@@ -1,5 +1,7 @@
 const iconos = document.querySelectorAll('.icono');
 const prioridades = document.querySelectorAll('.prioridad');
+const icono__selected = document.querySelector('.icono__selected');
+const prioridad__selected = document.querySelector('.prioridad__selected');
 
 const reemplazarImagen = (icono, selected = false) => {
     let nuevoSrc = icono.src;
@@ -24,6 +26,12 @@ iconos.forEach(icono => {
             icono.classList.add('selected');
             reemplazarImagen(icono, true);
         }
+        for(let i = 0; i < iconos.length; i++) {
+            if(iconos[i].classList.contains('selected')) {
+                icono__selected.value = i + 1;
+                break;
+            }
+        }
     });
 });
 
@@ -33,6 +41,12 @@ prioridades.forEach(prioridad => {
         prioridades.forEach(p => p.classList.remove('pselected'));
         if(!prioridad.classList.contains('pselected')) {
             prioridad.classList.add('pselected');
+        }
+        for(let i = 0; i < prioridades.length; i++) {
+            if(prioridades[i].classList.contains('pselected')) {
+                prioridad__selected.value = i + 1;
+                break;
+            }
         }
     });
 });

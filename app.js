@@ -16,8 +16,10 @@ import methodOverride from 'method-override'; // Middleware que permite a las ap
 import passport from 'passport'; // Middleware de autenticación para Node.js
 
 import bcrypt from 'bcrypt';
-import usuariosDB from './models/usuarios-querys.js';
 import initialize from './passport-config.js';
+
+import usuariosDB from './models/usuarios-querys.js';
+import ticketsDB from './models/tickets-querys.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -26,9 +28,14 @@ const __dirname = path.dirname(__filename);
 app.use(express.static(__dirname + '/public'));
 
 let usuarios = null;
+let tickets = null;
 
 async function obtenerDatos() {
     usuarios = await usuariosDB.getTodos();
+}
+
+async function obtenerTickets(fkU) {
+    tickets = await ticketsDB.getTickets(fkU);
 }
 
 obtenerDatos();
@@ -83,13 +90,17 @@ app.get('/acerca', (req, res) => {
 });
 
 app.get('/home', checkAuthenticated, (req, res) => {
-    res.render('index', { 
-        pagina: 'usertickets',
-        user: req.user,
-        env: {
-            seccion: 'Mis Tickets',
-        },
-    });
+    obtenerTickets(req.user.id);
+    setTimeout(() => {
+        res.render('index', { 
+            pagina: 'usertickets',
+            user: req.user,
+            env: {
+                seccion: 'Mis Tickets',
+                tickets: tickets,
+            },
+        });
+    }, 100);
 });
 
 app.get('/solicitud', checkAuthenticated, (req, res) => {
@@ -100,6 +111,18 @@ app.get('/solicitud', checkAuthenticated, (req, res) => {
             seccion: 'Solicitar Ticket',
         },
     });
+});
+
+app.post('/solicitud', checkAuthenticated, (req, res) => {
+    ticketsDB.insertar(req.body.titulo,
+                       req.body.descripcion,
+                       parseInt(req.body.icono), 
+                       parseInt(req.body.prioridad),
+                       req.user.id,       
+                       1,
+                       0,
+                       formatearFecha());
+    res.redirect('/');
 });
 
 // Perfil es dinámico con el rol (admin - user), ambos comparten la misma interfaz de perfil
@@ -150,6 +173,13 @@ app.delete('/logout', (req, res) => {
         res.redirect('/');
     });
 });
+
+function formatearFecha() {
+    const date = new Date();
+    // Ajustar la hora al huso horario local
+    const localDate = new Date(date.getTime() - (date.getTimezoneOffset() * 60000));
+    return localDate.toISOString().slice(0, 19).replace('T', ' ');
+}
 
 function checkAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
