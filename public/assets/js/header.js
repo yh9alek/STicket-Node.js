@@ -9,10 +9,13 @@ const buttons = document.querySelector('.buttons');
 const perfil = document.querySelector('.perfil');
 const opciones = document.querySelector('.opciones');
 
+const html = document.querySelector('html');
+
 btnMenu.addEventListener('click', e => {
     if(!buttons.classList.contains('active')) {
         buttons.classList.add('active');
         background.classList.add('active');
+        html.style.overflow = 'hidden';
     }
 });
 
@@ -20,6 +23,7 @@ btnExit.addEventListener('click', e => {
     if(buttons.classList.contains('active')){
         buttons.classList.remove('active');
         background.classList.remove('active');
+        html.style.overflow = 'scroll';
     }
 });
 

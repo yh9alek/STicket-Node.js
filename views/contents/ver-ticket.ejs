@@ -71,6 +71,14 @@
     <% return hora12h; %>
 <% } %>
 
+<form class="dialog" action="/verticket" method="POST">
+    <p>¿Estas seguro de cerrar esta petición?</p>
+    <div>
+        <input type="hidden" name="id" value="<%= env.ticket.id %>">
+        <button class="op">NO</button>
+        <button type="submit" class="op">SI</button>
+    </div>
+</form>
 <section class="ticket__section">
     <div class="container">
         <div class="ticket">
@@ -108,10 +116,10 @@
                             <p>Creado <%= getFecha(env.ticket.fecha) + getHora(env.ticket.fecha) %></p>
                         </div>
                         <% if(env.ticket.estado){ %>
-                            <a class="cerrar" href="#">
+                            <button class="cerrar">
                                 <i class="bi bi-x-circle"></i>
                                 Cerrar Ticket
-                            </a>
+                            </button>
                         <% } %>
                     </div>
                 </div>
@@ -141,20 +149,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="mensaje">
-                    <p class="admin">
-                        <img src="/assets/imgs/estrella.PNG">
-                    </p>
-                    <div>
-                        <div class="head">
-                            <p class="admin__nombre">@MariaEstrella. <span>Hoy a las 2:42 PM</span></p>
-                        </div>
-                        <div class="cuerpo">
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit ducimus provident et. Illum cupiditate iusto quia dolores nisi, doloremque quos, voluptatem corrupti beatae ut numquam ratione. Animi maiores praesentium magnam. lorem30</p>
-                        </div>
-                    </div>
-                </div>
-                <% if(env.ticket.estado){ %>
+                <% if(env.ticket.estado) { %>
                     <div class="replica">
                         <h3><i class="bi bi-reply"></i>Añadir comentario</h3>
                         <div class="linea"></div>

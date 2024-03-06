@@ -117,6 +117,18 @@ app.get('/solicitud', checkAuthenticated, (req, res) => {
     });
 });
 
+app.post('/solicitud', checkAuthenticated, (req, res) => {
+    ticketsDB.insertar(req.body.titulo,
+                       req.body.descripcion,
+                       parseInt(req.body.icono), 
+                       parseInt(req.body.prioridad),
+                       req.user.id,       
+                       1,
+                       0,
+                       formatearFecha());
+    res.redirect('/');
+});
+
 app.get('/editar', checkAuthenticated, (req, res) => {
     let ticket = null;
     setTimeout(() => {
@@ -143,18 +155,6 @@ app.post('/editar', checkAuthenticated, (req, res) => {
     res.redirect(`/verticket?id=${req.body.id}`);
 });
 
-app.post('/solicitud', checkAuthenticated, (req, res) => {
-    ticketsDB.insertar(req.body.titulo,
-                       req.body.descripcion,
-                       parseInt(req.body.icono), 
-                       parseInt(req.body.prioridad),
-                       req.user.id,       
-                       1,
-                       0,
-                       formatearFecha());
-    res.redirect('/');
-});
-
 // Perfil es dinámico con el rol (admin - user), ambos comparten la misma interfaz de perfil
 app.get('/perfil', checkAuthenticated, (req, res) => {
     res.render('index', { 
@@ -179,6 +179,12 @@ app.get('/verticket', checkAuthenticated, (req, res) => {
             },
         });
     }, 100);
+});
+
+app.post('/verticket', checkAuthenticated, (req, res) => {
+    obtenerTickets(req.user.id);
+    ticketsDB.cerrar(req.body.id, formatearFecha());
+    res.redirect(`/verticket?id=${req.body.id}`);
 });
 
 /* Rutas para el administrador */

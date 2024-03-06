@@ -15,7 +15,7 @@
     left: 0; top: 0; right: 0; bottom: 0;
     background-color: #00000054;
     backdrop-filter: blur(3px);
-    z-index: 10;
+    z-index: 1001;
 }
 
 .container {
@@ -148,6 +148,10 @@ section:last-of-type {
 }
 
 @media screen and (max-width: 660px) {
+    .background.active {
+        z-index: 100;
+    }
+
     .buttons {
         position: fixed;
         left: -450px;
@@ -175,7 +179,7 @@ section:last-of-type {
 }
 
 @media screen and (max-width: 378px) {
-    form:not(.opciones) {
+    form:not(.opciones):not(.dialog) {
         width: 100% !important;
     }
 }
@@ -189,11 +193,3 @@ section:last-of-type {
         width: 100%;
     }
 }
-
-/* @media screen and (max-width: 320px) {
-    header > .container {
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-    }
-} */

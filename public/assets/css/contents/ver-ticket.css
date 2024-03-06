@@ -1,3 +1,69 @@
+.dialog {
+    position: fixed;
+    display: none;
+    top: 0px;
+    transition: all .2s ease;
+}
+
+.dialog.active {
+    display: inline-block;
+    padding: 12px;
+    padding-bottom: 15px;
+    background-color: #fff;
+    border: 1px solid gray;
+    border-radius: 5px;
+    width: 250px;
+    height: max-content;
+    z-index: 1002;
+    left: calc(50% - 125px);
+    top: 175px;
+}
+
+.dialog > p {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.dialog > p + div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.dialog > p + div > .op {
+    display: inline-block;
+    padding: 8px 10px 6px;
+    color: #fff;
+    border: none;
+    outline: none;
+    width: 60px;
+    height: 30px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.dialog > p + div > .op {
+    background-color: gray;
+    transition: all .2s ease;
+}
+
+.dialog > p + div > .op:hover {
+    cursor: pointer;
+    background-color: #9e9d9d;
+}
+
+.dialog > p + div > button[type="submit"].op {
+    background-color: #B1202F;
+}
+
+.dialog > p + div > button[type="submit"].op:hover {
+    cursor: pointer;
+    background-color: #DC3545;
+}
+
 .ticket__section > .container {
     padding-top: 60px;
     margin-bottom: 100px;
@@ -61,7 +127,7 @@
 
 .info > div:first-of-type p.abierto {
     color: #fff;
-    background-color: #DC3545;
+    background-color: #393f4b;
 }
 
 .info > div:first-of-type p:nth-of-type(2).r {
@@ -115,6 +181,8 @@
 }
 
 .cerrar {
+    outline: none;
+    border: none;
     color: #fff;
     background-color: #DC3545;
     padding: 8px 10px 6px;
@@ -124,6 +192,7 @@
 }
 
 .cerrar:hover {
+    cursor: pointer;
     background-color: #B1202F;
 }
 

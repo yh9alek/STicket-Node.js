@@ -75,4 +75,16 @@ ticketsDB.editar = function(titulo = '', descripcion = '', icono = 1, prioridad 
     });
 }
 
+ticketsDB.cerrar = function(id = '', fechaCierre = '') {
+    const consulta = `UPDATE tickets SET estado = 0, fechaCierre = ? WHERE id = ?;`;
+    conexion.query(consulta, [fechaCierre, id], function(err, res) {
+        if (err) {
+            console.log("Surgió un error: " + err);
+        }
+        else {
+            console.log("Se cerró con éxito");
+        }
+    });
+}
+
 export default ticketsDB;
