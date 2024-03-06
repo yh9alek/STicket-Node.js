@@ -118,7 +118,7 @@
             </div>
             <div class="tickets">
                 <% env.tickets.forEach(ticket => { %>
-                    <a class="ticket" href="/averticket">
+                    <a class="ticket" href="/averticket?idUser=<%=ticket.fkUsuario%>&idTicket=<%=ticket.id%>">
                         <div class="p">
                             <figure>
                                 <img class="imagen" src="/assets/imgs/user-default.png">

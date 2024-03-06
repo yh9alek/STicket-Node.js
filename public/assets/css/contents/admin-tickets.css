@@ -93,7 +93,7 @@
 }
 
 .ticket {
-    width: max-content;
+    width: 840px;
     padding: 10px;
     color: #212529;
     background-color: #fff;
@@ -103,14 +103,14 @@
     justify-content: flex-start;
     align-items: center;
     margin-bottom: 10px;
-    box-shadow: 0px 2px 4px #00000013;
+    box-shadow: 0px 2px 4px #0000003f;
     transition: all .2s ease;
 }
 
 .ticket:hover {
     cursor: pointer;
     transform: translateY(-3px);
-    box-shadow: 0px 7px 10px #00000015;
+    box-shadow: 0px 7px 10px #00000019;
 }
 
 .p {
@@ -196,11 +196,6 @@
     background-color: #DC4B4B;
 }
 
-
-/*background-color: #DC4B4B;
-background-color: #376bd3;*/
-
-
 .descripcion__ticket > .datos {
     display: flex;
     justify-content: flex-start;
@@ -225,6 +220,7 @@ background-color: #376bd3;*/
 }
 
 .espera {
+    font-size: 13px;
     padding: 8px 16px;
     background-color: #D1EBFF;
     color: #0D7FF6;

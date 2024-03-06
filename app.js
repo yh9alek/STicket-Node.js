@@ -200,11 +200,16 @@ app.get('/admintickets', checkAuthenticated, (req, res) => {
 });
 
 app.get('/averticket', checkAuthenticated, (req, res) => {
+    obtenerTickets(req.query.idUser);
+    const ticket = tickets.find(ticket => ticket.id === parseInt(req.query.idTicket));
+    const usuario = usuarios.find(user => user.id === parseInt(req.query.idUser));
     res.render('index', { 
         pagina: 'averticket',
         user: req.user,
         env: {
-            seccion: 'Ticket #',
+            seccion: `Ticket #${ticket.id}`,
+            ticket: ticket,
+            usuario: usuario,        
         },
     });
 });

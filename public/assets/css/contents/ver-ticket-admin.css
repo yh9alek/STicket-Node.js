@@ -55,15 +55,31 @@
     border-radius: 3px;
 }
 
+.info > div:first-of-type p.abierto.is {
+    color: #fff;
+    background-color: #8e54c4;
+}
+
 .info > div:first-of-type p.abierto {
-    color: #DDFFD1;
+    color: #fff;
+    background-color: #DC3545;
+}
+
+.info > div:first-of-type p:nth-of-type(2).r {
+    color: #fff;
     background-color: #33B122;
 }
 
-.info > div:first-of-type p:nth-of-type(2) {
+.info > div:first-of-type p:nth-of-type(2).m {
     color: #fff;
     background-color: #DC984B;
 }
+
+.info > div:first-of-type p:nth-of-type(2).c {
+    color: #fff;
+    background-color: #DC3545;
+}
+
 
 .info > div:first-of-type .com {
     display: flex;
