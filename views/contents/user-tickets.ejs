@@ -97,7 +97,7 @@
             <% } %>
             <% env.tickets.forEach( ticket => { %>
                 <a href="/verticket?id=<%=ticket.id%>" class="ticket">
-                    <p class="titulo"><%= ticket.titulo %></p>
+                    <p class="titulo"><%= ticket.titulo.length >= 25 ? ticket.titulo.substring(0, 23) + '...' : ticket.titulo %></p>
                     <% let pri = getPrioridad(ticket); %>
                     <p class="prioridad <%= pri %>"><%= pri %></p>
                     <p class="hora"><%= getFecha(ticket.fecha) + getHora(ticket.fecha) %></p>
