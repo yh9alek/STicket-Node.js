@@ -78,7 +78,7 @@
                 <div class="edit">
                     <h3>Detalles del ticket</h3>
                     <% if(env.ticket.estado){ %>
-                        <a href="./solicitud.html"><i class="bi bi-pencil-square"></i> Editar</a>
+                        <a href="/solicitud?"><i class="bi bi-pencil-square"></i> Editar</a>
                     <% } %>
                 </div>
                 <div class="info">
@@ -164,8 +164,6 @@
                 </div>
             <% } else { %>
                 <div class="mensaje">
-                    <div class="circle">
-                    </div>
                     <div>
                         <div class="head last">
                             <p class="admin__nombre">Ticket cerrado. <span><%= getFecha(env.ticket.fechaCierre) + getHora(env.ticket.fechaCierre) %></span></p>

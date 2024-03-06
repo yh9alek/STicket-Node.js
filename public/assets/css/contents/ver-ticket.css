@@ -110,6 +110,10 @@
     gap: 10px;
 }
 
+.c2 > .com + p {
+    text-align: left;
+}
+
 .cerrar {
     color: #fff;
     background-color: #DC3545;
@@ -249,6 +253,7 @@
 }
 
 .head.last {
+    position: relative;
     border-radius: 5px;
     background-color: #ffe5e5;
     border: 1px solid #f1d1d1;
@@ -256,15 +261,7 @@
 
 .head.last::after,
 .head.last::before {
-    top: 4px;
-}
-
-.head.last::after {
-    background-color: #ffe5e5;
-}
-
-.head.last::before {
-    background-color: #f1d1d1;
+    display: none;
 }
 
 .cuerpo {
@@ -363,16 +360,6 @@
 
 .edit > a:hover {
     text-decoration: underline;
-}
-
-.circle {
-    position: relative;
-    left: 10px;
-    width: 20px;
-    height: 20px;
-    background-color: #DC3545;
-    border-radius: 50%;
-    margin-right: 20px;
 }
 
 @media screen and (max-width: 900px){

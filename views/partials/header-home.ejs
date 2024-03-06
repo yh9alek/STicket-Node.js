@@ -21,9 +21,13 @@
             <% } %>
         </div>
         <div class="perfil__content">
-            <a class="perfil" href="/perfil">
+            <div class="perfil">
                 <img src="/assets/imgs/octavio.PNG">
-            </a>
+                <form class="opciones" action="/logout?_method=DELETE" method="POST">
+                    <a class="opcion" href="/perfil"><i class="bi bi-person"></i> Perfil</a>
+                    <button class="opcion" type="submit"><i class="bi bi-box-arrow-left"></i> Cerrar Sesión</button>
+                </form>
+            </div>
             <p>@<%= user.usuario %></p>
         </div>
     </div>
