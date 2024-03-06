@@ -141,8 +141,8 @@ app.get('/perfil', checkAuthenticated, (req, res) => {
 });
 
 app.get('/verticket', checkAuthenticated, (req, res) => {
-    const ticket = tickets.find(ticket => ticket.fkUsuario === req.user.id);
     setTimeout(() => {
+        const ticket = tickets.find(ticket => ticket.id === parseInt(req.query.id));
         res.render('index', { 
             pagina: 'verticket',
             user: req.user,

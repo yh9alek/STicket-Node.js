@@ -96,7 +96,7 @@
                 <p>No hay tickets pendientes</p>
             <% } %>
             <% env.tickets.forEach( ticket => { %>
-                <a href="/verticket" class="ticket">
+                <a href="/verticket?id=<%=ticket.id%>" class="ticket">
                     <p class="titulo"><%= ticket.titulo %></p>
                     <% let pri = getPrioridad(ticket); %>
                     <p class="prioridad <%= pri %>"><%= pri %></p>
