@@ -15,6 +15,12 @@
     <%-include('../contents/solicitud.ejs')%>
 <% } %>
 
+<% if(pagina === 'editar') { %>
+    <%-include('../partials/header-home.ejs')%>
+    <%-include('../partials/section-header.ejs')%>
+    <%-include('../contents/editar.ejs')%>
+<% } %>
+
 <% if(pagina === 'perfil') { %>
     <%-include('../partials/header-home.ejs')%>
     <%-include('../partials/section-header.ejs')%>

@@ -117,6 +117,32 @@ app.get('/solicitud', checkAuthenticated, (req, res) => {
     });
 });
 
+app.get('/editar', checkAuthenticated, (req, res) => {
+    let ticket = null;
+    setTimeout(() => {
+        if(req.query.id){
+            ticket = tickets.find(ticket => ticket.id === parseInt(req.query.id));
+        }
+        res.render('index', { 
+            pagina: 'editar',
+            user: req.user,
+            env: {
+                seccion: 'Editar Ticket',
+                ticket: ticket,
+            },
+        });
+    }, 100);
+});
+
+app.post('/editar', checkAuthenticated, (req, res) => {
+    ticketsDB.editar(req.body.titulo,
+                     req.body.descripcion,
+                     parseInt(req.body.icono),
+                     parseInt(req.body.prioridad),
+                     parseInt(req.body.id));
+    res.redirect(`/verticket?id=${req.body.id}`);
+});
+
 app.post('/solicitud', checkAuthenticated, (req, res) => {
     ticketsDB.insertar(req.body.titulo,
                        req.body.descripcion,
@@ -141,6 +167,7 @@ app.get('/perfil', checkAuthenticated, (req, res) => {
 });
 
 app.get('/verticket', checkAuthenticated, (req, res) => {
+    obtenerTickets(req.user.id);
     setTimeout(() => {
         const ticket = tickets.find(ticket => ticket.id === parseInt(req.query.id));
         res.render('index', { 

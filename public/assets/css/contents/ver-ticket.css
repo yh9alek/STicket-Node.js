@@ -55,12 +55,12 @@
 }
 
 .info > div:first-of-type p.abierto.is {
-    color: #DDFFD1;
+    color: #fff;
     background-color: #8e54c4;
 }
 
 .info > div:first-of-type p.abierto {
-    color: #DDFFD1;
+    color: #fff;
     background-color: #DC3545;
 }
 

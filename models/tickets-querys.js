@@ -48,4 +48,16 @@ ticketsDB.insertar = function(titulo = '', descripcion = '', icono = 0, priorida
     });
 }
 
+ticketsDB.editar = function(titulo = '', descripcion = '', icono = 1, prioridad = 1, id) {
+    const consulta = `UPDATE tickets SET titulo = ?, descripcion = ?, icono = ?, prioridad = ? WHERE id = ?;`;
+    conexion.query(consulta, [titulo, descripcion, icono, prioridad, id], function(err, res) {
+        if (err) {
+            console.log("Surgió un error: " + err);
+        }
+        else {
+            console.log("Se editó con éxito");
+        }
+    });
+}
+
 export default ticketsDB;

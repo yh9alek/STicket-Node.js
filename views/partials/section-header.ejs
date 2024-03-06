@@ -3,8 +3,11 @@
         <div class="container">
             <h3><%=env.seccion%></h3>
             <% if(!user.isAdmin) { %>
-                <% if(pagina !== 'usertickets') { %>
+                <% if(pagina !== 'usertickets' && pagina !== 'editar') { %>
                     <p class="sections"><a href="/home"><i class="bi bi-reply"></i> Regresar</a>
+                <% } %>
+                <% if(pagina === 'editar') { %>
+                    <p class="sections"><a href="/verticket?id=<%=env.ticket.id%>"><i class="bi bi-reply"></i> Regresar</a>
                 <% } %>
             <% } else { %>
                 <% if(pagina !== 'admintickets') { %>

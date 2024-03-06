@@ -1,5 +1,5 @@
-const iconos = document.querySelectorAll('.icono');
-const prioridades = document.querySelectorAll('.prioridad');
+const iconos = Array.from(document.querySelectorAll('.icono'));
+const prioridades = Array.from(document.querySelectorAll('.prioridad'));
 const icono__selected = document.querySelector('.icono__selected');
 const prioridad__selected = document.querySelector('.prioridad__selected');
 
@@ -13,6 +13,28 @@ const reemplazarImagen = (icono, selected = false) => {
     nuevoSrc = arr.join('') + sub;
     icono.src = nuevoSrc;
 }
+
+(() => {
+    for(let i = 0; i < parseInt(icono__selected.value); i++) {
+        if(iconos[i].classList.contains('selected')) {
+            iconos[i].classList.remove('selected');
+            reemplazarImagen(iconos[i]);
+        }
+        if((i + 1) === parseInt(icono__selected.value)) {
+            iconos[i].classList.add('selected');
+            reemplazarImagen(iconos[i], true);
+        }
+    }
+
+    for(let i = 0; i < parseInt(prioridad__selected.value); i++) {
+        if(prioridades[i].classList.contains('pselected')) {
+            prioridades[i].classList.remove('pselected');
+        }
+        if((i + 1) === parseInt(prioridad__selected.value)) {
+            prioridades[i].classList.add('pselected');
+        }
+    }
+})();
 
 iconos.forEach(icono => {
     icono.addEventListener('click', e => {

@@ -1,0 +1,44 @@
+<section class="ticket__section">
+    <div class="container">
+        <p>Modificación de solicitud de soporte técnico</p>
+        <div class="ticket">
+            <form action="/editar" method="POST">
+                <input type="hidden" name="id" value="<%= env.ticket.id %>">
+                <i class="bi bi-pencil-square"></i>
+                <input class="inp titulo" type="text" name="titulo" placeholder="Ingrese el título..." value="<%= env.ticket.titulo %>" required>
+                <div class="hr"></div>
+                <div class="inputs">
+                    <div class="input">
+                        <p>Descripción del asunto:</p>
+                        <textarea class="descripcion" name="descripcion" required><%= env.ticket.descripcion %></textarea>
+                    </div>
+                    <div class="input">
+                        <p>Selecciona un icono de preferencia para este ticket:</p>
+                        <div class="iconos">
+                            <input class="icono__selected" type="hidden" name="icono" value="<%= env.ticket.icono %>">
+                            <img class="icono selected" src="/assets/imgs/impresora-s.png" alt="Icono">
+                            <img class="icono" src="/assets/imgs/fix-b.png" alt="Icono">
+                            <img class="icono" src="/assets/imgs/computadora-b.png" alt="Icono">
+                            <img class="icono" src="/assets/imgs/documento-b.png" alt="Icono">
+                            <img class="icono" src="/assets/imgs/reloj-b.png" alt="Icono">
+                            <img class="icono" src="/assets/imgs/carpeta-b.png" alt="Icono">
+                            <img class="icono" src="/assets/imgs/gear-b.png" alt="Icono">
+                        </div>
+                    </div>
+                    <div class="input">
+                        <p>Nivel de Prioridad</p>
+                        <div class="prioridades">
+                            <input class="prioridad__selected" type="hidden" name="prioridad" value="<%= env.ticket.prioridad %>">
+                            <button class="prioridad pselected">Regular</button>
+                            <button class="prioridad">Medio</button>
+                            <button class="prioridad">Crítico</button>
+                        </div>
+                    </div>
+                    <div class="input">
+                        <button type="submit" class="levantar">Editar Petición</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
