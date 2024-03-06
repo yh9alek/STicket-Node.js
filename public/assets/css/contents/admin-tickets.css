@@ -165,29 +165,41 @@
     border-right: 1px solid #e2e2e2;
 }
 
-.datos > p:first-of-type {
+.datos > p {
     padding: 6px 10px 4px;
+    width: 75px;
     text-transform: uppercase;
     color: #fff;
     font-size: 13px;
     font-weight: 500;
-    width: max-content;
     border-radius: 5px;
     margin-top: 5px;
+}
+
+.datos > p:first-of-type.abierto {
+    background-color: #8e54c4;
+}
+
+.datos > p:first-of-type.cerrado {
     background-color: #DC4B4B;
 }
 
-.datos > p:last-of-type {
-    padding: 6px 10px 4px;
-    text-transform: uppercase;
-    color: #fff;
-    font-size: 13px;
-    font-weight: 500;
-    width: max-content;
-    border-radius: 5px;
-    margin-top: 5px;
-    background-color: #376bd3;
+.datos > p:last-of-type.regular {
+    background-color: #33B122;
 }
+
+.datos > p:last-of-type.medio {
+    background-color: #DC984B;
+}
+
+.datos > p:last-of-type.critico {
+    background-color: #DC4B4B;
+}
+
+
+/*background-color: #DC4B4B;
+background-color: #376bd3;*/
+
 
 .descripcion__ticket > .datos {
     display: flex;

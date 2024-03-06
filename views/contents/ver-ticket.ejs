@@ -121,48 +121,51 @@
                 </div>
             </div>
             <div class="linea__punteada"></div>
-            <div class="estado">
-                <p class="admin">
-                    <img src="/assets/imgs/estrella.PNG">
-                </p>
-                <p><span class="admin__nombre">@MariaEstrella</span> ha atendido tu ticket.</p>
-            </div>
-            <div class="mensaje">
-                <p class="admin">
-                    <img src="/assets/imgs/estrella.PNG">
-                </p>
-                <div>
-                    <div class="head">
-                        <p class="admin__nombre">@MariaEstrella. <span>Hoy a las 2:42 PM</span></p>
-                    </div>
-                    <div class="cuerpo">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit ducimus provident et. Illum cupiditate iusto quia dolores nisi, doloremque quos, voluptatem corrupti beatae ut numquam ratione. Animi maiores praesentium magnam. lorem30</p>
-                    </div>
+            <% if(env.ticket.isRespondido) { %>
+                <div class="estado">
+                    <p class="admin">
+                        <img src="/assets/imgs/estrella.PNG">
+                    </p>
+                    <p><span class="admin__nombre">@MariaEstrella</span> ha atendido tu ticket.</p>
                 </div>
-            </div>
-            <div class="mensaje">
-                <p class="admin">
-                    <img src="/assets/imgs/estrella.PNG">
-                </p>
-                <div>
-                    <div class="head">
-                        <p class="admin__nombre">@MariaEstrella. <span>Hoy a las 2:42 PM</span></p>
-                    </div>
-                    <div class="cuerpo">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit ducimus provident et. Illum cupiditate iusto quia dolores nisi, doloremque quos, voluptatem corrupti beatae ut numquam ratione. Animi maiores praesentium magnam. lorem30</p>
-                    </div>
-                </div>
-            </div>
-            <% if(env.ticket.estado){ %>
-                <div class="replica">
-                    <h3><i class="bi bi-reply"></i>Añadir comentario</h3>
-                    <div class="linea"></div>
-                    <textarea class="comentario" placeholder="Escribe aquí..."></textarea>
+                <div class="mensaje">
+                    <p class="admin">
+                        <img src="/assets/imgs/estrella.PNG">
+                    </p>
                     <div>
-                        <a class="enviar" href="#">Enviar Comentario</a>
+                        <div class="head">
+                            <p class="admin__nombre">@MariaEstrella. <span>Hoy a las 2:42 PM</span></p>
+                        </div>
+                        <div class="cuerpo">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit ducimus provident et. Illum cupiditate iusto quia dolores nisi, doloremque quos, voluptatem corrupti beatae ut numquam ratione. Animi maiores praesentium magnam. lorem30</p>
+                        </div>
                     </div>
                 </div>
-            <% } else { %>
+                <div class="mensaje">
+                    <p class="admin">
+                        <img src="/assets/imgs/estrella.PNG">
+                    </p>
+                    <div>
+                        <div class="head">
+                            <p class="admin__nombre">@MariaEstrella. <span>Hoy a las 2:42 PM</span></p>
+                        </div>
+                        <div class="cuerpo">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit ducimus provident et. Illum cupiditate iusto quia dolores nisi, doloremque quos, voluptatem corrupti beatae ut numquam ratione. Animi maiores praesentium magnam. lorem30</p>
+                        </div>
+                    </div>
+                </div>
+                <% if(env.ticket.estado){ %>
+                    <div class="replica">
+                        <h3><i class="bi bi-reply"></i>Añadir comentario</h3>
+                        <div class="linea"></div>
+                        <textarea class="comentario" placeholder="Escribe aquí..."></textarea>
+                        <div>
+                            <a class="enviar" href="#">Enviar Comentario</a>
+                        </div>
+                    </div>
+                <% } %>
+            <% } %>
+            <% if(!env.ticket.estado){ %>
                 <div class="mensaje">
                     <div>
                         <div class="head last">

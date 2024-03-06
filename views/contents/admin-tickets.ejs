@@ -1,3 +1,93 @@
+<% function getPrioridad(ticket) { %>
+    <% let prioridades = ['regular', 'medio', 'critico']; %>
+    <% return prioridades[ticket.prioridad - 1]; %>
+<% } %>
+
+<% function getIcono(ticket) { %>
+    <% const iconos = [
+        '/assets/imgs/impresora-b.png',
+        '/assets/imgs/fix-b.png', 
+        '/assets/imgs/computadora-b.png',
+        '/assets/imgs/documento-b.png',
+        '/assets/imgs/reloj-b.png',
+        '/assets/imgs/carpeta-b.png',
+        '/assets/imgs/gear-b.png']; %>
+    <% return iconos[ticket.icono - 1]; %>
+<% } %>
+
+<% function getFecha(fecha) { %>
+    <% // Obtener la fecha del ticket y la fecha actual del navegador %>
+    <% const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone; %>
+    <% const fechaTicket = new Date(fecha).toLocaleString('es-US', { timeZone }).split(',')[0]; %>
+    <% const fechaActual = new Date().toLocaleString('es-US', { timeZone }).split(',')[0]; %>
+
+    <% // Array para la comparativa %>
+    <% const meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']; %>
+    <% const dias = [31, [28, 29], 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; %>
+    <% const bisiesto = parseInt(fechaActual.split('/')[2]) % 4 === 0; %>
+    <% // Validaciones para mostrar la fecha %>
+    <% if(fechaTicket === fechaActual) { %>
+        <% return 'Hoy a las '; %>
+    <% } %>
+    <% fechaTicketSplit = fechaTicket.split('/'); %>
+    <% fechaActualSplit = fechaActual.split('/'); %>
+
+    <% if(fechaTicketSplit[1] === fechaActualSplit[1] && parseInt(fechaTicketSplit[0]) + 1 === parseInt(fechaActualSplit[0])) { %>
+        <% return 'Ayer a las '; %>
+    <% } %>
+
+    <% if(fechaTicketSplit[1] === fechaActualSplit[1] && parseInt(fechaTicketSplit[0]) < parseInt(fechaActualSplit[0])) { %>
+        <% return `${fechaTicketSplit[0]} de ${meses[fechaTicketSplit[1] - 1]} a las `; %>
+    <% } %>
+    
+    <!-- Validar Febrero -->
+    <% if(parseInt(fechaTicketSplit[1]) + 1 === parseInt(fechaActualSplit[1]) && parseInt(fechaTicketSplit[1]) === 2) { %>
+        <% if(bisiesto && parseInt(fechaTicketSplit[0]) === dias[fechaTicketSplit[1] - 1][1]) { %>
+            <% if(parseInt(fechaActualSplit[0]) <= 1) { %>
+                <% return 'Ayer a las '; %>
+            <% } %>
+        <% } %>
+        <% if(!bisiesto && parseInt(fechaTicketSplit[0]) === dias[fechaTicketSplit[1] - 1][0]) { %>
+            <% if(parseInt(fechaActualSplit[0]) <= 1) { %>
+                <% return 'Ayer a las '; %>
+            <% } %>
+        <% } %>
+        <% return `${fechaTicketSplit[0]} de ${meses[fechaTicketSplit[1] - 1]} a las `; %>
+    <% } %>
+
+    <!-- Validar Meses con 31 días -->
+    <% if(parseInt(fechaTicketSplit[1]) + 1 === parseInt(fechaActualSplit[1])) { %>
+        <% if(dias[parseInt(fechaTicketSplit[1]) - 1] === 31 && parseInt(fechaActualSplit[0]) <= 1) { %>
+            <% console.log('JAJAJAJA 31'); %>
+            <% return 'Ayer a las '; %>
+        <% } %>
+    <% } %>
+
+    <!-- Validar Meses con 30 días -->
+    <% if(parseInt(fechaTicketSplit[1]) + 1 === parseInt(fechaActualSplit[1])) { %>
+        <% if(dias[parseInt(fechaTicketSplit[1]) - 1] === 30 && parseInt(fechaActualSplit[0]) <= 1) { %>
+            <% console.log('JAJAJAJA 30'); %>
+            <% return 'Ayer a las '; %>
+        <% } %>
+    <% } %>
+
+    <% if(fechaTicketSplit[1] !== fechaActualSplit[1]) { %>
+        <% return `${fechaTicketSplit[0]} de ${meses[fechaTicketSplit[1] - 1]} a las `; %>
+    <% } %>
+<% } %>
+
+<!-- Obtener la hora formateada a 12 horas -->
+<% function getHora(fecha) { %>
+    <% const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone; %>
+    <% const hora12h = new Date(fecha).toLocaleTimeString('es-US', {
+        timeZone: timeZone,
+        hour12: true,
+        hour: 'numeric',
+        minute: 'numeric',
+    }); %>
+    <% return hora12h; %>
+<% } %>
+
 <section>
     <div class="container">
         <div class="tickets__section">
@@ -27,188 +117,42 @@
                 </div>
             </div>
             <div class="tickets">
-                <a class="ticket" href="/averticket">
-                    <div class="p">
-                        <figure>
-                            <img class="imagen" src="/assets/imgs/octavio.PNG">
-                        </figure>
+                <% env.tickets.forEach(ticket => { %>
+                    <a class="ticket" href="/averticket">
+                        <div class="p">
+                            <figure>
+                                <img class="imagen" src="/assets/imgs/user-default.png">
+                            </figure>
+                            <div>
+                                <p class="nombre">@<%= env.usuarios.find(user => user.id === ticket.fkUsuario).usuario %></p>
+                                <p class="dep"><%= env.usuarios.find(user => user.id === ticket.fkUsuario).departamento %></p>
+                            </div>
+                        </div>
+                        <div class="icono">
+                            <img src="<%= getIcono(ticket) %>">
+                        </div>
+                        <div class="descripcion__ticket">
+                            <p><%= ticket.titulo.length >= 25 ? ticket.titulo.substring(0, 23) + '...' : ticket.titulo %></p>
+                            <div class="datos">
+                                <p class="<%= ticket.estado ? 'abierto' : 'cerrado' %>"><%= ticket.estado ? 'Abierto' : 'Cerrado' %></p>
+                                <p class="<%= getPrioridad(ticket) %>"><%= getPrioridad(ticket).charAt(0).toUpperCase() + getPrioridad(ticket).substring(1); %></p>
+                            </div>
+                        </div>
                         <div>
-                            <p class="nombre">@OctavioBatman</p>
-                            <p class="dep">Informática</p>
+                            <p class="fecha"><%= getFecha(ticket.fecha) + getHora(ticket.fecha) %></p>
                         </div>
-                    </div>
-                    <div class="icono">
-                        <img src="/assets/imgs/impresora-b.PNG">
-                    </div>
-                    <div class="descripcion__ticket">
-                        <p>Problema con Impresora</p>
-                        <div class="datos">
-                            <p>CRÍTICO</p>
-                            <p>Abierto</p>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="fecha">2 Sep 2024 2:42 PM</p>
-                    </div>
-                    <p class="espera"><i class="bi bi-pencil-square"></i> En espera</p>
-                    <p class="codigo">#173</p>
-                </a>
-                <a class="ticket" href="/averticket">
-                    <div class="p">
-                        <figure>
-                            <img class="imagen" src="/assets/imgs/octavio.PNG">
-                        </figure>
-                        <div>
-                            <p class="nombre">@OctavioBatman</p>
-                            <p class="dep">Informática</p>
-                        </div>
-                    </div>
-                    <div class="icono">
-                        <img src="/assets/imgs/impresora-b.PNG">
-                    </div>
-                    <div class="descripcion__ticket">
-                        <p>Problema con Impresora</p>
-                        <div class="datos">
-                            <p>CRÍTICO</p>
-                            <p>Abierto</p>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="fecha">2 Sep 2024 2:42 PM</p>
-                    </div>
-                    <p class="espera"><i class="bi bi-pencil-square"></i> En espera</p>
-                    <p class="codigo">#174</p>
-                </a>
-                <a class="ticket" href="/averticket">
-                    <div class="p">
-                        <figure>
-                            <img class="imagen" src="/assets/imgs/octavio.PNG">
-                        </figure>
-                        <div>
-                            <p class="nombre">@OctavioBatman</p>
-                            <p class="dep">Informática</p>
-                        </div>
-                    </div>
-                    <div class="icono">
-                        <img src="/assets/imgs/impresora-b.PNG">
-                    </div>
-                    <div class="descripcion__ticket">
-                        <p>Problema con Impresora</p>
-                        <div class="datos">
-                            <p>CRÍTICO</p>
-                            <p>Abierto</p>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="fecha">2 Sep 2024 2:42 PM</p>
-                    </div>
-                    <p class="espera"><i class="bi bi-pencil-square"></i> En espera</p>
-                    <p class="codigo">#175</p>
-                </a>
-                <a class="ticket" href="/averticket">
-                    <div class="p">
-                        <figure>
-                            <img class="imagen" src="/assets/imgs/octavio.PNG">
-                        </figure>
-                        <div>
-                            <p class="nombre">@OctavioBatman</p>
-                            <p class="dep">Informática</p>
-                        </div>
-                    </div>
-                    <div class="icono">
-                        <img src="/assets/imgs/impresora-b.PNG">
-                    </div>
-                    <div class="descripcion__ticket">
-                        <p>Problema con Impresora</p>
-                        <div class="datos">
-                            <p>CRÍTICO</p>
-                            <p>Abierto</p>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="fecha">2 Sep 2024 2:42 PM</p>
-                    </div>
-                    <p class="espera"><i class="bi bi-pencil-square"></i> En espera</p>
-                    <p class="codigo">#176</p>
-                </a>
-                <a class="ticket" href="/averticket">
-                    <div class="p">
-                        <figure>
-                            <img class="imagen" src="/assets/imgs/octavio.PNG">
-                        </figure>
-                        <div>
-                            <p class="nombre">@OctavioBatman</p>
-                            <p class="dep">Informática</p>
-                        </div>
-                    </div>
-                    <div class="icono">
-                        <img src="/assets/imgs/impresora-b.PNG">
-                    </div>
-                    <div class="descripcion__ticket">
-                        <p>Problema con Impresora</p>
-                        <div class="datos">
-                            <p>CRÍTICO</p>
-                            <p>Abierto</p>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="fecha">2 Sep 2024 2:42 PM</p>
-                    </div>
-                    <p class="espera"><i class="bi bi-pencil-square"></i> En espera</p>
-                    <p class="codigo">#177</p>
-                </a>
-                <a class="ticket" href="/averticket">
-                    <div class="p">
-                        <figure>
-                            <img class="imagen" src="/assets/imgs/octavio.PNG">
-                        </figure>
-                        <div>
-                            <p class="nombre">@OctavioBatman</p>
-                            <p class="dep">Informática</p>
-                        </div>
-                    </div>
-                    <div class="icono">
-                        <img src="/assets/imgs/impresora-b.PNG">
-                    </div>
-                    <div class="descripcion__ticket">
-                        <p>Problema con Impresora</p>
-                        <div class="datos">
-                            <p>CRÍTICO</p>
-                            <p>Abierto</p>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="fecha">2 Sep 2024 2:42 PM</p>
-                    </div>
-                    <p class="espera"><i class="bi bi-pencil-square"></i> En espera</p>
-                    <p class="codigo">#178</p>
-                </a>
-                <a class="ticket" href="/averticket">
-                    <div class="p">
-                        <figure>
-                            <img class="imagen" src="/assets/imgs/octavio.PNG">
-                        </figure>
-                        <div>
-                            <p class="nombre">@OctavioBatman</p>
-                            <p class="dep">Informática</p>
-                        </div>
-                    </div>
-                    <div class="icono">
-                        <img src="/assets/imgs/impresora-b.PNG">
-                    </div>
-                    <div class="descripcion__ticket">
-                        <p>Problema con Impresora</p>
-                        <div class="datos">
-                            <p>CRÍTICO</p>
-                            <p>Abierto</p>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="fecha">2 Sep 2024 2:42 PM</p>
-                    </div>
-                    <p class="espera"><i class="bi bi-pencil-square"></i> En espera</p>
-                    <p class="codigo">#179</p>
-                </a>
+                        <p class="espera">
+                            <% const respuesta = ticket.isRespondido ? 'Respondido' : 'En espera'; %>
+                                <% if(respuesta === 'Respondido') { %>
+                                    <i class="bi bi-chat-left"></i>
+                                <% } else { %>
+                                    <i class="bi bi-hourglass-split"></i>
+                                <% } %>
+                            <%= respuesta %>
+                        </p>
+                        <p class="codigo">#<%= ticket.id %></p>
+                    </a>
+                <% }); %>
             </div>
         </div>
     </div>

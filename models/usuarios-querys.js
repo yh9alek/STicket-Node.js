@@ -2,6 +2,18 @@ import conexion from './conexion.js';
 
 const usuariosDB = {};
 
+usuariosDB.getUsuarioId = function(id) {
+    const consulta = "SELECT * from usuarios WHERE id = ?;";
+    conexion.query(consulta, [id], function(err, res) {
+        if (err) {
+            console.log("Surgió un error");
+        }
+        else {
+            console.log("Se buscó con éxito");
+        }
+    });
+};
+
 usuariosDB.insertar = function(usuario = '', pass = '', nombre = '', correo = '', celular = '', puesto = '', departamento = '', isAdmin = false) {
     const consulta = "INSERT INTO usuarios (usuario, pass, nombre, correo, celular, puesto, departamento, isAdmin) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
     conexion.query(consulta, [usuario, pass, nombre, correo, celular, puesto, departamento, isAdmin], function(err, res) {

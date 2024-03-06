@@ -54,8 +54,8 @@
 
 .ticket:hover {
     cursor: pointer;
-    transform: translateY(-5px);
-    box-shadow: 0px 7px 10px #00000025;
+    transform: translateY(-3px);
+    box-shadow: 0px 7px 7px #00000025;
 }
 
 .hora {

@@ -38,8 +38,8 @@ async function obtenerTickets(fkU) {
     tickets = await ticketsDB.getTickets(fkU);
 }
 
-async function obtenerTicket(id) {
-    tickets = await ticketsDB.getTicket(id);
+async function obtenerTodos() {
+    tickets = await ticketsDB.getTodos();
 }
 
 obtenerDatos();
@@ -184,13 +184,19 @@ app.get('/verticket', checkAuthenticated, (req, res) => {
 /* Rutas para el administrador */
 
 app.get('/admintickets', checkAuthenticated, (req, res) => {
-    res.render('index', { 
-        pagina: 'admintickets',
-        user: req.user,
-        env: {
-            seccion: 'Tickets del sistema',
-        },
-    });
+    obtenerTodos();
+    obtenerDatos();
+    setTimeout(() => {
+        res.render('index', { 
+            pagina: 'admintickets',
+            user: req.user,
+            env: {
+                seccion: 'Tickets del sistema',
+                tickets: tickets,
+                usuarios: usuarios,
+            },
+        });
+    }, 100);
 });
 
 app.get('/averticket', checkAuthenticated, (req, res) => {

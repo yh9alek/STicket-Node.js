@@ -5,31 +5,33 @@
                 <div class="foto">
                     <div class="foto__content">
                         <div class="foto__img">
-                            <img src="/assets/imgs/octavio.PNG">
+                            <img src="/assets/imgs/user-default.png">
                         </div>
                     </div>
                     <p>@<%= user.usuario %></p>
                     <p><%= user.isAdmin ? 'Admin' : 'Trabajador - Empleado'%></p>
                 </div>
-                <div class="tickets">
-                    <div>
-                        <p class="misTickets">Mis Tickets</p>
-                        <p class="numeroTickets">30</p>
+                <% if(!user.isAdmin) { %>
+                    <div class="tickets">
+                        <div>
+                            <p class="misTickets">Mis Tickets</p>
+                            <p class="numeroTickets">30</p>
+                        </div>
+                        <div class="linea"></div>
+                        <div class="tipos">
+                            <p>Regular</p>
+                            <p>10</p>
+                        </div>
+                        <div class="tipos">
+                            <p>Medio</p>
+                            <p>10</p>
+                        </div>
+                        <div class="tipos">
+                            <p>Crítico</p>
+                            <p>10</p>
+                        </div>
                     </div>
-                    <div class="linea"></div>
-                    <div class="tipos">
-                        <p>Regular</p>
-                        <p>10</p>
-                    </div>
-                    <div class="tipos">
-                        <p>Medio</p>
-                        <p>10</p>
-                    </div>
-                    <div class="tipos">
-                        <p>Crítico</p>
-                        <p>10</p>
-                    </div>
-                </div>
+                <% } %>
             </div>
             <form class="col2">
                 <p class="infoPerfil">Información de Perfil</p>
