@@ -38,6 +38,10 @@ async function obtenerTickets(fkU) {
     tickets = await ticketsDB.getTickets(fkU);
 }
 
+async function obtenerTicket(id) {
+    tickets = await ticketsDB.getTicket(id);
+}
+
 obtenerDatos();
 
 setTimeout(() => {
@@ -137,13 +141,17 @@ app.get('/perfil', checkAuthenticated, (req, res) => {
 });
 
 app.get('/verticket', checkAuthenticated, (req, res) => {
-    res.render('index', { 
-        pagina: 'verticket',
-        user: req.user,
-        env: {
-            seccion: 'Ticket #',
-        },
-    });
+    const ticket = tickets.find(ticket => ticket.fkUsuario === req.user.id);
+    setTimeout(() => {
+        res.render('index', { 
+            pagina: 'verticket',
+            user: req.user,
+            env: {
+                seccion: `Ticket #${ticket.id}`,
+                ticket: ticket,
+            },
+        });
+    }, 100);
 });
 
 /* Rutas para el administrador */

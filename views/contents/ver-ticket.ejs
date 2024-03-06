@@ -1,39 +1,123 @@
+<% function getFecha(fecha) { %>
+    <% // Obtener la fecha del ticket y la fecha actual del navegador %>
+    <% const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone; %>
+    <% const fechaTicket = new Date(fecha).toLocaleString('es-US', { timeZone }).split(',')[0]; %>
+    <% const fechaActual = new Date().toLocaleString('es-US', { timeZone }).split(',')[0]; %>
+
+    <% // Array para la comparativa %>
+    <% const meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']; %>
+    <% const dias = [31, [28, 29], 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; %>
+    <% const bisiesto = parseInt(fechaActual.split('/')[2]) % 4 === 0; %>
+    <% // Validaciones para mostrar la fecha %>
+    <% if(fechaTicket === fechaActual) { %>
+        <% return 'Hoy a las '; %>
+    <% } %>
+    <% fechaTicketSplit = fechaTicket.split('/'); %>
+    <% fechaActualSplit = fechaActual.split('/'); %>
+
+    <% if(fechaTicketSplit[1] === fechaActualSplit[1] && parseInt(fechaTicketSplit[0]) + 1 === parseInt(fechaActualSplit[0])) { %>
+        <% return 'Ayer a las '; %>
+    <% } %>
+
+    <% if(fechaTicketSplit[1] === fechaActualSplit[1] && parseInt(fechaTicketSplit[0]) < parseInt(fechaActualSplit[0])) { %>
+        <% return `${fechaTicketSplit[0]} de ${meses[fechaTicketSplit[1] - 1]} a las `; %>
+    <% } %>
+    
+    <!-- Validar Febrero -->
+    <% if(parseInt(fechaTicketSplit[1]) + 1 === parseInt(fechaActualSplit[1]) && parseInt(fechaTicketSplit[1]) === 2) { %>
+        <% if(bisiesto && parseInt(fechaTicketSplit[0]) === dias[fechaTicketSplit[1] - 1][1]) { %>
+            <% if(parseInt(fechaActualSplit[0]) <= 1) { %>
+                <% return 'Ayer a las '; %>
+            <% } %>
+        <% } %>
+        <% if(!bisiesto && parseInt(fechaTicketSplit[0]) === dias[fechaTicketSplit[1] - 1][0]) { %>
+            <% if(parseInt(fechaActualSplit[0]) <= 1) { %>
+                <% return 'Ayer a las '; %>
+            <% } %>
+        <% } %>
+        <% return `${fechaTicketSplit[0]} de ${meses[fechaTicketSplit[1] - 1]} a las `; %>
+    <% } %>
+
+    <!-- Validar Meses con 31 días -->
+    <% if(parseInt(fechaTicketSplit[1]) + 1 === parseInt(fechaActualSplit[1])) { %>
+        <% if(dias[parseInt(fechaTicketSplit[1]) - 1] === 31 && parseInt(fechaActualSplit[0]) <= 1) { %>
+            <% console.log('JAJAJAJA 31'); %>
+            <% return 'Ayer a las '; %>
+        <% } %>
+    <% } %>
+
+    <!-- Validar Meses con 30 días -->
+    <% if(parseInt(fechaTicketSplit[1]) + 1 === parseInt(fechaActualSplit[1])) { %>
+        <% if(dias[parseInt(fechaTicketSplit[1]) - 1] === 30 && parseInt(fechaActualSplit[0]) <= 1) { %>
+            <% console.log('JAJAJAJA 30'); %>
+            <% return 'Ayer a las '; %>
+        <% } %>
+    <% } %>
+
+    <% if(fechaTicketSplit[1] !== fechaActualSplit[1]) { %>
+        <% return `${fechaTicketSplit[0]} de ${meses[fechaTicketSplit[1] - 1]} a las `; %>
+    <% } %>
+<% } %>
+
+<!-- Obtener la hora formateada a 12 horas -->
+<% function getHora(fecha) { %>
+    <% const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone; %>
+    <% const hora12h = new Date(fecha).toLocaleTimeString('es-US', {
+        timeZone: timeZone,
+        hour12: true,
+        hour: 'numeric',
+        minute: 'numeric',
+    }); %>
+    <% return hora12h; %>
+<% } %>
+
 <section class="ticket__section">
     <div class="container">
         <div class="ticket">
             <div class="details">
                 <div class="edit">
                     <h3>Detalles del ticket</h3>
-                    <a href="./solicitud.html"><i class="bi bi-pencil-square"></i> Editar</a>
+                    <% if(env.ticket.estado){ %>
+                        <a href="./solicitud.html"><i class="bi bi-pencil-square"></i> Editar</a>
+                    <% } %>
                 </div>
                 <div class="info">
                     <div>
                         <div class="c1">
-                            <p class="abierto">Abierto</p>
-                            <p>Medio</p>
+                            <% const prioridades = [['r', 'Regular'], ['m', 'Medio'], ['c', 'Crítico']]; %>
+                            <% const estado = env.ticket.estado ? ['is', 'Abierto'] : ['', 'Cerrado']; %>
+                            <p class="abierto <%= estado[0] %>"><%= estado[1] %></p>
+                            <p class="<%= prioridades[env.ticket.prioridad - 1][0] %>"><%= prioridades[env.ticket.prioridad - 1][1] %></p>
                         </div>
                         <div class="c2">
                             <div class="com">
-                                <i class="bi bi-chat-left"></i></i>
-                                <p>Respondido</p>
+                                <% const respuesta = env.ticket.isRespondido ? 'Respondido' : 'En espera'; %>
+                                <% if(respuesta === 'Respondido') { %>
+                                    <i class="bi bi-chat-left"></i>
+                                <% } else { %>
+                                    <i class="bi bi-hourglass-split"></i>
+                                <% } %>
+                                <p><%= respuesta %></p>
                             </div>
-                            <p>Informática</p>
+                            <p><%= user.departamento %></p>
                         </div>
                     </div>
                     <div class="fecha">
                         <div class="com">
                             <i class="bi bi-calendar2-week"></i>
-                            <p>11 Feb 2024 [ 2:42 PM ]</p>
+                            <p>Creado <%= getFecha(env.ticket.fecha) + getHora(env.ticket.fecha) %></p>
                         </div>
-                        <a class="cerrar" href="#">
-                            <i class="bi bi-x-circle"></i>
-                            Cerrar Ticket
-                        </a>
+                        <% if(env.ticket.estado){ %>
+                            <a class="cerrar" href="#">
+                                <i class="bi bi-x-circle"></i>
+                                Cerrar Ticket
+                            </a>
+                        <% } %>
                     </div>
                 </div>
                 <div class="contenido">
-                    <h3 class="titulo">No funciona el Excel</h3>
-                    <p class="descripcion">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae dolorem veritatis itaque odit, quod corrupti! Voluptates veritatis vero nobis, ipsam dolores odit eius, nulla, modi fugiat culpa pariatur fuga! Maxime quas unde iusto exercitationem. Voluptas, dolorem. Impedit illum deserunt vitae, reprehenderit, asperiores totam laborum libero, culpa in magnam quam temporibus!</p>
+                    <h3 class="titulo"><%= env.ticket.titulo %></h3>
+                    <p class="descripcion"><%= env.ticket.descripcion %></p>
                 </div>
             </div>
             <div class="linea__punteada"></div>
@@ -68,15 +152,27 @@
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit ducimus provident et. Illum cupiditate iusto quia dolores nisi, doloremque quos, voluptatem corrupti beatae ut numquam ratione. Animi maiores praesentium magnam. lorem30</p>
                     </div>
                 </div>
-            </div> 
-            <div class="replica">
-                <h3><i class="bi bi-reply"></i>Añadir comentario</h3>
-                <div class="linea"></div>
-                <textarea class="comentario" placeholder="Escribe aquí..."></textarea>
-                <div>
-                    <a class="enviar" href="#">Enviar Comentario</a>
-                </div>
             </div>
+            <% if(env.ticket.estado){ %>
+                <div class="replica">
+                    <h3><i class="bi bi-reply"></i>Añadir comentario</h3>
+                    <div class="linea"></div>
+                    <textarea class="comentario" placeholder="Escribe aquí..."></textarea>
+                    <div>
+                        <a class="enviar" href="#">Enviar Comentario</a>
+                    </div>
+                </div>
+            <% } else { %>
+                <div class="mensaje">
+                    <div class="circle">
+                    </div>
+                    <div>
+                        <div class="head last">
+                            <p class="admin__nombre">Ticket cerrado. <span><%= getFecha(env.ticket.fechaCierre) + getHora(env.ticket.fechaCierre) %></span></p>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
         </div>
     </div>
 </section>

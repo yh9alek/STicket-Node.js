@@ -17,6 +17,21 @@ ticketsDB.getTickets = function(fkU) {
     });
 }
 
+ticketsDB.getTicket = function(id) {
+    return new Promise((resolve, reject) => {
+        var sqlConsulta = "SELECT * FROM tickets WHERE id= ?;";
+        conexion.query(sqlConsulta, [id], function (err, res) {
+            if (err) {
+                console.log("Surgio un error");
+                reject(err);
+            }
+            else {
+                resolve(res);
+            }
+        });
+    });
+}
+
 ticketsDB.insertar = function(titulo = '', descripcion = '', icono = 0, prioridad = 0, fkUsuario = 0, estado = 0, isRespondido = 0, fecha = '') {
     const consulta = `INSERT INTO tickets (titulo, descripcion, icono, prioridad, fkUsuario, fkAdmin, estado, isRespondido, fecha, fechaCierre) 
                       VALUES (?, ?, ?, ?, ?, NULL, ?, ?, ?, NULL);`;

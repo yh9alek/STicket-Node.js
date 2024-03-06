@@ -76,6 +76,7 @@
     <% } %>
 <% } %>
 
+<!-- Obtener la hora formateada a 12 horas -->
 <% function getHora(fecha) { %>
     <% const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone; %>
     <% const hora12h = new Date(fecha).toLocaleTimeString('es-US', {
@@ -95,7 +96,6 @@
                 <p>No hay tickets pendientes</p>
             <% } %>
             <% env.tickets.forEach( ticket => { %>
-                <% getFecha(ticket.fecha); %>
                 <a href="/verticket" class="ticket">
                     <p class="titulo"><%= ticket.titulo %></p>
                     <% let pri = getPrioridad(ticket); %>
