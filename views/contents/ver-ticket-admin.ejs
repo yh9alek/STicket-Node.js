@@ -123,43 +123,61 @@
             <div class="linea__punteada"></div>
             <% if(env.ticket.estado) { %>
                 <div class="estado">
-                    <p class="admin">
-                        <img src="/assets/imgs/user-default.png">
-                    </p>
-                    <form action="/averticket" method="POST">
-                        <button type="submit" class="atender">Atender Ticket</button>
-                    </form>
+                    <% if(!env.ticket.isRespondido) { %>
+                        <p class="admin">
+                            <img src="/assets/imgs/user-default.png">
+                        </p>
+                        <form class="atender__form" action="/averticket" method="POST">
+                            <input type="hidden" name="idTicket" value="<%= env.ticket.id %>">
+                            <input type="hidden" name="idUser" value="<%= env.ticket.fkUsuario %>">
+                            <button type="submit" class="atender">Atender Ticket</button>
+                        </form>
+                    <% } %>
                 </div>
             <% } %>
             <% if(env.ticket.isRespondido) { %>
+                <% let nombreAdmin = null; %>
                 <div class="estado">
                     <p class="admin">
                         <img src="/assets/imgs/user-default.png">
                     </p>
-                    <p><span class="admin__nombre">Has atendido este ticket.</span></p>
-                </div>
-            <% } %>
-                <!-- <div class="mensaje">
-                    <p class="admin">
-                        <img src="/assets/imgs/octavio.PNG">
+                    <p>
+                        <% if(user.id === env.ticket.fkAdmin) { %>
+                            <% nombreAdmin = user.usuario; %>
+                            <span class="admin__nombre">Has atendido este ticket.</span>
+                        <% } else { %>
+                            <% nombreAdmin = env.admin.usuario; %>
+                            <span class="admin__nombre">@<%= nombreAdmin %></span>
+                            ha atendido este ticket.
+                        <% } %>
                     </p>
-                    <div>
-                        <div class="head">
-                            <p class="admin__nombre">@OctavioBatman. <span>Hoy a las 2:42 PM</span></p>
-                        </div>
-                        <div class="cuerpo">
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit ducimus provident et. Illum cupiditate iusto quia dolores nisi, doloremque quos, voluptatem corrupti beatae ut numquam ratione. Animi maiores praesentium magnam. lorem30</p>
-                        </div>
-                    </div>
                 </div>
-                <div class="replica">
-                    <h3><i class="bi bi-reply"></i>Añadir comentario</h3>
-                    <div class="linea"></div>
-                    <textarea class="comentario" placeholder="Escribe aquí..."></textarea>
-                    <div>
-                        <a class="enviar" href="#">Enviar Comentario</a>
+                <% if(user.id === env.ticket.fkAdmin) { %>
+                    <div class="mensaje">
+                        <p class="admin">
+                            <img src="/assets/imgs/user-default.PNG">
+                        </p>
+                        <div>
+                            <div class="head">
+                                <p class="admin__nombre">@OctavioBatman. <span>Hoy a las 2:42 PM</span></p>
+                            </div>
+                            <div class="cuerpo">
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit ducimus provident et. Illum cupiditate iusto quia dolores nisi, doloremque quos, voluptatem corrupti beatae ut numquam ratione. Animi maiores praesentium magnam. lorem30</p>
+                            </div>
+                        </div>
                     </div>
-                </div> -->
+                <% } %>
+                <% if(user.id === env.ticket.fkAdmin && env.ticket.estado) { %>
+                    <div class="replica">
+                        <h3><i class="bi bi-reply"></i>Añadir comentario</h3>
+                        <div class="linea"></div>
+                        <textarea class="comentario" placeholder="Escribe aquí..."></textarea>
+                        <div>
+                            <a class="enviar" href="#">Enviar Comentario</a>
+                        </div>
+                    </div>
+                <% } %>
+            <% } %>
             <% if(!env.ticket.estado){ %>
                 <div class="mensaje">
                     <div>

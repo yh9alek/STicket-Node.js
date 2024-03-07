@@ -132,23 +132,23 @@
             <% if(env.ticket.isRespondido) { %>
                 <div class="estado">
                     <p class="admin">
-                        <img src="/assets/imgs/estrella.PNG">
+                        <img src="/assets/imgs/user-default.png">
                     </p>
-                    <p><span class="admin__nombre">@MariaEstrella</span> ha atendido tu ticket.</p>
+                    <p><span class="admin__nombre">@<%= env.admin.usuario %></span> ha atendido tu ticket.</p>
                 </div>
-                <div class="mensaje">
+                <!-- <div class="mensaje">
                     <p class="admin">
-                        <img src="/assets/imgs/estrella.PNG">
+                        <img src="/assets/imgs/user-default.png">
                     </p>
                     <div>
                         <div class="head">
-                            <p class="admin__nombre">@MariaEstrella. <span>Hoy a las 2:42 PM</span></p>
+                            <p class="admin__nombre">@<%= env.admin.usuario %><span>Hoy a las 2:42 PM</span></p>
                         </div>
                         <div class="cuerpo">
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit ducimus provident et. Illum cupiditate iusto quia dolores nisi, doloremque quos, voluptatem corrupti beatae ut numquam ratione. Animi maiores praesentium magnam. lorem30</p>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <% if(env.ticket.estado) { %>
                     <div class="replica">
                         <h3><i class="bi bi-reply"></i>Añadir comentario</h3>

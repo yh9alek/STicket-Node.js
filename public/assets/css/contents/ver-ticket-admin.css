@@ -117,11 +117,15 @@
     border: none;
     display: inline-block;
     color: #fff;
-    background-color: #ad35dc;
+    background-color: #8e54c4;
     padding: 8px 10px 6px;
     border-radius: 3px;
     font-weight: 500;
     transition: all .2s ease;
+}
+
+.atender:hover {
+    cursor: pointer;
 }
 
 .cerrar:hover {

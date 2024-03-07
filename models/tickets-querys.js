@@ -87,4 +87,16 @@ ticketsDB.cerrar = function(id = '', fechaCierre = '') {
     });
 }
 
+ticketsDB.atender = function(isRespondido = 0, idAmin = null, id = '') {
+    const consulta = `UPDATE tickets SET isRespondido = ?, fkAdmin = ? WHERE id = ?;`;
+    conexion.query(consulta, [isRespondido, idAmin, id], function(err, res) {
+        if (err) {
+            console.log("Surgió un error: " + err);
+        }
+        else {
+            console.log("Se atendió con éxito");
+        }
+    });
+}
+
 export default ticketsDB;

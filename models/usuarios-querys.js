@@ -2,15 +2,19 @@ import conexion from './conexion.js';
 
 const usuariosDB = {};
 
-usuariosDB.getUsuarioId = function(id) {
-    const consulta = "SELECT * from usuarios WHERE id = ?;";
-    conexion.query(consulta, [id], function(err, res) {
-        if (err) {
-            console.log("Surgió un error");
-        }
-        else {
-            console.log("Se buscó con éxito");
-        }
+usuariosDB.getAdmin = function(id) {
+    return new Promise((resolve, reject) => {
+        const consulta = "SELECT * FROM usuarios WHERE isAdmin = 1 AND id = ?;";
+        conexion.query(consulta, [id], function(err, res) {
+            if (err) {
+                console.log("Surgió un error");
+                reject(res);
+            }
+            else {
+                console.log("Se buscó con éxito");
+                resolve(res);
+            }
+        });
     });
 };
 

@@ -29,6 +29,7 @@ app.use(express.static(__dirname + '/public'));
 
 let usuarios = null;
 let tickets = null;
+let admin = null;
 
 async function obtenerDatos() {
     usuarios = await usuariosDB.getTodos();
@@ -40,6 +41,10 @@ async function obtenerTickets(fkU) {
 
 async function obtenerTodos() {
     tickets = await ticketsDB.getTodos();
+}
+
+async function obtenerAdmin(id) {
+    admin = await usuariosDB.getAdmin(id);
 }
 
 obtenerDatos();
@@ -170,14 +175,18 @@ app.get('/verticket', checkAuthenticated, (req, res) => {
     obtenerTickets(req.user.id);
     setTimeout(() => {
         const ticket = tickets.find(ticket => ticket.id === parseInt(req.query.id));
-        res.render('index', { 
-            pagina: 'verticket',
-            user: req.user,
-            env: {
-                seccion: `Ticket #${ticket.id}`,
-                ticket: ticket,
-            },
-        });
+        obtenerAdmin(ticket.fkAdmin);
+        setTimeout(() => {
+            res.render('index', { 
+                pagina: 'verticket',
+                user: req.user,
+                env: {
+                    seccion: `Ticket #${ticket.id}`,
+                    ticket: ticket,
+                    admin: admin[0],
+                },
+            });
+        }, 100);
     }, 100);
 });
 
@@ -206,18 +215,31 @@ app.get('/admintickets', checkAuthenticated, (req, res) => {
 });
 
 app.get('/averticket', checkAuthenticated, (req, res) => {
+    let ticket = null;
+    let usuario = null;
     obtenerTickets(req.query.idUser);
-    const ticket = tickets.find(ticket => ticket.id === parseInt(req.query.idTicket));
-    const usuario = usuarios.find(user => user.id === parseInt(req.query.idUser));
-    res.render('index', { 
-        pagina: 'averticket',
-        user: req.user,
-        env: {
-            seccion: `Ticket #${ticket.id}`,
-            ticket: ticket,
-            usuario: usuario,        
-        },
-    });
+    setTimeout(() => {
+        ticket = tickets.find(ticket => ticket.id === parseInt(req.query.idTicket));
+        usuario = usuarios.find(user => user.id === parseInt(req.query.idUser));
+        obtenerAdmin(ticket.fkAdmin);
+        setTimeout(() => {
+            res.render('index', {
+                pagina: 'averticket',
+                user: req.user,
+                env: {
+                    seccion: `Ticket #${ticket.id}`,
+                    ticket: ticket,
+                    usuario: usuario,
+                    admin: admin[0],
+                },
+            });
+        }, 100);
+    }, 100);
+});
+
+app.post('/averticket', checkAuthenticated, (req, res) => {
+    ticketsDB.atender(1, req.user.id, req.body.idTicket);
+    res.redirect(`/averticket?idUser=${req.body.idUser}&idTicket=${req.body.idTicket}`);
 });
 
 app.delete('/logout', (req, res) => {
