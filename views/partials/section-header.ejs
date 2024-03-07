@@ -13,7 +13,7 @@
                 <% if(pagina !== 'admintickets') { %>
                     <p class="sections"><a href="/admintickets"><i class="bi bi-reply"></i> Regresar</a>
                 <% } else { %>
-                    <p class="sections"><span>679</span> en espera</p>
+                    <p class="sections"><span><%= env.enEspera %></span> en espera</p>
                 <% } %>
             <% } %>
         </div>

@@ -13,9 +13,9 @@
                 </figure>
                 <button class="exit"><i class="bi bi-x"></i></button>
             </div>
-            <a class="btn selected" href="#">Home</a>
+            <a class="btn <%= pagina === 'admintickets' ? 'selected' : '' %>" href="<%= !user.isAdmin ? '/home' : '/admintickets' %>">Home</a>
             <% if(user.isAdmin) { %>
-                <a class="btn" href="#">Usuarios</a>
+                <a class="btn <%= pagina === 'usuarios' ? 'selected' : '' %>" href="/usuarios">Usuarios</a>
             <% } else { %>
                 <a class="btn" href="#">Configuración</a>
             <% } %>

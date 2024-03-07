@@ -105,6 +105,7 @@ app.get('/acerca', (req, res) => {
 });
 
 app.get('/home', checkAuthenticated, (req, res) => {
+    if(req.user.isAdmin) throw new Error('Acceso Negado');
     obtenerTickets(req.user.id);
     setTimeout(() => {
         res.render('index', { 
@@ -119,6 +120,7 @@ app.get('/home', checkAuthenticated, (req, res) => {
 });
 
 app.get('/solicitud', checkAuthenticated, (req, res) => {
+    if(req.user.isAdmin) throw new Error('Acceso Negado');
     res.render('index', { 
         pagina: 'solicitud',
         user: req.user,
@@ -129,6 +131,7 @@ app.get('/solicitud', checkAuthenticated, (req, res) => {
 });
 
 app.post('/solicitud', checkAuthenticated, (req, res) => {
+    if(req.user.isAdmin) throw new Error('Acceso Negado');
     ticketsDB.insertar(req.body.titulo,
                        req.body.descripcion,
                        parseInt(req.body.icono), 
@@ -141,6 +144,7 @@ app.post('/solicitud', checkAuthenticated, (req, res) => {
 });
 
 app.get('/editar', checkAuthenticated, (req, res) => {
+    if(req.user.isAdmin) throw new Error('Acceso Negado');
     let ticket = null;
     setTimeout(() => {
         if(req.query.id){
@@ -158,6 +162,7 @@ app.get('/editar', checkAuthenticated, (req, res) => {
 });
 
 app.post('/editar', checkAuthenticated, (req, res) => {
+    if(req.user.isAdmin) throw new Error('Acceso Negado');
     ticketsDB.editar(req.body.titulo,
                      req.body.descripcion,
                      parseInt(req.body.icono),
@@ -178,6 +183,7 @@ app.get('/perfil', checkAuthenticated, (req, res) => {
 });
 
 app.get('/verticket', checkAuthenticated, (req, res) => {
+    if(req.user.isAdmin) throw new Error('Acceso Negado');
     obtenerTickets(req.user.id);
     setTimeout(() => {
         const ticket = tickets.find(ticket => ticket.id === parseInt(req.query.id));
@@ -199,11 +205,13 @@ app.get('/verticket', checkAuthenticated, (req, res) => {
 });
 
 app.post('/verticket', checkAuthenticated, (req, res) => {
+    if(req.user.isAdmin) throw new Error('Acceso Negado');
     obtenerTickets(req.user.id);
     ticketsDB.cerrar(req.body.id, formatearFecha());
     res.redirect(`/verticket?id=${req.body.id}`);
 });
 
+// Esta ruta se usa para enviar los mensajes al backend, es compartida por ambos roles (admin - user)
 app.post('/message', checkAuthenticated, (req, res) => {
     const mensaje = req.body.mensaje;
     mensajesDB.insertar(mensaje, req.body.idTicket, req.body.idEmisor, req.body.idReceptor, formatearFecha());
@@ -218,9 +226,12 @@ app.post('/message', checkAuthenticated, (req, res) => {
 /* Rutas para el administrador */
 
 app.get('/admintickets', checkAuthenticated, (req, res) => {
+    if(!req.user.isAdmin) throw new Error('Acceso Negado');
     obtenerTodos();
     obtenerDatos();
+    let enEspera = null;
     setTimeout(() => {
+        enEspera = tickets.filter(ticket => !ticket.isRespondido).length;
         res.render('index', { 
             pagina: 'admintickets',
             user: req.user,
@@ -228,12 +239,14 @@ app.get('/admintickets', checkAuthenticated, (req, res) => {
                 seccion: 'Tickets del sistema',
                 tickets: tickets,
                 usuarios: usuarios,
+                enEspera: enEspera,
             },
         });
     }, 100);
 });
 
 app.get('/averticket', checkAuthenticated, (req, res) => {
+    if(!req.user.isAdmin) throw new Error('Acceso Negado');
     let ticket = null;
     let usuario = null;
     obtenerTickets(req.query.idUser);
@@ -259,8 +272,20 @@ app.get('/averticket', checkAuthenticated, (req, res) => {
 });
 
 app.post('/averticket', checkAuthenticated, (req, res) => {
+    if(!req.user.isAdmin) throw new Error('Acceso Negado');
     ticketsDB.atender(1, req.user.id, req.body.idTicket);
     res.redirect(`/averticket?idUser=${req.body.idUser}&idTicket=${req.body.idTicket}`);
+});
+
+app.get('/usuarios', checkAuthenticated, (req, res) => {
+    if(!req.user.isAdmin) throw new Error('Acceso Negado');
+    res.render('index', {
+        pagina: 'usuarios',
+        user: req.user,
+        env: {
+            seccion: `Usuarios`,
+        },
+    });
 });
 
 app.delete('/logout', (req, res) => {
