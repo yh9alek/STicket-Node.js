@@ -179,7 +179,7 @@ section:last-of-type {
 }
 
 @media screen and (max-width: 378px) {
-    form:not(.opciones):not(.dialog) {
+    form:not(.opciones):not(.dialog):not(.atender__form):not(.message__form) {
         width: 100% !important;
     }
 }

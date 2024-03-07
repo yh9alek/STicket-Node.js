@@ -20,6 +20,7 @@ import initialize from './passport-config.js';
 
 import usuariosDB from './models/usuarios-querys.js';
 import ticketsDB from './models/tickets-querys.js';
+import mensajesDB from './models/mensajes-querys.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -30,6 +31,7 @@ app.use(express.static(__dirname + '/public'));
 let usuarios = null;
 let tickets = null;
 let admin = null;
+let mensajes = null;
 
 async function obtenerDatos() {
     usuarios = await usuariosDB.getTodos();
@@ -45,6 +47,10 @@ async function obtenerTodos() {
 
 async function obtenerAdmin(id) {
     admin = await usuariosDB.getAdmin(id);
+}
+
+async function obtenerMensajes(id) {
+    mensajes = await mensajesDB.getMensajes(id);
 }
 
 obtenerDatos();
@@ -176,6 +182,7 @@ app.get('/verticket', checkAuthenticated, (req, res) => {
     setTimeout(() => {
         const ticket = tickets.find(ticket => ticket.id === parseInt(req.query.id));
         obtenerAdmin(ticket.fkAdmin);
+        obtenerMensajes(ticket.id);
         setTimeout(() => {
             res.render('index', { 
                 pagina: 'verticket',
@@ -184,6 +191,7 @@ app.get('/verticket', checkAuthenticated, (req, res) => {
                     seccion: `Ticket #${ticket.id}`,
                     ticket: ticket,
                     admin: admin[0],
+                    mensajes: mensajes,
                 },
             });
         }, 100);
@@ -194,6 +202,17 @@ app.post('/verticket', checkAuthenticated, (req, res) => {
     obtenerTickets(req.user.id);
     ticketsDB.cerrar(req.body.id, formatearFecha());
     res.redirect(`/verticket?id=${req.body.id}`);
+});
+
+app.post('/message', checkAuthenticated, (req, res) => {
+    const mensaje = req.body.mensaje;
+    mensajesDB.insertar(mensaje, req.body.idTicket, req.body.idEmisor, req.body.idReceptor, formatearFecha());
+    if(!req.user.isAdmin) {
+        res.redirect(`/verticket?id=${req.body.idTicket}`);
+    }
+    else {
+        res.redirect(`/averticket?idUser=${req.body.idReceptor}&idTicket=${req.body.idTicket}`);
+    }
 });
 
 /* Rutas para el administrador */
@@ -222,6 +241,7 @@ app.get('/averticket', checkAuthenticated, (req, res) => {
         ticket = tickets.find(ticket => ticket.id === parseInt(req.query.idTicket));
         usuario = usuarios.find(user => user.id === parseInt(req.query.idUser));
         obtenerAdmin(ticket.fkAdmin);
+        obtenerMensajes(ticket.id);
         setTimeout(() => {
             res.render('index', {
                 pagina: 'averticket',
@@ -231,6 +251,7 @@ app.get('/averticket', checkAuthenticated, (req, res) => {
                     ticket: ticket,
                     usuario: usuario,
                     admin: admin[0],
+                    mensajes: mensajes,
                 },
             });
         }, 100);

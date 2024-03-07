@@ -405,6 +405,10 @@
     border-radius: 5px;
 }
 
+.enviar:hover {
+    cursor: pointer;
+}
+
 .comentario + div {
     display: flex;
     justify-content: flex-end;

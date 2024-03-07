@@ -153,29 +153,40 @@
                     </p>
                 </div>
                 <% if(user.id === env.ticket.fkAdmin) { %>
-                    <div class="mensaje">
-                        <p class="admin">
-                            <img src="/assets/imgs/user-default.PNG">
-                        </p>
-                        <div>
-                            <div class="head">
-                                <p class="admin__nombre">@OctavioBatman. <span>Hoy a las 2:42 PM</span></p>
-                            </div>
-                            <div class="cuerpo">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit ducimus provident et. Illum cupiditate iusto quia dolores nisi, doloremque quos, voluptatem corrupti beatae ut numquam ratione. Animi maiores praesentium magnam. lorem30</p>
+                    <% env.mensajes.forEach(mensaje => {  %>
+                        <div class="mensaje">
+                            <p class="admin">
+                                <img src="/assets/imgs/user-default.png">
+                            </p>
+                            <div>
+                                <div class="head">
+                                    <% if(mensaje.fkEmisor === user.id){ %>
+                                        <p class="admin__nombre">Tú<span><%= getFecha(mensaje.fecha) + getHora(mensaje.fecha) %></span></p>
+                                    <% } else { %>
+                                        <p class="admin__nombre">@<%= env.usuario.usuario %><span><%= getFecha(mensaje.fecha) + getHora(mensaje.fecha) %></span></p>
+                                    <% } %>
+                                </div>
+                                <div class="cuerpo">
+                                    <p><%= mensaje.mensaje %></p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    <% }); %>
                 <% } %>
                 <% if(user.id === env.ticket.fkAdmin && env.ticket.estado) { %>
-                    <div class="replica">
-                        <h3><i class="bi bi-reply"></i>Añadir comentario</h3>
-                        <div class="linea"></div>
-                        <textarea class="comentario" placeholder="Escribe aquí..."></textarea>
-                        <div>
-                            <a class="enviar" href="#">Enviar Comentario</a>
+                    <form class="message__form" action="/message" method="POST">
+                        <input type="hidden" name="idTicket" value="<%= env.ticket.id %>">
+                        <input type="hidden" name="idEmisor" value="<%= user.id %>">
+                        <input type="hidden" name="idReceptor" value="<%= env.ticket.fkUsuario %>">
+                        <div class="replica">
+                            <h3><i class="bi bi-reply"></i>Añadir comentario</h3>
+                            <div class="linea"></div>
+                            <textarea name="mensaje" class="comentario" placeholder="Escribe aquí..."></textarea>
+                            <div>
+                                <button type="submit" class="enviar">Enviar Comentario</button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 <% } %>
             <% } %>
             <% if(!env.ticket.estado){ %>
