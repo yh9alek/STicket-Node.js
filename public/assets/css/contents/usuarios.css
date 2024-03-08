@@ -1,3 +1,73 @@
+.dialog {
+    position: fixed;
+    display: none;
+    top: 0px;
+    transition: all .2s ease;
+}
+
+.dialog.active {
+    display: inline-block;
+    padding: 12px;
+    padding-bottom: 15px;
+    background-color: #fff;
+    border: 1px solid gray;
+    border-radius: 5px;
+    width: 250px;
+    height: max-content;
+    z-index: 1002;
+    left: calc(50% - 125px);
+    top: 175px;
+}
+
+.dialog > p {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.dialog > p > span {
+    font-weight: bold;
+}
+
+.dialog > p + div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.dialog > p + div > .op {
+    display: inline-block;
+    padding: 8px 10px 6px;
+    color: #fff;
+    border: none;
+    outline: none;
+    width: 60px;
+    height: 30px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.dialog > p + div > .op {
+    background-color: gray;
+    transition: all .2s ease;
+}
+
+.dialog > p + div > .op:hover {
+    cursor: pointer;
+    background-color: #9e9d9d;
+}
+
+.dialog > p + div > button[type="submit"].op {
+    background-color: #B1202F;
+}
+
+.dialog > p + div > button[type="submit"].op:hover {
+    cursor: pointer;
+    background-color: #DC3545;
+}
+
 .usuarios {
     position: relative;
     background-color: #EEF4F5;
@@ -150,7 +220,8 @@
     box-shadow: 0px 5px 6px #00000023;
 }
 
-.usuario:hover > a {
+.usuario:hover > a.editar,
+.usuario:hover > button.eliminar {
     bottom: 10px;
 }
 
@@ -204,7 +275,8 @@
     background-color: #6682bb;
 }
 
-.usuario > a {
+.usuario > a.editar,
+.usuario > button.eliminar {
     position: absolute;
     font-size: 12px;
     padding: 10px 10px 8px;
@@ -225,12 +297,15 @@ a.editar:hover {
     background-color: gray;
 }
 
-a.eliminar {
+button.eliminar {
+    outline: none;
+    border: none;
     right: calc(50% - 40px);
     background-color: #DC4B4B;
 }
 
-a.eliminar:hover {
+button.eliminar:hover {
+    cursor: pointer;
     background-color: #d43535;
 }
 
