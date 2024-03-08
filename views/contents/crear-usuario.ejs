@@ -1,0 +1,76 @@
+<section>
+    <div class="container">
+        <p class="ptitulo">Registro de nueva cuenta</p>
+        <form class="usuario" action="/crearusuario" method="POST">
+            <div class="usuario__contenedor">
+                <div class="col">
+                    <p class="infoPerfil">Datos del usuario</p>
+                    <div class="linea"></div>
+                    <div class="inputs__container">
+                        <div class="inputs">
+                            <div class="input">
+                                <p>Nombre Completo</p>
+                                <input class="inp usuario" type="text" placeholder="...">
+                            </div>
+                            <div class="input">
+                                <p>Puesto</p>
+                                <input class="inp puesto" type="text" placeholder="...">
+                            </div>
+                            <div class="input">
+                                <p>Departamento</p>
+                                <input class="inp departamento" type="text" placeholder="...">
+                            </div>
+                            <div class="input">
+                                <p>Número Celular</p>
+                                <div class="numeroCelular">
+                                    <input class="inp codigo" type="number" min="0" placeholder="52"></input>
+                                    <input class="inp celular" type="text" min="0" placeholder="...">
+                                    <p>+</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="foto">
+                            <div class="foto__content">
+                                <div class="foto__img">
+                                    <img src="/assets/imgs/user-default.png">
+                                </div>
+                                <label for="imagen"><i class="bi bi-pencil-square"></i></label>
+                            </div>
+                            <input id="imagen" class="inp imagen" type="file" accept=".jpg, .jpeg, .png">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="usuario__contenedor">
+                <div class="col">
+                    <p class="infoPerfil">Datos de sesión</p>
+                    <div class="linea"></div>
+                    <div class="inputs">
+                        <div class="input">
+                            <p>Correo Electrónico</p>
+                            <input class="inp correo" type="email" placeholder="...">
+                        </div>
+                        <div class="input">
+                            <p>Rol asignado</p>
+                            <select class="inp roles">
+                                <option value="0">USER</option>
+                                <option value="1">ADMIN</option>
+                            </select>
+                        </div>
+                        <div class="input">
+                            <p>Contraseña</p>
+                            <input class="inp pass" type="password" placeholder="...">
+                        </div>
+                        <div class="input">
+                            <p>Confirmar Contraseña</p>
+                            <input class="inp cpass" type="password" placeholder="...">
+                        </div>
+                    </div>
+                </div>
+                <div class="r-cont">
+                    <button class="registrar">Registrar Cuenta</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>

@@ -288,6 +288,17 @@ app.get('/usuarios', checkAuthenticated, (req, res) => {
     });
 });
 
+app.get('/crearusuario', checkAuthenticated, (req, res) => {
+    if(!req.user.isAdmin) throw new Error('Acceso Negado');
+    res.render('index', {
+        pagina: 'crearusuario',
+        user: req.user,
+        env: {
+            seccion: `Crear nuevo Usuario`,
+        },
+    });
+});
+
 app.delete('/logout', (req, res) => {
     req.logout(function() {
         res.redirect('/');
