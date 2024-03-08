@@ -299,6 +299,17 @@ app.get('/crearusuario', checkAuthenticated, (req, res) => {
     });
 });
 
+app.get('/editarusuario', checkAuthenticated, (req, res) => {
+    if(!req.user.isAdmin) throw new Error('Acceso Negado');
+    res.render('index', {
+        pagina: 'editarusuario',
+        user: req.user,
+        env: {
+            seccion: `Editar Usuario`,
+        },
+    });
+});
+
 app.delete('/logout', (req, res) => {
     req.logout(function() {
         res.redirect('/');
