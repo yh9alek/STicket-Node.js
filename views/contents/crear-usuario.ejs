@@ -10,21 +10,21 @@
                         <div class="inputs">
                             <div class="input">
                                 <p>Nombre Completo</p>
-                                <input class="inp usuario" type="text" placeholder="..." required>
+                                <input name="nombre" class="inp usuario" type="text" placeholder="..." required>
                             </div>
                             <div class="input">
                                 <p>Puesto</p>
-                                <input class="inp puesto" type="text" placeholder="..." required>
+                                <input name="puesto" class="inp puesto" type="text" placeholder="..." required>
                             </div>
                             <div class="input">
                                 <p>Departamento</p>
-                                <input class="inp departamento" type="text" placeholder="..." required>
+                                <input name="departamento" class="inp departamento" type="text" placeholder="..." required>
                             </div>
                             <div class="input">
                                 <p>Número Celular</p>
                                 <div class="numeroCelular">
-                                    <input class="inp codigo" type="number" min="0" placeholder="000" required></input>
-                                    <input class="inp celular" type="text" min="0" placeholder="..." required>
+                                    <input name="codigo" class="inp codigo" type="number" min="0" placeholder="000" required></input>
+                                    <input name="numero" class="inp celular" type="text" min="0" placeholder="..." required>
                                     <p>+</p>
                                 </div>
                             </div>
@@ -36,7 +36,7 @@
                                 </div>
                                 <label for="imagen"><i class="bi bi-pencil-square"></i></label>
                             </div>
-                            <input id="imagen" class="inp imagen" type="file" accept=".jpg, .jpeg, .png">
+                            <input name="foto" id="imagen" class="inp imagen" type="file" accept=".jpg, .jpeg, .png">
                         </div>
                     </div>
                 </div>
@@ -48,22 +48,22 @@
                     <div class="inputs">
                         <div class="input">
                             <p>Correo Electrónico</p>
-                            <input class="inp correo" type="email" placeholder="..." required>
+                            <input name="email" class="inp correo" type="email" placeholder="..." required>
                         </div>
                         <div class="input">
                             <p>Rol asignado</p>
-                            <select class="inp roles">
+                            <select name="isAdmin" class="inp roles">
                                 <option value="0">USER</option>
                                 <option value="1">ADMIN</option>
                             </select>
                         </div>
                         <div class="input">
                             <p>Contraseña</p>
-                            <input class="inp pass" type="password" placeholder="..." required>
+                            <input name="pass" class="inp pass" type="password" placeholder="..." required>
                         </div>
                         <div class="input">
                             <p>Confirmar Contraseña</p>
-                            <input class="inp cpass" type="password" placeholder="..." required>
+                            <input name="cpass" class="inp cpass" type="password" placeholder="..." required>
                         </div>
                     </div>
                 </div>

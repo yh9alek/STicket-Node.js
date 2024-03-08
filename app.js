@@ -279,13 +279,17 @@ app.post('/averticket', checkAuthenticated, (req, res) => {
 
 app.get('/usuarios', checkAuthenticated, (req, res) => {
     if(!req.user.isAdmin) throw new Error('Acceso Negado');
-    res.render('index', {
-        pagina: 'usuarios',
-        user: req.user,
-        env: {
-            seccion: `Usuarios`,
-        },
-    });
+    obtenerDatos();
+    setTimeout(() => {
+        res.render('index', {
+            pagina: 'usuarios',
+            user: req.user,
+            env: {
+                seccion: `Usuarios`,
+                usuarios: usuarios,
+            },
+        });
+    }, 100);
 });
 
 app.get('/crearusuario', checkAuthenticated, (req, res) => {
@@ -297,6 +301,29 @@ app.get('/crearusuario', checkAuthenticated, (req, res) => {
             seccion: `Crear nuevo Usuario`,
         },
     });
+});
+
+app.post('/crearusuario', checkAuthenticated, async (req, res) => {
+    if(!req.user.isAdmin) throw new Error('Acceso Negado');
+    try {
+        let hashedPassword = null;
+        if(checarContraseña(req.body.pass, req.body.cpass)) {
+            hashedPassword = await bcrypt.hash(req.body.pass, 10);
+        }
+        usuariosDB.insertar(formatearUsuario(req.body.nombre),
+                        hashedPassword,
+                        req.body.nombre,
+                        req.body.email,
+                        req.body.numero,
+                        req.body.codigo,
+                        req.body.puesto, 
+                        req.body.departamento,
+                        parseInt(req.body.isAdmin),
+                        req.body.foto.toString());
+    res.redirect('/usuarios');
+    } catch(err){
+        throw new Error('Surgió un error: ' + err);
+    }
 });
 
 app.get('/editarusuario', checkAuthenticated, (req, res) => {
@@ -326,6 +353,15 @@ app.delete('/logout', (req, res) => {
         res.redirect('/');
     });
 });
+
+function checarContraseña(pass, cpass) {
+    return pass === cpass ? pass : '';
+}
+
+function formatearUsuario(usuario) {
+    const partes = usuario.split(' ');
+    return partes[0] + partes[1];
+}
 
 function formatearFecha() {
     const date = new Date();

@@ -33,66 +33,20 @@
         </div>
         <div class="usuarios">
             <div class="usuarios__contenedor">
-                <div class="usuario">
-                    <div class="usuario__head">
-                        <div class="foto">
-                            <img src="/assets/imgs/user-default.png">
+                <% env.usuarios.forEach(usuario => { %>
+                    <div class="usuario">
+                        <div class="usuario__head">
+                            <div class="foto">
+                                <img src="/assets/imgs/user-default.png">
+                            </div>
                         </div>
+                        <p class="usuario__nombre">@<%=usuario.usuario %></p>
+                        <p class="usuario__departamento"><%= usuario.departamento %></p>
+                        <p class="rol <%= usuario.isAdmin ? 'admin' : 'user' %>"><%= usuario.isAdmin ? 'ADMIN' : 'USER' %></p>
+                        <a href="/editarusuario" class="editar"><i class="bi bi-pencil-square"></i></a>
+                        <button class="eliminar"><i class="bi bi-trash-fill"></i></button>
                     </div>
-                    <p class="usuario__nombre">@NombreUsuario</p>
-                    <p class="usuario__departamento">Informática</p>
-                    <p class="rol admin">ADMIN</p>
-                    <a href="/editarusuario" class="editar"><i class="bi bi-pencil-square"></i></a>
-                    <button class="eliminar"><i class="bi bi-trash-fill"></i></button>
-                </div>
-                <div class="usuario">
-                    <div class="usuario__head">
-                        <div class="foto">
-                            <img src="/assets/imgs/user-default.png">
-                        </div>
-                    </div>
-                    <p class="usuario__nombre">@NombreUsuario</p>
-                    <p class="usuario__departamento">Informática</p>
-                    <p class="rol user">USER</p>
-                    <a href="/editarusuario" class="editar"><i class="bi bi-pencil-square"></i></a>
-                    <button class="eliminar"><i class="bi bi-trash-fill"></i></button>
-                </div>
-                <div class="usuario">
-                    <div class="usuario__head">
-                        <div class="foto">
-                            <img src="/assets/imgs/user-default.png">
-                        </div>
-                    </div>
-                    <p class="usuario__nombre">@NombreUsuario</p>
-                    <p class="usuario__departamento">Informática</p>
-                    <p class="rol admin">ADMIN</p>
-                    <a href="/editarusuario" class="editar"><i class="bi bi-pencil-square"></i></a>
-                    <button class="eliminar"><i class="bi bi-trash-fill"></i></button>
-                </div>
-                <div class="usuario">
-                    <div class="usuario__head">
-                        <div class="foto">
-                            <img src="/assets/imgs/user-default.png">
-                        </div>
-                    </div>
-                    <p class="usuario__nombre">@NombreUsuario</p>
-                    <p class="usuario__departamento">Informática</p>
-                    <p class="rol user">USER</p>
-                    <a href="/editarusuario" class="editar"><i class="bi bi-pencil-square"></i></a>
-                    <button class="eliminar"><i class="bi bi-trash-fill"></i></button>
-                </div>
-                <div class="usuario">
-                    <div class="usuario__head">
-                        <div class="foto">
-                            <img src="/assets/imgs/user-default.png">
-                        </div>
-                    </div>
-                    <p class="usuario__nombre">@NombreUsuario</p>
-                    <p class="usuario__departamento">Informática</p>
-                    <p class="rol admin">ADMIN</p>
-                    <a href="/editarusuario" class="editar"><i class="bi bi-pencil-square"></i></a>
-                    <button class="eliminar"><i class="bi bi-trash-fill"></i></button>
-                </div>
+                <% }); %>
             </div>
         </div>
     </div>

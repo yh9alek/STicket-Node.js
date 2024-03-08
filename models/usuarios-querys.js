@@ -18,11 +18,14 @@ usuariosDB.getAdmin = function(id) {
     });
 };
 
-usuariosDB.insertar = function(usuario = '', pass = '', nombre = '', correo = '', celular = '', puesto = '', departamento = '', isAdmin = false) {
-    const consulta = "INSERT INTO usuarios (usuario, pass, nombre, correo, celular, puesto, departamento, isAdmin) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
-    conexion.query(consulta, [usuario, pass, nombre, correo, celular, puesto, departamento, isAdmin], function(err, res) {
+usuariosDB.insertar = function(usuario, pass, nombre, correo, celular, codigo, puesto, departamento, isAdmin = false, foto = '') {
+    if(pass === '' || nombre === '' || correo === '' || celular === '' || codigo === '' || puesto === '' || departamento === '') {
+        throw new Error('No se pueden insertar campos vacíos...');
+    }
+    const consulta = "INSERT INTO usuarios (usuario, pass, nombre, correo, celular, codigo, puesto, departamento, isAdmin, foto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+    conexion.query(consulta, [usuario, pass, nombre, correo, celular, codigo, puesto, departamento, isAdmin, foto], function(err, res) {
         if (err) {
-            console.log("Surgió un error");
+            console.log("Surgió un error: " + err);
         }
         else {
             console.log("Se insertó con éxito");
