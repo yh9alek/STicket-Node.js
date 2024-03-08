@@ -1,0 +1,258 @@
+.perfil__section > .container {
+    padding-top: 60px;
+    margin-bottom: 100px;
+}
+
+.sections.back {
+    font-weight: bold;
+}
+
+.sections.back:hover {
+    cursor: pointer;
+}
+
+.col1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    row-gap: 20px;
+}
+
+._perfil {
+    background-color: #EEF4F5;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    column-gap: 20px;
+}
+
+.foto {
+    width: 245px;
+    height: 212px;
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #e2e2e2;
+    border-radius: 5px;
+    box-shadow: 0px 2px 3px #00000010;
+}
+
+.foto__content {
+    padding: 5px;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+}
+
+.foto__img {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    text-align: center;
+    border-radius: 3px;
+}
+
+.foto__img > img {
+    width: 100%;
+}
+
+.foto__content + p {
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.foto__content + p + p {
+    font-size: 14px;
+    margin-top: 5px;
+    color: gray;
+}
+
+.tickets {
+    position: relative;
+    width: 245px;
+    background-color: #fff;
+    border: 1px solid #e2e2e2;
+    border-radius: 5px;
+    box-shadow: 0px 2px 3px #00000010;
+    padding: 12px 20px;
+}
+
+.tickets > div:first-of-type,
+.tipos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0px;
+}
+
+.tickets > div:first-of-type {
+    padding-top: 5px;
+    padding-bottom: 20px;
+}
+
+.misTickets {
+    font-size: 18px;
+    font-weight: 500;
+    margin-top: 2px;
+}
+
+.numeroTickets {
+    font-size: 13px;
+    font-weight: 500;
+    background-color: #6C757D;
+    padding: 5px 5px 3px;
+    border-radius: 3px;
+    color: #fff;
+}
+
+.linea {
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background-color: #e2e2e2;
+    top: 53px;
+    left: 0;
+}
+
+.tipos:last-of-type {
+    padding-bottom: 4px;
+}
+
+.tipos > p:nth-of-type(2) {
+    font-size: 13px;
+    padding: 3px 4px;
+    border-radius: 5px;
+    border: 1px solid #50af3d;
+    color: #50af3d;
+}
+
+.tipos + .tipos > p:nth-of-type(2) {
+    border: 1px solid #DC984B;
+    color: #DC984B;
+}
+
+.tipos + .tipos + .tipos > p:nth-of-type(2) {
+    border: 1px solid #DC4B4B;
+    color: #DC4B4B;
+}
+
+form {
+    position: relative;
+    background-color: #fff;
+    border: 1px solid #e2e2e2;
+    border-radius: 5px;
+    box-shadow: 0px 2px 3px #00000010;
+    padding: 12px 20px 30px;
+    width: 100%;
+}
+
+form .linea {
+    top: 41px;
+}
+
+.infoPerfil {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 35px;
+}
+
+.inputs {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr));
+    column-gap: 20px;
+    row-gap: 30px;
+}
+
+.input > p {
+    margin-bottom: 11px;
+    margin-left: 2px;
+}
+
+.inp {
+    padding: 9px 12px 7px;
+    font-size: 16px;
+    line-height: 20px;
+    width: 100%;
+    outline: none;
+    color: #555;
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;
+}
+
+.inp:hover {
+    cursor: auto;
+}
+
+.numeroCelular {
+    position: relative;
+}
+
+.numeroCelular > p {
+    position: absolute;
+    top: 11px;
+    left: 11px;
+    color: #000;
+}
+
+.codigo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 74px;
+    padding-left: 26px;
+    border-radius: 5px 0px 0px 5px;
+    background-color: #E9ECEF;
+}
+
+.celular {
+    padding-left: 92px;
+}
+
+@media screen and (max-width: 660px) {
+    ._perfil {
+        flex-direction: column;
+        row-gap: 20px;
+    }
+
+    .col1 {
+        flex-direction: row;
+        column-gap: 20px;
+    }
+
+    .tickets {
+        height: 212px;
+    }
+
+    form {
+        width: 510px;
+    }
+}
+
+@media screen and (max-width: 612px) {
+    form,
+    .col1 {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 435px) {
+    .col1 {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 317px) {
+    .foto,
+    .tickets {
+        width: 100%;
+    }
+}

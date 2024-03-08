@@ -310,6 +310,17 @@ app.get('/editarusuario', checkAuthenticated, (req, res) => {
     });
 });
 
+app.get('/verperfil', checkAuthenticated, (req, res) => {
+    if(!req.user.isAdmin) throw new Error('Acceso Negado');
+    res.render('index', {
+        pagina: 'verperfil',
+        user: req.user,
+        env: {
+            seccion: `Perfil de @ELXOKAS`,
+        },
+    });
+});
+
 app.delete('/logout', (req, res) => {
     req.logout(function() {
         res.redirect('/');

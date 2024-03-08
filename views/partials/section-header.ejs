@@ -2,22 +2,26 @@
     <div class="section__header">
         <div class="container">
             <h3><%=env.seccion%></h3>
-            <% if(!user.isAdmin) { %>
-                <% if(pagina !== 'usertickets' && pagina !== 'editar') { %>
-                    <p class="sections"><a href="/home"><i class="bi bi-reply"></i> Regresar</a>
-                <% } %>
-                <% if(pagina === 'editar') { %>
-                    <p class="sections"><a href="/verticket?id=<%=env.ticket.id%>"><i class="bi bi-reply"></i> Regresar</a>
-                <% } %>
+            <% if(pagina === 'verperfil') { %>
+                <p class="sections back"><i class="bi bi-reply"></i> Regresar</a>
             <% } else { %>
-                <% if(pagina !== 'admintickets') { %>
-                    <% if(pagina === 'usuarios') { %>
-                        <p class="sections"> 103 Usuarios registrados</a>
-                    <% } else { %>
-                        <p class="sections"><a href="<%= pagina === 'crearusuario' || pagina === 'editarusuario' ? '/usuarios' : '/admintickets' %>"><i class="bi bi-reply"></i> Regresar</a>
+                <% if(!user.isAdmin) { %>
+                    <% if(pagina !== 'usertickets' && pagina !== 'editar') { %>
+                        <p class="sections"><a href="/home"><i class="bi bi-reply"></i> Regresar</a>
+                    <% } %>
+                    <% if(pagina === 'editar') { %>
+                        <p class="sections"><a href="/verticket?id=<%=env.ticket.id%>"><i class="bi bi-reply"></i> Regresar</a>
                     <% } %>
                 <% } else { %>
-                    <p class="sections"><span><%= env.enEspera %></span> disponibles para atender</p>
+                    <% if(pagina !== 'admintickets') { %>
+                        <% if(pagina === 'usuarios') { %>
+                            <p class="sections"> 103 Usuarios registrados</a>
+                        <% } else { %>
+                            <p class="sections"><a href="<%= pagina === 'crearusuario' || pagina === 'editarusuario' ? '/usuarios' : '/admintickets' %>"><i class="bi bi-reply"></i> Regresar</a>
+                        <% } %>
+                    <% } else { %>
+                        <p class="sections"><span><%= env.enEspera %></span> disponibles para atender</p>
+                    <% } %>
                 <% } %>
             <% } %>
         </div>

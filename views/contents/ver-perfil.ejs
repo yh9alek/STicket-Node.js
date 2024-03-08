@@ -1,0 +1,68 @@
+<section class="perfil__section">
+    <div class="container">
+        <div class="_perfil">
+            <div class="col1">
+                <div class="foto">
+                    <div class="foto__content">
+                        <div class="foto__img">
+                            <img src="/assets/imgs/user-default.png">
+                        </div>
+                    </div>
+                    <p>@<%= user.usuario %></p>
+                    <p><%= user.isAdmin ? 'Admin' : 'Trabajador - Empleado'%></p>
+                </div>
+                <% if(!user.isAdmin) { %>
+                    <div class="tickets">
+                        <div>
+                            <p class="misTickets">Mis Tickets</p>
+                            <p class="numeroTickets">30</p>
+                        </div>
+                        <div class="linea"></div>
+                        <div class="tipos">
+                            <p>Regular</p>
+                            <p>10</p>
+                        </div>
+                        <div class="tipos">
+                            <p>Medio</p>
+                            <p>10</p>
+                        </div>
+                        <div class="tipos">
+                            <p>Crítico</p>
+                            <p>10</p>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+            <form class="col2">
+                <p class="infoPerfil">Información de Perfil</p>
+                <div class="linea"></div>
+                <div class="inputs">
+                    <div class="input">
+                        <p>Nombre</p>
+                        <input class="inp usuario" type="text" placeholder="<%= user.nombre %>" readonly>
+                    </div>
+                    <div class="input">
+                        <p>Correo Electrónico</p>
+                        <input class="inp correo" type="email" placeholder="<%= user.correo %>" readonly>
+                    </div>
+                    <div class="input">
+                        <p>Número Celular</p>
+                        <div class="numeroCelular">
+                            <input class="inp codigo" type="number" min="0" placeholder="52" readonly></input>
+                            <input class="inp celular" type="text" min="0" placeholder="<%= user.celular %>" readonly>
+                            <p>+</p>
+                        </div>
+                    </div>
+                    <div class="input">
+                        <p>Puesto</p>
+                        <input class="inp puesto" type="text" placeholder="<%= user.puesto %>" readonly>
+                    </div>
+                    <div class="input">
+                        <p>Departamento</p>
+                        <input class="inp departamento" type="text" placeholder="<%= user.departamento %>" readonly>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
