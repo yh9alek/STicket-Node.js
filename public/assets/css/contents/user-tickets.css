@@ -4,12 +4,36 @@
 }
 
 .solicitar {
+    position: relative;
     font-weight: bold;
-    display: inline-block;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    column-gap: 5px;
     font-size: 20px;
     color: #303030;
-    padding: 5px 5px 5px 0px;
+    padding: 5px 5px 5px 5px;
+    width: max-content;
     margin-bottom: 15px;
+}
+
+.solicitar > img {
+    position: relative;
+    width: 23px;
+    top: -1px;
+}
+
+.solicitar:hover > .linea__a {
+    background-color: #303030;
+}
+
+.linea__a {
+    position: absolute;
+    height: 1px;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    border-radius: 50%;
 }
 
 .prioridad.regular {
@@ -26,10 +50,6 @@
 
 .prioridad {
     color: #fff;
-}
-
-.solicitar:hover {
-    text-decoration: underline;
 }
 
 .tickets {
@@ -83,4 +103,16 @@
     margin: 0;
     font-weight: bold;
     margin-bottom: 10px;
+}
+
+@media screen and (max-width: 611px) {
+    .ticket {
+        width: 320px;
+    }
+}
+
+@media screen and (max-width: 401px) {
+    .ticket {
+        width: 100%;
+    }
 }

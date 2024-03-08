@@ -90,7 +90,11 @@
 
 <section class="section__tickets">
     <div class="container">
-        <a href="/solicitud" class="solicitar">Solicitar Ticket <i class="bi bi-plus-lg"></i></a>
+        <a href="/solicitud" class="solicitar">
+            Solicitar Ticket 
+            <img src="/assets/imgs/plus.PNG">
+            <div class="linea__a"></div>
+        </a>
         <div class="tickets">
             <% if(env.tickets.length <= 0) { %>
                 <p>No hay tickets pendientes</p>
