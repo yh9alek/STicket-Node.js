@@ -34,18 +34,23 @@
         <div class="usuarios">
             <div class="usuarios__contenedor">
                 <% env.usuarios.forEach(usuario => { %>
-                    <div class="usuario">
+                    <form class="usuario" action="/verperfil" method="POST">
+                        <label class="verusuario" for="user__<%= usuario.usuario %>"></label>
                         <div class="usuario__head">
                             <div class="foto">
                                 <img src="/assets/imgs/user-default.png">
                             </div>
                         </div>
-                        <p class="usuario__nombre">@<%=usuario.usuario %></p>
+                        <p class="usuario__nombre">@ <span><%= usuario.usuario %></span></p>
                         <p class="usuario__departamento"><%= usuario.departamento %></p>
                         <p class="rol <%= usuario.isAdmin ? 'admin' : 'user' %>"><%= usuario.isAdmin ? 'ADMIN' : 'USER' %></p>
                         <a href="/editarusuario" class="editar"><i class="bi bi-pencil-square"></i></a>
                         <button class="eliminar"><i class="bi bi-trash-fill"></i></button>
-                    </div>
+
+                        <input type="hidden" name="usuario" value="<%= usuario.usuario %>">
+                        <input type="hidden" name="ant" value="/usuarios">
+                        <button id="user__<%= usuario.usuario %>" type="submit"></button>
+                    </form>
                 <% }); %>
             </div>
         </div>

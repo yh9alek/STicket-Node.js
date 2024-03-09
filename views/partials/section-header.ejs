@@ -3,7 +3,7 @@
         <div class="container">
             <h3><%=env.seccion%></h3>
             <% if(pagina === 'verperfil') { %>
-                <p class="sections back"><i class="bi bi-reply"></i> Regresar</a>
+                <p class="sections"><a href="<%= env.ant %>"><i class="bi bi-reply"></i> Regresar</a>
             <% } else { %>
                 <% if(!user.isAdmin) { %>
                     <% if(pagina !== 'usertickets' && pagina !== 'editar') { %>

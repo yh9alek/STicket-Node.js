@@ -258,6 +258,10 @@
     color: #303030;
 }
 
+.usuario__nombre > span {
+    font-weight: bold;
+}
+
 .usuario__departamento {
     margin-top: 5px;
     font-size: 12px;
@@ -314,6 +318,19 @@ button.eliminar {
 button.eliminar:hover {
     cursor: pointer;
     background-color: #d43535;
+}
+
+.verusuario {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+}
+
+.verusuario:hover {
+    cursor: pointer;
 }
 
 @media screen and (max-width: 756px) {

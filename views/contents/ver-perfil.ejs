@@ -8,8 +8,8 @@
                             <img src="/assets/imgs/user-default.png">
                         </div>
                     </div>
-                    <p>@<%= user.usuario %></p>
-                    <p><%= user.isAdmin ? 'Admin' : 'Trabajador - Empleado'%></p>
+                    <p>@<%= env.usuario.usuario %></p>
+                    <p><%= env.usuario.isAdmin ? 'Admin' : 'Trabajador - Empleado'%></p>
                 </div>
                 <% if(!user.isAdmin) { %>
                     <div class="tickets">
@@ -39,27 +39,27 @@
                 <div class="inputs">
                     <div class="input">
                         <p>Nombre</p>
-                        <input class="inp usuario" type="text" placeholder="<%= user.nombre %>" readonly>
+                        <input class="inp usuario" type="text" placeholder="<%= env.usuario.nombre %>" readonly>
                     </div>
                     <div class="input">
                         <p>Correo Electrónico</p>
-                        <input class="inp correo" type="email" placeholder="<%= user.correo %>" readonly>
+                        <input class="inp correo" type="email" placeholder="<%= env.usuario.correo %>" readonly>
                     </div>
                     <div class="input">
                         <p>Número Celular</p>
                         <div class="numeroCelular">
-                            <input class="inp codigo" type="number" min="0" placeholder="52" readonly></input>
-                            <input class="inp celular" type="text" min="0" placeholder="<%= user.celular %>" readonly>
+                            <input class="inp codigo" type="number" min="0" placeholder="<%= env.usuario.codigo %>" readonly></input>
+                            <input class="inp celular" type="text" min="0" placeholder="<%= env.usuario.celular %>" readonly>
                             <p>+</p>
                         </div>
                     </div>
                     <div class="input">
                         <p>Puesto</p>
-                        <input class="inp puesto" type="text" placeholder="<%= user.puesto %>" readonly>
+                        <input class="inp puesto" type="text" placeholder="<%= env.usuario.puesto %>" readonly>
                     </div>
                     <div class="input">
                         <p>Departamento</p>
-                        <input class="inp departamento" type="text" placeholder="<%= user.departamento %>" readonly>
+                        <input class="inp departamento" type="text" placeholder="<%= env.usuario.departamento %>" readonly>
                     </div>
                 </div>
             </form>

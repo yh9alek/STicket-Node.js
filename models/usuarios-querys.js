@@ -38,7 +38,7 @@ usuariosDB.getTodos = function() {
         var sqlConsulta = "SELECT * FROM usuarios;";
         conexion.query(sqlConsulta, null, function (err, res) {
             if (err) {
-                console.log("Surgio un error");
+                console.log("Surgio un error: " + err);
                 reject(err);
             }
             else {
@@ -53,7 +53,7 @@ usuariosDB.getUsuariosEmail = function(email) {
         var sqlConsulta = "SELECT * FROM usuarios WHERE email = ?;";
         conexion.query(sqlConsulta, [email], function (err, res) {
             if (err) {
-                console.log("Surgio un error");
+                console.log("Surgio un error: " + err);
                 reject(err);
             }
             else {

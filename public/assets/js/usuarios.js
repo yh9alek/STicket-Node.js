@@ -8,6 +8,7 @@ const html = document.querySelector('html');
 
 
 usuarios.addEventListener('click', e => {
+    let usuario = e.target.closest('.usuario');
     if(e.target.closest('button.eliminar')) {
         e.preventDefault();
         if(!dialog.classList.contains('active')) {
@@ -16,13 +17,9 @@ usuarios.addEventListener('click', e => {
             html.style.overflow = 'hidden';
         }
         const boton = e.target.closest('button.eliminar');
-        const usuario = boton.parentNode;
+        usuario = boton.parentNode;
         dialog.querySelector('p > span').textContent = usuario.querySelector('.usuario__nombre').textContent;
-        return;
     }
-    if(e.target.closest('.usuario')) {
-        window.location.href = "/verperfil";
-    }    
 });
 
 btnNo.addEventListener('click', e => {

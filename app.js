@@ -57,8 +57,8 @@ obtenerDatos();
 
 setTimeout(() => {
     initialize(passport,
-        correo => usuarios.find(user => user.correo === correo),
-        id => usuarios.find(user => user.id === id),
+        correo => usuarios.find(usuario => usuario.correo === correo),
+        id => usuarios.find(usuario => usuario.id === id),
     );
 }, 100);
 
@@ -337,15 +337,21 @@ app.get('/editarusuario', checkAuthenticated, (req, res) => {
     });
 });
 
-app.get('/verperfil', checkAuthenticated, (req, res) => {
+app.post('/verperfil', checkAuthenticated, (req, res) => {
     if(!req.user.isAdmin) throw new Error('Acceso Negado');
-    res.render('index', {
-        pagina: 'verperfil',
-        user: req.user,
-        env: {
-            seccion: `Perfil de @ELXOKAS`,
-        },
-    });
+    obtenerDatos();
+    let usuario = usuarios.find(usuario => usuario.usuario === req.body.usuario);
+    setTimeout(() => {
+        res.render('index', {
+            pagina: 'verperfil',
+            user: req.user,
+            env: {
+                ant: req.body.ant,
+                usuario: usuario,
+                seccion: `Perfil de @${usuario.usuario}`,
+            },
+        });
+    }, 100);
 });
 
 app.delete('/logout', (req, res) => {

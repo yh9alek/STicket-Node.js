@@ -5,7 +5,7 @@ async function initialize(passport, getUserByEmail, getUserById) {
     const authenticateUser = async (email, password, done) => {
         const user = getUserByEmail(email);
         if(user == null) {
-            return done(null, false, {message: 'Este usuario no está registrado'});
+            return done(null, false, { message: 'Este usuario no está registrado' });
         }
         try {
             if(await bcrypt.compare(password, user.pass)) {

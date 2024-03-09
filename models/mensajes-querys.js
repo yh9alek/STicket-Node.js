@@ -24,7 +24,7 @@ mensajesDB.getMensajes = function(fkTicket) {
                 reject(res);
             }
             else {
-                console.log('Se mandó con éxito');
+                console.log('Se obtuvieron los mensajes con éxito');
                 resolve(res);
             }
         });
