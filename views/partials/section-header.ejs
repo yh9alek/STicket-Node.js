@@ -15,7 +15,7 @@
                 <% } else { %>
                     <% if(pagina !== 'admintickets') { %>
                         <% if(pagina === 'usuarios') { %>
-                            <p class="sections"> 103 Usuarios registrados</a>
+                            <p class="sections"> <%= env.usuarios.length %> Usuarios registrados</a>
                         <% } else { %>
                             <p class="sections"><a href="<%= pagina === 'crearusuario' || pagina === 'editarusuario' ? '/usuarios' : '/admintickets' %>"><i class="bi bi-reply"></i> Regresar</a>
                         <% } %>
