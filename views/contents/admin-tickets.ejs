@@ -112,7 +112,8 @@
                     </div>
                 </div>
                 <div class="busqueda">
-                    <a href="#" class="inp buscar"><i class="bi bi-search"></i></a>
+                    <p class="hash">#</p>
+                    <p class="inp buscar"><i class="bi bi-search"></i></p>
                     <input class="inp buscar__input" type="text" name="id" placeholder="Buscar código">
                 </div>
             </div>
@@ -138,18 +139,18 @@
                                 <p class="<%= getPrioridad(ticket) %>"><%= getPrioridad(ticket).charAt(0).toUpperCase() + getPrioridad(ticket).substring(1); %></p>
                             </div>
                         </div>
-                        <div>
-                            <p class="fecha"><%= getFecha(ticket.fecha) + getHora(ticket.fecha) %></p>
-                        </div>
-                        <p class="espera">
+                        <p class="espera <%= ticket.isRespondido ? 'resp' : '' %>">
                             <% const respuesta = ticket.isRespondido ? 'Respondido' : 'En espera'; %>
                                 <% if(respuesta === 'Respondido') { %>
                                     <i class="bi bi-chat-left"></i>
                                 <% } else { %>
                                     <i class="bi bi-hourglass-split"></i>
                                 <% } %>
-                            <%= respuesta %>
+                            <%= ticket.estado === 0 && ticket.isRespondido === 0 ? 'No se respondió' : respuesta %>
                         </p>
+                        <div>
+                            <p class="fecha"><%= getFecha(ticket.fecha) + getHora(ticket.fecha) %></p>
+                        </div>
                         <p class="codigo">#<%= ticket.id %></p>
                     </a>
                 <% }); %>

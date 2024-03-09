@@ -15,12 +15,12 @@
                 <% } else { %>
                     <% if(pagina !== 'admintickets') { %>
                         <% if(pagina === 'usuarios') { %>
-                            <p class="sections"> <%= env.usuarios.length %> Usuarios registrados</a>
+                            <p class="sections"> <%= env.usuarios.length ? env.usuarios.length + ' Usuarios Registrados' : 'Aún no se han registrado usuarios' %></a>
                         <% } else { %>
                             <p class="sections"><a href="<%= pagina === 'crearusuario' || pagina === 'editarusuario' ? '/usuarios' : '/admintickets' %>"><i class="bi bi-reply"></i> Regresar</a>
                         <% } %>
                     <% } else { %>
-                        <p class="sections"><span><%= env.enEspera %></span> disponibles para atender</p>
+                        <p class="sections"><span><%= env.enEspera ? env.enEspera : '' %></span> <%= env.enEspera ? 'disponibles para atender' : 'Todos los tickets han sido atendidos' %></p>
                     <% } %>
                 <% } %>
             <% } %>

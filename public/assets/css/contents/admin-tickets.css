@@ -39,6 +39,7 @@
 }
 
 .busqueda {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -49,7 +50,10 @@
 .buscar {
     position: relative;
     display: inline-block;
-    color: #212529;
+    color: #fff;
+    font-weight: 500;
+    border: 1px solid #376bd3 !important;
+    background-color: #376bd3;
     width: 30px;
     height: 30px !important;
     font-size: 13px;
@@ -58,11 +62,11 @@
     transition: all .1s ease;
 }
 
-.buscar:hover {
-    color: #fff;
-    font-weight: 500;
-    border: 1px solid #376bd3;
-    background-color: #376bd3;
+.hash {
+    position: absolute;
+    font-size: 14px;
+    top: 9px;
+    left: 47px;
 }
 
 .inp {
@@ -75,6 +79,7 @@
 
 .buscar__input {
     height: 30px;
+    padding-left: 20px;
 }
 
 .buscar__input:focus {
@@ -167,17 +172,17 @@
 
 .datos > p {
     padding: 6px 10px 4px;
-    width: 75px;
+    width: max-content;
     text-transform: uppercase;
     color: #fff;
-    font-size: 13px;
+    font-size: 11px;
     font-weight: 500;
     border-radius: 5px;
     margin-top: 5px;
 }
 
 .datos > p:first-of-type.abierto {
-    background-color: #8e54c4;
+    background-color: #3795d3;
 }
 
 .datos > p:first-of-type.cerrado {
@@ -220,12 +225,18 @@
 }
 
 .espera {
+    width: 115px;
     font-size: 13px;
     padding: 8px 16px;
-    background-color: #D1EBFF;
-    color: #0D7FF6;
     border-radius: 5px;
     margin-right: 20px;
+    color: #727272;
+    background-color: #dddddd;
+}
+
+.espera.resp {
+    color: #0D7FF6;
+    background-color: #D1EBFF;
 }
 
 .codigo {

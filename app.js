@@ -231,7 +231,7 @@ app.get('/admintickets', checkAuthenticated, (req, res) => {
     obtenerDatos();
     let enEspera = null;
     setTimeout(() => {
-        enEspera = tickets.filter(ticket => !ticket.isRespondido).length;
+        enEspera = tickets.filter(ticket => !ticket.isRespondido && ticket.estado).length;
         res.render('index', { 
             pagina: 'admintickets',
             user: req.user,

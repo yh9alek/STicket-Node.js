@@ -19,7 +19,7 @@ ticketsDB.getTickets = function(fkU) {
 
 ticketsDB.getTodos = function() {
     return new Promise((resolve, reject) => {
-        var sqlConsulta = "SELECT * FROM tickets ORDER BY id DESC;";
+        var sqlConsulta = "SELECT * FROM tickets ORDER BY isRespondido ASC, id DESC;";
         conexion.query(sqlConsulta, null, function (err, res) {
             if (err) {
                 console.log("Surgio un error");

@@ -122,7 +122,7 @@
 
 .info > div:first-of-type p.abierto.is {
     color: #fff;
-    background-color: #8e54c4;
+    background-color: #3795d3;
 }
 
 .info > div:first-of-type p.abierto {
@@ -151,11 +151,18 @@
     align-items: center;
     width: max-content;
     gap: 6px;
-    background-color: #D1EBFF;
-    color: #0D7FF6;
+    color: #727272;
+    background-color: #dddddd;
     padding-left: 10px;
     border-radius: 3px;
 }
+
+.info > div:first-of-type .com.resp {
+    background-color: #D1EBFF;
+    color: #0D7FF6;
+}
+
+
 
 .info > div:first-of-type .com > p{
     padding-left: 0;

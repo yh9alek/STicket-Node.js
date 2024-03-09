@@ -98,14 +98,14 @@
                             <p class="<%= prioridades[env.ticket.prioridad - 1][0] %>"><%= prioridades[env.ticket.prioridad - 1][1] %></p>
                         </div>
                         <div class="c2">
-                            <div class="com">
+                            <div class="com <%= env.ticket.isRespondido ? 'resp' : '' %>">
                                 <% const respuesta = env.ticket.isRespondido ? 'Respondido' : 'En espera'; %>
                                 <% if(respuesta === 'Respondido') { %>
                                     <i class="bi bi-chat-left"></i>
                                 <% } else { %>
                                     <i class="bi bi-hourglass-split"></i>
                                 <% } %>
-                                <p><%= respuesta %></p>
+                                <p><%= env.ticket.estado === 0 && env.ticket.isRespondido === 0 ? 'No se respondió' : respuesta %></p>
                             </div>
                             <p><%= user.departamento %></p>
                         </div>
