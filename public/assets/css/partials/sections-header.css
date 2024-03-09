@@ -11,6 +11,10 @@
     margin-bottom: 12px;
 }
 
+.sections:hover {
+    cursor: pointer;
+}
+
 .sections > a {
     color: #fff;
 }

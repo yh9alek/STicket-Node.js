@@ -2,29 +2,28 @@
     <div class="section__header">
         <div class="container">
             <h3><%=env.seccion%></h3>
-            <% if(pagina === 'verperfil') { %>
-                <p class="sections"><a href="<%= env.ant %>"><i class="bi bi-reply"></i> Regresar</a>
-            <% } else { %>
+            <% if(pagina !== 'verperfil' && pagina !== 'perfil') { %>
                 <% if(!user.isAdmin) { %>
                     <% if(pagina !== 'usertickets' && pagina !== 'editar') { %>
-                        <p class="sections"><a href="/home"><i class="bi bi-reply"></i> Regresar</a>
+                        <p class="sections"><a href="/home"><i class="bi bi-reply"></i> Regresar</a></p>
                     <% } %>
                     <% if(pagina === 'editar') { %>
-                        <p class="sections"><a href="/verticket?id=<%=env.ticket.id%>"><i class="bi bi-reply"></i> Regresar</a>
+                        <p class="sections"><a href="/verticket?id=<%=env.ticket.id%>"><i class="bi bi-reply"></i> Regresar</a></p>
                     <% } %>
                 <% } else { %>
                     <% if(pagina !== 'admintickets') { %>
                         <% if(pagina === 'usuarios') { %>
-                            <p class="sections"> <%= env.usuarios.length ? env.usuarios.length + ' Usuarios Registrados' : 'Aún no se han registrado usuarios' %></a>
+                            <p class="sections"> <%= env.usuarios.length ? env.usuarios.length + ' Usuarios Registrados' : 'Aún no se han registrado usuarios' %></a></p>
                         <% } else { %>
-                            <p class="sections"><a href="<%= pagina === 'crearusuario' || pagina === 'editarusuario' ? '/usuarios' : '/admintickets' %>"><i class="bi bi-reply"></i> Regresar</a>
+                            <p class="sections"><a href="<%= pagina === 'crearusuario' || pagina === 'editarusuario' ? '/usuarios' : '/admintickets' %>"><i class="bi bi-reply"></i> Regresar</a></p>
                         <% } %>
                     <% } else { %>
                         <p class="sections"><span><%= env.enEspera ? env.enEspera : '' %></span> <%= env.enEspera ? 'disponibles para atender' : 'Todos los tickets han sido atendidos' %></p>
                     <% } %>
                 <% } %>
-            <% } %>
-        </div>
+            <% } else { %>
+                <p class="sections"><i class="bi bi-reply"></i> Regresar</p>
+            <% }%>
         </div>
     </div>
 </section>

@@ -254,7 +254,9 @@ app.get('/averticket', checkAuthenticated, (req, res) => {
         ticket = tickets.find(ticket => ticket.id === parseInt(req.query.idTicket));
         usuario = usuarios.find(user => user.id === parseInt(req.query.idUser));
         obtenerAdmin(ticket.fkAdmin);
-        obtenerMensajes(ticket.id);
+        if(ticket.fkAdmin === req.user.id) {
+            obtenerMensajes(ticket.id);
+        }
         setTimeout(() => {
             res.render('index', {
                 pagina: 'averticket',
@@ -328,7 +330,6 @@ app.post('/crearusuario', checkAuthenticated, async (req, res) => {
 
 app.get('/editarusuario', checkAuthenticated, (req, res) => {
     if(!req.user.isAdmin) throw new Error('Acceso Negado');
-    obtenerDatos();
     let usuario = usuarios.find(usuario => usuario.usuario === req.query.usuario);
     setTimeout(() => {
         res.render('index', {
@@ -344,7 +345,6 @@ app.get('/editarusuario', checkAuthenticated, (req, res) => {
 
 app.post('/editarusuario', checkAuthenticated, (req, res) => {
     if(!req.user.isAdmin) throw new Error('Acceso Negado');
-    console.log(req.body.nombre);
     usuariosDB.editar(formatearUsuario(req.body.nombre),
                       req.body.nombre,
                       req.body.puesto,
@@ -357,14 +357,13 @@ app.post('/editarusuario', checkAuthenticated, (req, res) => {
 
 app.post('/verperfil', checkAuthenticated, (req, res) => {
     if(!req.user.isAdmin) throw new Error('Acceso Negado');
-    obtenerDatos();
+    if(req.body.usuario === req.user.usuario) res.redirect('/perfil');
     let usuario = usuarios.find(usuario => usuario.usuario === req.body.usuario);
     setTimeout(() => {
         res.render('index', {
             pagina: 'verperfil',
             user: req.user,
             env: {
-                ant: req.body.ant,
                 usuario: usuario,
                 seccion: `Perfil de @${usuario.usuario}`,
             },
