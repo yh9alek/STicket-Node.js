@@ -44,7 +44,7 @@
                         <p class="usuario__nombre">@ <span><%= usuario.usuario %></span></p>
                         <p class="usuario__departamento"><%= usuario.departamento %></p>
                         <p class="rol <%= usuario.isAdmin ? 'admin' : 'user' %>"><%= usuario.isAdmin ? 'ADMIN' : 'USER' %></p>
-                        <a href="/editarusuario" class="editar"><i class="bi bi-pencil-square"></i></a>
+                        <a href="/editarusuario?usuario=<%= usuario.usuario %>" class="editar"><i class="bi bi-pencil-square"></i></a>
                         <button class="eliminar"><i class="bi bi-trash-fill"></i></button>
 
                         <input type="hidden" name="usuario" value="<%= usuario.usuario %>">

@@ -33,6 +33,18 @@ usuariosDB.insertar = function(usuario, pass, nombre, correo, celular, codigo, p
     });
 };
 
+usuariosDB.editar = function(usuario, nombre, puesto, departamento, celular, codigo, id) {
+    const consulta = 'UPDATE usuarios SET usuario = ?, nombre = ?, puesto = ?, departamento = ?, celular = ?, codigo = ? WHERE id = ?;';
+    conexion.query(consulta, [usuario, nombre, puesto, departamento, celular, codigo, id], (err, res) => {
+        if (err) {
+            console.log("Surgió un error: " + err);
+        }
+        else {
+            console.log("Se editó con éxito");
+        }
+    });
+}
+
 usuariosDB.getTodos = function() {
     return new Promise((resolve, reject) => {
         var sqlConsulta = "SELECT * FROM usuarios;";

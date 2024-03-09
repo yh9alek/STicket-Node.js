@@ -1,7 +1,8 @@
 <section>
     <div class="container">
-        <p class="ptitulo">Editar datos de @ELXOKAS</p>
-        <form class="usuario" action="/crearusuario" method="POST">
+        <p class="ptitulo">Editar datos de @<%= env.usuario.usuario %></p>
+        <form class="usuario" action="/editarusuario" method="POST">
+            <input type="hidden" name="id" value="<%= env.usuario.id %>">
             <div class="usuario__contenedor">
                 <div class="col">
                     <p class="infoPerfil">Datos del usuario</p>
@@ -10,21 +11,21 @@
                         <div class="inputs">
                             <div class="input">
                                 <p>Nombre Completo</p>
-                                <input class="inp usuario" type="text" placeholder="..." required>
+                                <input class="inp usuario" name="nombre" type="text" placeholder="..." value="<%= env.usuario.nombre %>">
                             </div>
                             <div class="input">
                                 <p>Puesto</p>
-                                <input class="inp puesto" type="text" placeholder="..." required>
+                                <input class="inp puesto" name="puesto" type="text" placeholder="..." value="<%= env.usuario.puesto %>">
                             </div>
                             <div class="input">
                                 <p>Departamento</p>
-                                <input class="inp departamento" type="text" placeholder="..." required>
+                                <input class="inp departamento" name="departamento" type="text" placeholder="..." value="<%= env.usuario.departamento %>">
                             </div>
                             <div class="input">
                                 <p>Número Celular</p>
                                 <div class="numeroCelular">
-                                    <input class="inp codigo" type="number" min="0" placeholder="000" required></input>
-                                    <input class="inp celular" type="text" min="0" placeholder="..." required>
+                                    <input class="inp codigo" name="codigo" type="number" min="0" placeholder="000" value="<%= env.usuario.codigo %>"></input>
+                                    <input class="inp celular" name="celular" type="text" min="0" placeholder="..." value="<%= env.usuario.celular %>">
                                     <p>+</p>
                                 </div>
                             </div>

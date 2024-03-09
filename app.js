@@ -328,13 +328,31 @@ app.post('/crearusuario', checkAuthenticated, async (req, res) => {
 
 app.get('/editarusuario', checkAuthenticated, (req, res) => {
     if(!req.user.isAdmin) throw new Error('Acceso Negado');
-    res.render('index', {
-        pagina: 'editarusuario',
-        user: req.user,
-        env: {
-            seccion: `Editar Usuario`,
-        },
+    obtenerDatos();
+    let usuario = usuarios.find(usuario => usuario.usuario === req.query.usuario);
+    setTimeout(() => {
+        res.render('index', {
+            pagina: 'editarusuario',
+            user: req.user,
+            env: {
+                usuario: usuario,
+                seccion: `Editar Usuario`,
+            },
+        });
     });
+});
+
+app.post('/editarusuario', checkAuthenticated, (req, res) => {
+    if(!req.user.isAdmin) throw new Error('Acceso Negado');
+    console.log(req.body.nombre);
+    usuariosDB.editar(formatearUsuario(req.body.nombre),
+                      req.body.nombre,
+                      req.body.puesto,
+                      req.body.departamento,
+                      req.body.celular,
+                      req.body.codigo,
+                      req.body.id);
+    res.redirect('/usuarios');
 });
 
 app.post('/verperfil', checkAuthenticated, (req, res) => {
