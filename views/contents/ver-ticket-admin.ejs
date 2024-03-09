@@ -103,16 +103,15 @@
                             <i class="bi bi-calendar2-week"></i>
                             <p><%= getFecha(env.ticket.fecha) + getHora(env.ticket.fecha) %></p>
                         </div>
-                        <div class="perfil__content">
+                        <form class="perfil__content" action="/verperfil" method="POST" >
+                            <label for="verperfil__<%= env.usuario.usuario %>"></label>
                             <div class="perfil">
                                 <img src="/assets/imgs/user-default.png">
-                                <form class="opciones" action="/logout?_method=DELETE" method="POST">
-                                    <a class="opcion" href="/perfil"><i class="bi bi-person"></i> Perfil</a>
-                                    <button class="opcion" type="submit"><i class="bi bi-box-arrow-left"></i> Cerrar Sesión</button>
-                                </form>
                             </div>
+                            <input type="hidden" name="usuario" value="<%= env.usuario.usuario %>">
+                            <button class="verelperfil" id="verperfil__<%= env.usuario.usuario %>" type="submit"></button>
                             <p class="not">@<%= env.usuario.usuario.length >= 11 ? env.usuario.usuario.substring(0, 11) : env.usuario.usuario %></p>
-                        </div>
+                        </form>
                     </div>
                 </div>
                 <div class="contenido">
@@ -120,7 +119,9 @@
                     <p class="descripcion"><%= env.ticket.descripcion %></p>
                 </div>
             </div>
-            <div class="linea__punteada"></div>
+            <% if(env.ticket.isRespondido) { %>
+                <div class="linea__punteada"></div>
+            <% } %>
             <% if(env.ticket.estado) { %>
                 <div class="estado">
                     <% if(!env.ticket.isRespondido) { %>

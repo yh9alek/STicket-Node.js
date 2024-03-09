@@ -11,25 +11,31 @@
                     <p>@<%= env.usuario.usuario %></p>
                     <p><%= env.usuario.isAdmin ? 'Admin' : 'Trabajador - Empleado'%></p>
                 </div>
-                <% if(!user.isAdmin) { %>
+                <% if(!env.usuario.isAdmin) { %>
                     <div class="tickets">
+                    <% if(env.tickets.length) { %>
                         <div>
-                            <p class="misTickets">Mis Tickets</p>
-                            <p class="numeroTickets">30</p>
+                            <p class="misTickets">Tickets</p>
+                            <p class="numeroTickets"><%= env.tickets.length %></p>
                         </div>
                         <div class="linea"></div>
                         <div class="tipos">
                             <p>Regular</p>
-                            <p>10</p>
+                            <p><%= env.tickets.filter(ticket => ticket.prioridad === 1).length %></p>
                         </div>
                         <div class="tipos">
                             <p>Medio</p>
-                            <p>10</p>
+                            <p><%= env.tickets.filter(ticket => ticket.prioridad === 2).length %></p>
                         </div>
                         <div class="tipos">
                             <p>Crítico</p>
-                            <p>10</p>
+                            <p><%= env.tickets.filter(ticket => ticket.prioridad === 3).length %></p>
                         </div>
+                    <% } else { %>
+                        <div>
+                            <p class="misTickets">No ha solicitado ningún ticket</p>
+                        </div>                        
+                    <% } %>
                     </div>
                 <% } %>
             </div>

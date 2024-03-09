@@ -175,6 +175,30 @@
     gap: 6px;
 }
 
+.verperfilform {
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.verperfilform > .admin {
+    margin-right: 10px;
+}
+
+.verperfilform > label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+.verperfilform > label:hover {
+    cursor: pointer;
+}
+
 .c1,
 .c2 {
     display: flex;
@@ -224,7 +248,7 @@
     left: 39px;
     bottom: 23px;
     width: 3px;
-    height: calc(100% - 5%);
+    height: calc(100% - 10%);
     border-left: 2px dashed #D1DAE4;
     z-index: 0;
 }

@@ -113,7 +113,7 @@ app.get('/home', checkAuthenticated, (req, res) => {
             user: req.user,
             env: {
                 seccion: 'Mis Tickets',
-                tickets: tickets,
+                tickets: tickets.filter(ticket => ticket.estado),
             },
         });
     }, 100);
@@ -173,13 +173,19 @@ app.post('/editar', checkAuthenticated, (req, res) => {
 
 // Perfil es dinámico con el rol (admin - user), ambos comparten la misma interfaz de perfil
 app.get('/perfil', checkAuthenticated, (req, res) => {
-    res.render('index', { 
-        pagina: 'perfil',
-        user: req.user,
-        env: {
-            seccion: 'Perfil',
-        },
-    });
+    if(!req.user.isAdmin) {
+        obtenerTickets(req.user.id);
+    }
+    setTimeout(()=> {
+        res.render('index', { 
+            pagina: 'perfil',
+            user: req.user,
+            env: {
+                tickets: tickets,
+                seccion: 'Perfil',
+            },
+        });
+    }, 100);
 });
 
 app.get('/verticket', checkAuthenticated, (req, res) => {
@@ -356,15 +362,16 @@ app.post('/editarusuario', checkAuthenticated, (req, res) => {
 });
 
 app.post('/verperfil', checkAuthenticated, (req, res) => {
-    if(!req.user.isAdmin) throw new Error('Acceso Negado');
     if(req.body.usuario === req.user.usuario) res.redirect('/perfil');
     let usuario = usuarios.find(usuario => usuario.usuario === req.body.usuario);
+    obtenerTickets(usuario.id);
     setTimeout(() => {
         res.render('index', {
             pagina: 'verperfil',
             user: req.user,
             env: {
                 usuario: usuario,
+                tickets: !usuario.isAdmin ? tickets : '',
                 seccion: `Perfil de @${usuario.usuario}`,
             },
         });

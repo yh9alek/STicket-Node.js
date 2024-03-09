@@ -128,13 +128,20 @@
                     <p class="descripcion"><%= env.ticket.descripcion %></p>
                 </div>
             </div>
-            <div class="linea__punteada"></div>
+            <% if(env.ticket.isRespondido) { %>
+                <div class="linea__punteada"></div>
+            <% } %>
             <% if(env.ticket.isRespondido) { %>
                 <div class="estado">
-                    <p class="admin">
-                        <img src="/assets/imgs/user-default.png">
-                    </p>
-                    <p><span class="admin__nombre">@<%= env.admin.usuario %></span> ha atendido tu ticket.</p>
+                    <form class="verperfilform" action="/verperfil" method="POST">
+                        <label for="ver"></label>
+                        <p class="admin">
+                            <img src="/assets/imgs/user-default.png">
+                        </p>
+                        <p><span class="admin__nombre">@<%= env.admin.usuario %></span> ha atendido tu ticket.</p>
+                            <input type="hidden" name="usuario" value="<%= env.admin.usuario %>">
+                        <button id="ver" type="submit"></button>
+                    </form>
                 </div>
                 <% env.mensajes.forEach(mensaje => {  %>
                     <div class="mensaje">
