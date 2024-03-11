@@ -18,7 +18,7 @@ usuariosDB.getAdmin = function(id) {
     });
 };
 
-usuariosDB.insertar = function(usuario, pass, nombre, correo, celular, codigo, puesto, departamento, isAdmin = false, foto = '') {
+usuariosDB.insertar = function(usuario, pass, nombre, correo, celular, codigo, puesto, departamento, isAdmin = false, foto = null) {
     if(pass === '' || nombre === '' || correo === '' || celular === '' || codigo === '' || puesto === '' || departamento === '') {
         throw new Error('No se pueden insertar campos vacíos...');
     }
@@ -33,9 +33,9 @@ usuariosDB.insertar = function(usuario, pass, nombre, correo, celular, codigo, p
     });
 };
 
-usuariosDB.editar = function(usuario, nombre, puesto, departamento, celular, codigo, id) {
-    const consulta = 'UPDATE usuarios SET usuario = ?, nombre = ?, puesto = ?, departamento = ?, celular = ?, codigo = ? WHERE id = ?;';
-    conexion.query(consulta, [usuario, nombre, puesto, departamento, celular, codigo, id], (err, res) => {
+usuariosDB.editar = function(usuario, nombre, puesto, departamento, celular, codigo, foto = null, id) {
+    const consulta = `UPDATE usuarios SET usuario = ?, nombre = ?, puesto = ?, departamento = ?, celular = ?, codigo = ?${foto ? ', foto = ?' : ''} WHERE id = ?;`;
+    conexion.query(consulta, foto ? [usuario, nombre, puesto, departamento, celular, codigo, foto, id] : [usuario, nombre, puesto, departamento, celular, codigo, id], (err, res) => {
         if (err) {
             console.log("Surgió un error: " + err);
         }

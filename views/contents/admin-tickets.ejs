@@ -122,7 +122,8 @@
                     <a class="ticket" href="/averticket?idUser=<%=ticket.fkUsuario%>&idTicket=<%=ticket.id%>">
                         <div class="p">
                             <figure>
-                                <img class="imagen" src="/assets/imgs/user-default.png">
+                                <% const foto = env.usuarios.find(user => user.id === ticket.fkUsuario).foto; %>
+                                <img class="imagen" src="/assets/imgs/<%= foto ? 'perfil/' + foto : 'user-default.png' %>">
                             </figure>
                             <div>
                                 <p class="nombre">@<%= env.usuarios.find(user => user.id === ticket.fkUsuario).usuario %></p>

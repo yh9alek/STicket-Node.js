@@ -38,7 +38,7 @@
                         <label class="verusuario" for="user__<%= usuario.usuario %>"></label>
                         <div class="usuario__head">
                             <div class="foto">
-                                <img src="/assets/imgs/user-default.png">
+                                <img src="/assets/imgs/<%= usuario.foto ? 'perfil/' + usuario.foto : 'user-default.png' %>">
                             </div>
                         </div>
                         <p class="usuario__nombre">@ <span><%= usuario.usuario %></span></p>

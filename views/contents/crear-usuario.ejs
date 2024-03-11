@@ -1,7 +1,7 @@
 <section>
     <div class="container">
         <p class="ptitulo">Editar datos de @ELXOKAS</p>
-        <form class="usuario" action="/crearusuario" method="POST">
+        <form class="usuario" action="/crearusuario" method="POST" enctype="multipart/form-data">
             <div class="usuario__contenedor">
                 <div class="col">
                     <p class="infoPerfil">Datos del usuario</p>
@@ -32,11 +32,11 @@
                         <div class="foto">
                             <div class="foto__content">
                                 <div class="foto__img">
-                                    <img src="/assets/imgs/user-default.png">
+                                    <img class="laimagen" src="/assets/imgs/user-default.png">
                                 </div>
                                 <label for="imagen"><i class="bi bi-pencil-square"></i></label>
                             </div>
-                            <input name="foto" id="imagen" class="inp imagen" type="file" accept=".jpg, .jpeg, .png">
+                            <input name="foto" id="imagen" class="inp imagen" type="file" accept=".jpg, .jpeg, .png, .gif">
                         </div>
                     </div>
                 </div>

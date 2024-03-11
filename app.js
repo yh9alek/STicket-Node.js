@@ -21,6 +21,9 @@ import initialize from './passport-config.js';
 import usuariosDB from './models/usuarios-querys.js';
 import ticketsDB from './models/tickets-querys.js';
 import mensajesDB from './models/mensajes-querys.js';
+import multer from 'multer';
+import { v4 as uuid } from 'uuid';
+import fs from 'fs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -76,6 +79,36 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride('_method'));
+
+const storage = multer.diskStorage({
+    destination: 'public/assets/imgs/perfil',
+    filename: (req, file, cb) => {
+        cb(null, uuid() + path.extname(file.originalname).toLocaleLowerCase());
+    }
+});
+
+app.use(multer({
+    storage,
+    limits: {
+        fileSize: 250000,
+    },
+    fileFilter: (req, file, cb) => {
+        const filetypes = /jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF/;
+        const mimetype = filetypes.test(file.mimetype);
+        const extname = filetypes.test(path.extname(file.originalname));
+        if(mimetype && extname) {
+            return cb(null, true);
+        }
+        cb("Error, formato de imagen invalido.");
+    }
+}).single('foto'));
+
+// Rutas
+
+app.post('/upload', checkAuthenticated, (req, res) => {
+    console.log(req.file);
+    req.send('Imagen cargada');
+});
 
 app.get('/', checkNotAuthenticated, (req, res) => {
     obtenerDatos();
@@ -318,16 +351,32 @@ app.post('/crearusuario', checkAuthenticated, async (req, res) => {
         if(checarContraseña(req.body.pass, req.body.cpass)) {
             hashedPassword = await bcrypt.hash(req.body.pass, 10);
         }
+        const datos = {
+            pass: hashedPassword,
+            nombre: req.body.nombre,
+            email: req.body.email,
+            numero: req.body.numero,
+            codigo: req.body.codigo,
+            puesto: req.body.puesto,
+            departamento: req.body.departamento,
+            isAdmin: parseInt(req.body.isAdmin),
+            file: null,
+        };
+        if(req.file) {
+            datos.file = req.file.filename;
+        } else {
+            datos.file = null;
+        }
         usuariosDB.insertar(formatearUsuario(req.body.nombre),
-                        hashedPassword,
-                        req.body.nombre,
-                        req.body.email,
-                        req.body.numero,
-                        req.body.codigo,
-                        req.body.puesto, 
-                        req.body.departamento,
-                        parseInt(req.body.isAdmin),
-                        req.body.foto.toString());
+                        datos.pass,
+                        datos.nombre,
+                        datos.email,
+                        datos.numero,
+                        datos.codigo,
+                        datos.puesto, 
+                        datos.departamento,
+                        datos.isAdmin,
+                        datos.file);
     res.redirect('/usuarios');
     } catch(err){
         throw new Error('Surgió un error: ' + err);
@@ -350,14 +399,31 @@ app.get('/editarusuario', checkAuthenticated, (req, res) => {
 });
 
 app.post('/editarusuario', checkAuthenticated, (req, res) => {
-    if(!req.user.isAdmin) throw new Error('Acceso Negado');
-    usuariosDB.editar(formatearUsuario(req.body.nombre),
-                      req.body.nombre,
-                      req.body.puesto,
-                      req.body.departamento,
-                      req.body.celular,
-                      req.body.codigo,
-                      req.body.id);
+    if(!req.user.isAdmin) throw new Error('Acceso Negado'); 
+    let usuario = usuarios.find(usuario => usuario.id === parseInt(req.body.id));
+    const datos = {
+        nombre: req.body.nombre,
+        puesto: req.body.puesto,
+        departamento: req.body.departamento,
+        celular: req.body.celular,
+        codigo: req.body.codigo,
+        file: null,
+        id: parseInt(req.body.id),
+    };
+    if(req.file) {
+        fs.unlink(req.file.destination + '/' + usuario.foto, (err) => {});
+        datos.file = req.file.filename;
+    } else {
+        datos.file = null;
+    }
+    usuariosDB.editar(formatearUsuario(req.body.nombre), 
+                      datos.nombre,
+                      datos.puesto,
+                      datos.departamento,
+                      datos.celular,
+                      datos.codigo,
+                      datos.file,
+                      datos.id);
     res.redirect('/usuarios');
 });
 

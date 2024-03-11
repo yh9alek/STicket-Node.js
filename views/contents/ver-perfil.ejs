@@ -5,7 +5,7 @@
                 <div class="foto">
                     <div class="foto__content">
                         <div class="foto__img">
-                            <img src="/assets/imgs/user-default.png">
+                            <img src="/assets/imgs/<%= env.usuario.foto ? 'perfil/' + env.usuario.foto : 'user-default.png' %>">
                         </div>
                     </div>
                     <p>@<%= env.usuario.usuario %></p>
