@@ -136,7 +136,7 @@
                     <form class="verperfilform" action="/verperfil" method="POST">
                         <label for="ver"></label>
                         <p class="admin">
-                            <img src="/assets/imgs/<%= env.admin.foto ? 'perfil/' + env.admin.foto : 'user-default.png' %>">
+                            <img src="/assets/imgs/<%= env.admin.foto ? 'perfil/' + env.admin.foto : 'user-default.png' %>" onerror="this.onerror=null; this.src='/assets/imgs/user-default.png';">
                         </p>
                         <p><span class="admin__nombre">@<%= env.admin.usuario %></span> ha atendido tu ticket.</p>
                             <input type="hidden" name="usuario" value="<%= env.admin.usuario %>">
@@ -146,7 +146,11 @@
                 <% env.mensajes.forEach(mensaje => {  %>
                     <div class="mensaje">
                         <p class="admin">
-                            <img src="/assets/imgs/<%= user.foto ? 'perfil/' + user.foto : 'user-default.png' %>">
+                            <% if(mensaje.fkEmisor === user.id){ %>
+                                <img src="/assets/imgs/<%= user.foto ? 'perfil/' + user.foto : 'user-default.png' %>" onerror="this.onerror=null; this.src='/assets/imgs/user-default.png';">
+                            <% } else { %>
+                                <img src="/assets/imgs/<%= env.admin.foto ? 'perfil/' + env.admin.foto : 'user-default.png' %>" onerror="this.onerror=null; this.src='/assets/imgs/user-default.png';">
+                            <% } %>
                         </p>
                         <div>
                             <div class="head">

@@ -2,7 +2,6 @@
     <p>¿Estas seguro de dar de baja a <span></span>?</p>
     <p>Se le notificará al usuario que será eliminado del sistema</p>
     <div>
-        <input type="hidden" name="id" value="">
         <button class="op">NO</button>
         <button type="submit" class="op">SI</button>
     </div>
@@ -34,19 +33,24 @@
         <div class="usuarios">
             <div class="usuarios__contenedor">
                 <% env.usuarios.forEach(usuario => { %>
-                    <form class="usuario" action="/verperfil" method="POST">
+                    <form class="usuario <%= usuario.usuario === user.usuario ? 'me' : '' %>" action="/verperfil" method="POST">
                         <label class="verusuario" for="user__<%= usuario.usuario %>"></label>
                         <div class="usuario__head">
                             <div class="foto">
-                                <img src="/assets/imgs/<%= usuario.foto ? 'perfil/' + usuario.foto : 'user-default.png' %>">
+                                <img src="/assets/imgs/<%= usuario.foto ? 'perfil/' + usuario.foto : 'user-default.png' %>" onerror="this.onerror=null; this.src='/assets/imgs/user-default.png';">
                             </div>
                         </div>
-                        <p class="usuario__nombre">@ <span><%= usuario.usuario %></span></p>
+                        <p class="usuario__nombre"><span><%= usuario.usuario === user.usuario ? 'Tú' : '@ ' + usuario.usuario %></span></p>
                         <p class="usuario__departamento"><%= usuario.departamento %></p>
                         <p class="rol <%= usuario.isAdmin ? 'admin' : 'user' %>"><%= usuario.isAdmin ? 'ADMIN' : 'USER' %></p>
-                        <a href="/editarusuario?usuario=<%= usuario.usuario %>" class="editar"><i class="bi bi-pencil-square"></i></a>
-                        <button class="eliminar"><i class="bi bi-trash-fill"></i></button>
-
+                        <% if(!usuario.isAdmin || usuario.id === user.id) { %>
+                            <a href="/editarusuario?usuario=<%= usuario.usuario %>" class="editar <%= usuario.usuario === user.usuario ? 'tu' : '' %>"><i class="bi bi-pencil-square"></i></a>
+                        <% } %>
+                        <% if(!usuario.isAdmin) { %>
+                            <% if(usuario.usuario !== user.usuario) { %> 
+                                <button class="eliminar"><i class="bi bi-trash-fill"></i></button>
+                            <% } %>
+                        <% } %>
                         <input type="hidden" name="usuario" value="<%= usuario.usuario %>">
                         <input type="hidden" name="ant" value="/usuarios">
                         <button id="user__<%= usuario.usuario %>" type="submit"></button>

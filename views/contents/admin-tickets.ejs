@@ -123,7 +123,7 @@
                         <div class="p">
                             <figure>
                                 <% const foto = env.usuarios.find(user => user.id === ticket.fkUsuario).foto; %>
-                                <img class="imagen" src="/assets/imgs/<%= foto ? 'perfil/' + foto : 'user-default.png' %>">
+                                <img class="imagen" src="/assets/imgs/<%= foto ? 'perfil/' + foto : 'user-default.png' %>" onerror="this.onerror=null; this.src='/assets/imgs/user-default.png';">
                             </figure>
                             <div>
                                 <p class="nombre">@<%= env.usuarios.find(user => user.id === ticket.fkUsuario).usuario %></p>

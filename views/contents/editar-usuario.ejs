@@ -33,7 +33,7 @@
                         <div class="foto">
                             <div class="foto__content">
                                 <div class="foto__img">
-                                    <img class="laimagen" src="/assets/imgs/<%= env.usuario.foto ? 'perfil/' + env.usuario.foto : 'user-default.png' %>">
+                                    <img class="laimagen" src="/assets/imgs/<%= env.usuario.foto ? 'perfil/' + env.usuario.foto : 'user-default.png' %>" onerror="this.onerror=null; this.src='/assets/imgs/user-default.png';">
                                 </div>
                                 <label for="imagen"><i class="bi bi-pencil-square"></i></label>
                             </div>

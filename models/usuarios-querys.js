@@ -18,12 +18,13 @@ usuariosDB.getAdmin = function(id) {
     });
 };
 
-usuariosDB.insertar = function(usuario, pass, nombre, correo, celular, codigo, puesto, departamento, isAdmin = false, foto = null) {
-    if(pass === '' || nombre === '' || correo === '' || celular === '' || codigo === '' || puesto === '' || departamento === '') {
+usuariosDB.insertar = function(usuario, pass, nombre, celular, codigo, puesto, departamento, isAdmin = false, foto = null) {
+    const correo = `${new Date().getFullYear()}00@site.com`;
+    if(pass === '' || nombre === '' || celular === '' || codigo === '' || puesto === '' || departamento === '') {
         throw new Error('No se pueden insertar campos vacíos...');
     }
-    const consulta = "INSERT INTO usuarios (usuario, pass, nombre, correo, celular, codigo, puesto, departamento, isAdmin, foto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
-    conexion.query(consulta, [usuario, pass, nombre, correo, celular, codigo, puesto, departamento, isAdmin, foto], function(err, res) {
+    const consulta = "INSERT INTO usuarios (usuario, pass, nombre, correo, celular, codigo, puesto, departamento, isAdmin, foto, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+    conexion.query(consulta, [usuario, pass, nombre, correo, celular, codigo, puesto, departamento, isAdmin, foto, 1], function(err, res) {
         if (err) {
             console.log("Surgió un error: " + err);
         }
@@ -32,6 +33,18 @@ usuariosDB.insertar = function(usuario, pass, nombre, correo, celular, codigo, p
         }
     });
 };
+
+usuariosDB.corregirEmail = function(email = '', id) {
+    const consulta = "UPDATE usuarios SET correo = ? WHERE id = ?";
+    conexion.query(consulta, [email, id], (err, res) => {
+        if (err) {
+            console.log("Surgió un error: " + err);
+        }
+        else {
+            console.log("Se corrigió el email con éxito");
+        }
+    });
+}
 
 usuariosDB.editar = function(usuario, nombre, puesto, departamento, celular, codigo, foto = null, id) {
     const consulta = `UPDATE usuarios SET usuario = ?, nombre = ?, puesto = ?, departamento = ?, celular = ?, codigo = ?${foto ? ', foto = ?' : ''} WHERE id = ?;`;

@@ -1,3 +1,7 @@
+.getId {
+    font-weight: bold;
+}
+
 .ptitulo {
     font-size: 16px;
     font-weight: bold;
@@ -135,8 +139,16 @@ input[type="file"] {
     border-radius: 5px;
 }
 
+.inp:focus {
+    border: 1px solid #376BD3;
+}
+
 .inp.usuario {
     background-color: #fff;
+}
+
+.inp.correo:focus {
+    border: 1px solid #d3d3d3;
 }
 
 .inp:hover {

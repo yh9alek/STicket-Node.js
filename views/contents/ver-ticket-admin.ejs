@@ -106,7 +106,7 @@
                         <form class="perfil__content" action="/verperfil" method="POST" >
                             <label for="verperfil__<%= env.usuario.usuario %>"></label>
                             <div class="perfil">
-                                <img src="/assets/imgs/<%= env.usuario.foto ? 'perfil/' + env.usuario.foto : 'user-default.png' %>">
+                                <img src="/assets/imgs/<%= env.usuario.foto ? 'perfil/' + env.usuario.foto : 'user-default.png' %>" onerror="this.onerror=null; this.src='/assets/imgs/user-default.png';">
                             </div>
                             <input type="hidden" name="usuario" value="<%= env.usuario.usuario %>">
                             <button class="verelperfil" id="verperfil__<%= env.usuario.usuario %>" type="submit"></button>
@@ -126,7 +126,7 @@
                 <div class="estado">
                     <% if(!env.ticket.isRespondido) { %>
                         <p class="admin">
-                            <img src="/assets/imgs/<%= user.foto ? 'perfil/' + user.foto : 'user-default.png' %>">
+                            <img src="/assets/imgs/<%= user.foto ? 'perfil/' + user.foto : 'user-default.png' %>" onerror="this.onerror=null; this.src='/assets/imgs/user-default.png';">
                         </p>
                         <form class="atender__form" action="/averticket" method="POST">
                             <input type="hidden" name="idTicket" value="<%= env.ticket.id %>">
@@ -140,7 +140,7 @@
                 <% let nombreAdmin = null; %>
                 <div class="estado">
                     <p class="admin">
-                        <img src="/assets/imgs/<%= env.admin.foto ? 'perfil/' + env.admin.foto : 'user-default.png' %>">
+                        <img src="/assets/imgs/<%= env.admin.foto ? 'perfil/' + env.admin.foto : 'user-default.png' %>" onerror="this.onerror=null; this.src='/assets/imgs/user-default.png';">
                     </p>
                     <p>
                         <% if(user.id === env.ticket.fkAdmin) { %>
@@ -158,9 +158,9 @@
                         <div class="mensaje">
                             <p class="admin">
                                 <% if(mensaje.fkEmisor === user.id) { %>
-                                    <img src="/assets/imgs/<%= env.admin.foto ? 'perfil/' + env.admin.foto : 'user-default.png' %>">
+                                    <img src="/assets/imgs/<%= env.admin.foto ? 'perfil/' + env.admin.foto : 'user-default.png' %>" onerror="this.onerror=null; this.src='/assets/imgs/user-default.png';">
                                 <% } else { %>
-                                    <img src="/assets/imgs/<%= env.usuario.foto ? 'perfil/' + env.usuario.foto : 'user-default.png' %>">
+                                    <img src="/assets/imgs/<%= env.usuario.foto ? 'perfil/' + env.usuario.foto : 'user-default.png' %>" onerror="this.onerror=null; this.src='/assets/imgs/user-default.png';">
                                 <% } %>
                             </p>
                             <div>

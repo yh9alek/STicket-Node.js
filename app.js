@@ -52,6 +52,10 @@ async function obtenerAdmin(id) {
     admin = await usuariosDB.getAdmin(id);
 }
 
+async function obtenerUsuarioEmail(email) {
+    usuarios = await usuariosDB.getUsuariosEmail(email);
+}
+
 async function obtenerMensajes(id) {
     mensajes = await mensajesDB.getMensajes(id);
 }
@@ -346,6 +350,7 @@ app.get('/crearusuario', checkAuthenticated, (req, res) => {
 
 app.post('/crearusuario', checkAuthenticated, async (req, res) => {
     if(!req.user.isAdmin) throw new Error('Acceso Negado');
+    await obtenerDatos();
     try {
         let hashedPassword = null;
         if(checarContraseña(req.body.pass, req.body.cpass)) {
@@ -354,7 +359,6 @@ app.post('/crearusuario', checkAuthenticated, async (req, res) => {
         const datos = {
             pass: hashedPassword,
             nombre: req.body.nombre,
-            email: req.body.email,
             numero: req.body.numero,
             codigo: req.body.codigo,
             puesto: req.body.puesto,
@@ -370,14 +374,20 @@ app.post('/crearusuario', checkAuthenticated, async (req, res) => {
         usuariosDB.insertar(formatearUsuario(req.body.nombre),
                         datos.pass,
                         datos.nombre,
-                        datos.email,
                         datos.numero,
                         datos.codigo,
                         datos.puesto, 
                         datos.departamento,
                         datos.isAdmin,
                         datos.file);
-    res.redirect('/usuarios');
+        await obtenerDatos();
+        const user = usuarios.find(user => user.nombre === req.body.nombre);
+        let nuevoEmail = user.correo.split('00');
+        nuevoEmail.splice(1, 0, user.id);
+        nuevoEmail = nuevoEmail.join('');
+        user.email = nuevoEmail;
+        usuariosDB.corregirEmail(user.email, user.id);
+        res.redirect('/usuarios');
     } catch(err){
         throw new Error('Surgió un error: ' + err);
     }

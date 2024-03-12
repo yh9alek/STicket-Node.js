@@ -84,6 +84,10 @@
     overflow: hidden;
 }
 
+.usuario.me {
+    background-image: linear-gradient(145deg, #ebeef3, #cdd3dd);
+}
+
 .usuarios__contenedor {
     position: relative;
     background-color: #fff;
@@ -313,6 +317,13 @@ button.eliminar {
     border: none;
     right: calc(50% - 40px);
     background-color: #DC4B4B;
+}
+
+a.editar.tu {
+    outline: none;
+    border: none;
+    left: calc(50% - 16px);
+    background-color: #929292;
 }
 
 button.eliminar:hover {
