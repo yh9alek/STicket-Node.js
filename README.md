@@ -1,2 +1,2 @@
-# STicket-Node.js
-Proyecto STicket refactorizado y migrado a Node.js
+# Sistema de Tickets de Soporte Técnico con Node.js
+
