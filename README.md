@@ -31,9 +31,30 @@ De esta manera es posible hacer un sistema de tickets simple, donde la prioridad
 
 # Diseño de Interfaz
 <img src="https://cdn.discordapp.com/attachments/1129195909796860029/1217671585859899402/proto.jpg?ex=6604e009&is=65f26b09&hm=4f9a3963c0404fdc9d266baceb6b42a34f6a06a3afbea75845a58388876ed9bc&">
-Una vez terminado el diseño de la base de datos, ahora era momento de desarrollar la UI que se usaría en el sistema, se buscó que fuese facil de comprender y manejar por el usuario.
-Para el diseño, se tomó como base esta plantilla proporcionada por <a href="https://codecanyon.net/user/tatwerat-team/portfolio">Tatwerat</a>.<br>
+Una vez terminado el diseño de la base de datos, ahora era momento de desarrollar la UI que se usaría en el sistema, se buscó que fuese fácil de comprender y manejar por el usuario.
+Para el diseño, se tomó como base esta plantilla proporcionada por <a href="https://codecanyon.net/user/tatwerat-team/portfolio">Tatwerat</a>.<br><br>
 Pueden ver más sobre el UI concept aquí 👉: <a href="https://codecanyon.net/item/tdesk-helpdesk-boostrap-template/36759805#">TDesk</a>.
 <br>
 <br>
 Todo el diseño y responsive fueron hechos con CSS puro sin frameworks y un poco de javascript para manejar eventos del usuario.
+
+# Fases de programación
+<img src="https://cdn.discordapp.com/attachments/1129195909796860029/1217704970430976030/modulos.jpg?ex=6604ff20&is=65f28a20&hm=20d9256b2e2b924fe90b4c636b4d33a708c90fcac62bcee4971c31536a5c5334&">
+
+El desarrollo de todos los módulos tuvo un periodo de 1 mes.
+
+# Resultado Final
+Algunas capturas del sistema:
+
+# Usuario
+<img src="https://cdn.discordapp.com/attachments/1129195909796860029/1217714425436442735/login.jpg?ex=660507ef&is=65f292ef&hm=91288da1d3688ac3c7a4e82be444f135cbf47d983c016a4216077e12e8a3359e&">
+<img src="https://cdn.discordapp.com/attachments/1129195909796860029/1217710810667810836/ut.jpg?ex=66050491&is=65f28f91&hm=12870154eb794c9ef0572a739de8d3f9cff37bc41adc0985db503db1051d02a1&" >
+<img src="https://cdn.discordapp.com/attachments/1129195909796860029/1217712248273764372/uvt.jpg?ex=660505e7&is=65f290e7&hm=5f66bb14be4bb40525c5276a833583c16d2bb6426bd3cbc04af5b9e436a3be6f&">
+<img src="https://cdn.discordapp.com/attachments/1129195909796860029/1217713550815133788/up.jpg?ex=6605071e&is=65f2921e&hm=bcf02df71d4fe4982098d81b0e0e0edc8794c011960dedb7572164b54ea5fbf0&">
+
+# Admin
+<img src="https://cdn.discordapp.com/attachments/1129195909796860029/1217715868889518101/at.jpg?ex=66050947&is=65f29447&hm=bb29ef758089e0f1b2fe8e097c29b35bb831ac53a913c8ac1391863bf111f1d7&">
+<img src="https://cdn.discordapp.com/attachments/1129195909796860029/1217717298480283709/au.jpg?ex=66050a9c&is=65f2959c&hm=d4907c5277f427a2d3d140850e4f80b16f9375b02e0cfd78e248b95d57dac02d&">
+
+# Probar 💻
+<a href="" >STicket</a>
