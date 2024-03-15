@@ -18,8 +18,8 @@
                 <a class="btn <%= pagina === 'usuarios' ? 'selected' : '' %>" href="/usuarios">Usuarios</a>
             <% } else { %>
                 <a class="btn <%= pagina === 'usertickets' ? 'selected' : '' %>" href="/home">Inicio</a>
-                <a class="btn" href="#">Configuración</a>
             <% } %>
+            <a class="btn <%= pagina === 'acceso' ? 'selected' : '' %>" href="/acceso">Acceso</a>
         </div>
         <div class="perfil__content">
             <div class="perfil">

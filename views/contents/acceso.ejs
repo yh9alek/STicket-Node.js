@@ -1,0 +1,42 @@
+<section>
+    <div class="container">
+        <p class="ptitulo">Editar datos de acceso</p>
+        <form class="usuario" action="/acceso" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="id" value="<%= env.usuario.id %>">
+            <div class="usuario__contenedor">
+                <div class="col">
+                    <p class="infoPerfil">Cambiar contraseña. 
+                        <span class="message">
+                            <% if (env.error_ant) { %>
+                                La contraseña anterior es incorrecta.
+                            <% } %>
+                            <% if (env.error) { %>
+                                Verifica la coincidencia de la nueva contraseña.
+                            <% } %>
+                        </span>
+                    </p>
+                    <div class="linea"></div>
+                    <div class="inputs__container">
+                        <div class="inputs">
+                            <div class="input">
+                                <p>Contraseña anterior</p>
+                                <input class="inp antpass <%= env.error_ant ? 'error' : '' %>" name="antpass" type="password" placeholder="..." required>
+                            </div>
+                            <div class="input">
+                                <p>Nueva Contraseña</p>
+                                <input class="inp npass <%= env.error ? 'error' : '' %>" name="npass" type="password" placeholder="..." required>
+                            </div>
+                            <div class="input">
+                                <p>Confirmar Contraseña</p>
+                                <input class="inp cpass <%= env.error ? 'error' : '' %>" name="cpass" type="password" placeholder="..." required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="r-cont">
+                    <button type="submit" class="registrar">Confirmar edición</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>

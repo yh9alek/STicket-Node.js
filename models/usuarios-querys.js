@@ -58,6 +58,32 @@ usuariosDB.editar = function(usuario, nombre, puesto, departamento, celular, cod
     });
 }
 
+usuariosDB.editarConfiguracion = function(pass, foto = null, id) {
+    const consulta = `UPDATE usuarios SET pass = ? ${foto ? ', foto = ?' : ''} WHERE id = ?;`;
+    conexion.query(consulta, foto ? [pass, foto, id] : [pass, id], (err, res) => {
+        if (err) {
+            console.log("Surgió un error: " + err);
+        }
+        else {
+            console.log("Se configuró con éxito");
+        }
+    });
+}
+
+usuariosDB.editarFoto = function(foto = null, id) {
+    if(foto) {
+        const consulta = `UPDATE usuarios SET foto = ? WHERE id = ?;`;
+        conexion.query(consulta, [foto, id], (err, res) => {
+            if (err) {
+                console.log("Surgió un error: " + err);
+            }
+            else {
+                console.log("Se configuró con éxito");
+            }
+        });
+    }
+}
+
 usuariosDB.getTodos = function() {
     return new Promise((resolve, reject) => {
         var sqlConsulta = "SELECT * FROM usuarios;";

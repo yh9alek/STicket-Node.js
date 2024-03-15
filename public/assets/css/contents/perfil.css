@@ -42,6 +42,33 @@
 }
 
 .foto__img {
+    position: relative;
+}
+
+.foto__img > img + label {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    text-align: center;
+    line-height: 30px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #d3d3d3;
+    color: #fff;
+    background-color: #6682BB;
+    border-radius: 50%;
+    font-size: 13px;
+}
+
+.foto__img > img + label:hover {
+    cursor: pointer;
+}
+
+#imagen {
+    display: none;
+}
+
+.foto__img {
     width: 120px;
     height: 120px;
     display: flex;
@@ -56,13 +83,13 @@
     width: 100%;
 }
 
-.foto__content + p {
+.foto__content + input + p {
     font-size: 16px;
     font-weight: bold;
     margin-top: 20px;
 }
 
-.foto__content + p + p {
+.foto__content + input + p + p {
     font-size: 14px;
     margin-top: 5px;
     color: gray;
@@ -242,8 +269,13 @@ form .linea {
     }
 }
 
+@media screen and (max-width: 364px) {
+    .foto {
+        width: 100%;
+    }
+}
+
 @media screen and (max-width: 317px) {
-    .foto,
     .tickets {
         width: 100%;
     }

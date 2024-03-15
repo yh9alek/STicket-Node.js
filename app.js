@@ -156,6 +156,48 @@ app.get('/home', checkAuthenticated, (req, res) => {
     }, 100);
 });
 
+app.get('/acceso', checkAuthenticated, async (req, res) => {
+    await obtenerDatos();
+    let usuario = usuarios.find(usuario => usuario.usuario === req.user.usuario);
+    res.render('index', {
+        pagina: 'acceso',
+        user: req.user,
+        env: {
+            error: req.query.error || null,
+            error_ant: req.query.error_ant || null,
+            usuario: usuario,
+            seccion: 'Acceso',
+        }
+    });
+});
+
+app.post('/acceso', checkAuthenticated, async (req, res) => {
+    let nuevaPass = null;
+    const datos = {};
+    if(await bcrypt.compare(req.body.antpass, req.user.pass)) {
+       if(req.body.npass === req.body.cpass) {
+            nuevaPass = await bcrypt.hash(req.body.npass, 10);
+            if(req.file) {
+                fs.unlink(req.file.destination + '/' + req.user.foto, (err) => {});
+                datos.file = req.file.filename;
+            } else {
+                datos.file = null;
+            }
+            usuariosDB.editarConfiguracion(nuevaPass, datos.file, req.user.id);
+       } else {
+        res.redirect('/acceso?error=1');
+        return;
+       }
+    } else {
+        res.redirect('/acceso?error_ant=1');
+        return;
+    }
+    if(!req.user.isAdmin)
+        res.redirect('/home');
+    else
+        res.redirect('/admintickets');
+});
+
 app.get('/solicitud', checkAuthenticated, (req, res) => {
     if(req.user.isAdmin) throw new Error('Acceso Negado');
     res.render('index', { 
@@ -209,20 +251,36 @@ app.post('/editar', checkAuthenticated, (req, res) => {
 });
 
 // Perfil es dinámico con el rol (admin - user), ambos comparten la misma interfaz de perfil
-app.get('/perfil', checkAuthenticated, (req, res) => {
+app.get('/perfil', checkAuthenticated, async (req, res) => {
     if(!req.user.isAdmin) {
         obtenerTickets(req.user.id);
     }
+    await obtenerDatos();
+    let usuario = usuarios.find(user => user.id === req.user.id);
     setTimeout(()=> {
         res.render('index', { 
             pagina: 'perfil',
-            user: req.user,
+            user: usuario,
             env: {
                 tickets: tickets,
                 seccion: 'Perfil',
             },
         });
     }, 100);
+});
+
+app.post('/editarfoto', checkAuthenticated, async (req, res) => {
+    await obtenerDatos();
+    let usuario = usuarios.find(user => user.id === req.user.id);
+    const datos = {};
+    if(req.file) {
+        fs.unlink(req.file.destination + '/' + usuario.foto, (err) => {});
+        datos.file = req.file.filename;
+    } else {
+        datos.file = null;
+    }
+    usuariosDB.editarFoto(datos.file, req.user.id);
+    res.redirect('/perfil');
 });
 
 app.get('/verticket', checkAuthenticated, (req, res) => {

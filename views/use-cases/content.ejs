@@ -3,6 +3,12 @@
     <%-include('../contents/login.ejs')%>
 <% } %>
 
+<% if(pagina === 'acceso') { %>
+    <%-include('../partials/header-home.ejs')%>
+    <%-include('../partials/section-header.ejs')%>
+    <%-include('../contents/acceso.ejs')%>
+<% } %>
+
 <% if(pagina === 'usertickets') { %>
     <%-include('../partials/header-home.ejs')%>
     <%-include('../partials/section-header.ejs')%>

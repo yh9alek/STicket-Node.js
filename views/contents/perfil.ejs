@@ -2,15 +2,19 @@
     <div class="container">
         <div class="_perfil">
             <div class="col1">
-                <div class="foto">
-                    <div class="foto__content">
-                        <div class="foto__img">
-                            <img src="/assets/imgs/<%= user.foto ? 'perfil/' + user.foto : 'user-default.png' %>" onerror="this.onerror=null; this.src='/assets/imgs/user-default.png';">
+                <form class="enviar" action="/editarfoto" method="POST" enctype="multipart/form-data">
+                    <div class="foto">
+                        <div class="foto__content">
+                            <div class="foto__img">
+                                <img class="laimagen" src="/assets/imgs/<%= user.foto ? 'perfil/' + user.foto : 'user-default.png' %>" onerror="this.onerror=null; this.src='/assets/imgs/user-default.png';">
+                                <label for="imagen"><i class="bi bi-pencil-square"></i></label>
+                            </div>
                         </div>
+                        <input name="foto" id="imagen" class="inp imagen" type="file" accept=".jpg, .jpeg, .png">
+                        <p>@<%= user.usuario %></p>
+                        <p><%= user.isAdmin ? 'Admin' : 'Trabajador - Empleado'%></p>
                     </div>
-                    <p>@<%= user.usuario %></p>
-                    <p><%= user.isAdmin ? 'Admin' : 'Trabajador - Empleado'%></p>
-                </div>
+                </form>
                 <% if(!user.isAdmin) { %>
                     <div class="tickets">
                         <div>

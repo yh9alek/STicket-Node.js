@@ -2,6 +2,10 @@
     <script type="module" src="assets/js/back.js"></script>
 <% } %>
 
+<% if(pagina === 'perfil') { %>
+    <script type="module" src="assets/js/enviar.js"></script>
+<% } %>
+
 <% if(pagina === 'solicitud' || pagina === 'editar') { %>
     <script type="module" src="assets/js/solicitud.js"></script>
 <% } %>
@@ -20,6 +24,6 @@
     <script type="module" src="assets/js/usuarios.js"></script>
 <% } %>
 
-<% if(pagina === 'editarusuario' || pagina === 'crearusuario') { %>
+<% if(pagina === 'editarusuario' || pagina === 'crearusuario' || pagina === 'perfil') { %>
     <script type="module" src="assets/js/editar-img.js"></script>
 <% } %>

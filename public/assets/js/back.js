@@ -1,7 +1,10 @@
 const back = document.querySelector('.sections');
 back.style.fontWeight = 'bold';
 
-
 back.addEventListener('click', e => {
-    window.history.back();
+    if (window.location.href === document.referrer) {
+        window.history.go(-2);
+    } else {
+        window.history.back();
+    }
 });
