@@ -50,7 +50,7 @@ Algunas capturas del sistema:
 <img src="https://cdn.discordapp.com/attachments/1129195909796860029/1217714425436442735/login.jpg?ex=660507ef&is=65f292ef&hm=91288da1d3688ac3c7a4e82be444f135cbf47d983c016a4216077e12e8a3359e&">
 <img src="https://cdn.discordapp.com/attachments/1129195909796860029/1217710810667810836/ut.jpg?ex=66050491&is=65f28f91&hm=12870154eb794c9ef0572a739de8d3f9cff37bc41adc0985db503db1051d02a1&" >
 <img src="https://cdn.discordapp.com/attachments/1129195909796860029/1217712248273764372/uvt.jpg?ex=660505e7&is=65f290e7&hm=5f66bb14be4bb40525c5276a833583c16d2bb6426bd3cbc04af5b9e436a3be6f&">
-<img src="https://cdn.discordapp.com/attachments/1129195909796860029/1217713550815133788/up.jpg?ex=6605071e&is=65f2921e&hm=bcf02df71d4fe4982098d81b0e0e0edc8794c011960dedb7572164b54ea5fbf0&">
+<img src="https://cdn.discordapp.com/attachments/1129195909796860029/1220563835690287144/up.jpg?ex=660f65a7&is=65fcf0a7&hm=b672325dfe317860eaf69e908e458bce9f5aef38371257dcf7adddac340778ea&">
 
 # Admin
 <img src="https://cdn.discordapp.com/attachments/1129195909796860029/1217715868889518101/at.jpg?ex=66050947&is=65f29447&hm=bb29ef758089e0f1b2fe8e097c29b35bb831ac53a913c8ac1391863bf111f1d7&">
