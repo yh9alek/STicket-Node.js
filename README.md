@@ -57,4 +57,4 @@ Algunas capturas del sistema:
 <img src="https://github.com/yh9alek/miscellaneous/blob/main/src/STicket/imgs/sticket-img6.jpg?raw=true">
 
 # Probar 💻
-<a href="" >STicket</a>
+<a href="https://support-ticket-system.netlify.app" >STicket</a>
