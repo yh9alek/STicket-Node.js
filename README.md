@@ -58,3 +58,4 @@ Algunas capturas del sistema:
 
 # Probar 💻
 <a href="https://support-ticket-system.netlify.app" >STicket</a>
+<p>(Versión preview, la versión completa requiere adquirir un servidor AWS con Node.js)</p>
